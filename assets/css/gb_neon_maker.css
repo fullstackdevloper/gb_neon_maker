@@ -1,0 +1,131 @@
+
+@font-face {
+    font-family: 'Avenir Next LT Pro';
+    src:url('fonts/Avenger-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ModernTalking-Regular.woff';
+    src:url('fonts/ModernTalking-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RoadCrew-Regular.woff';
+    src:url('fonts/RoadCrew-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ShaimusOutline-Regular.woff';
+    src:url('fonts/ShaimusOutline-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Shorelines-Script-Bold.woff';
+    src:url('fonts/Shorelines-Script-Bold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'thistails-regular.woff';
+    src:url('fonts/thistails-regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'thistails-sans.woff';
+    src:url('fonts/thistails-sans.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap');
+img{max-width:100%;}
+html,body{margin:0; padding:0;font-family: 'Montserrat', sans-serif; }
+*{box-sizing:border-box;}
+body{background:#f5f5f5;}
+.holder_app{max-width:1170px; padding:0 15px; margin:0 auto;}
+.sbt_row{display:flex; flex-wrap:wrap;}
+.wd_5{max-width:40%; width:100%; padding:0 15px;padding-right:30px;}
+.wd_7{max-width:60%; width:100%; padding:0 15px;}
+.sbt_menu_items {padding: 0;list-style: none;margin: 0;	width: 80px;}
+.result_tabs { max-width: calc(100% - 80px); padding: 0 15px; width:100%;}
+.sbt_font_options ul {list-style: none;	padding: 0;	margin:10px 0 0 0;	display: flex;flex-wrap: wrap;}
+.sbt_menu_items > li > a {padding: 5px;background: #fff;border-radius: 6px;margin-bottom: 8px;width: 80px;height: 80px;display: flex;align-items: center;flex-direction: column;justify-content: center;text-decoration: none;color: #828AA6;text-transform: uppercase;font-weight: 500;	font-size: 12px; position:relative; transition-duration:.35s;}
+.sbt_menu_items > li > a > span {padding-top: 5px;}
+.sbt_text_font {background: #fff;border-radius: 19px;padding: 20px; min-height: 300px;}
+.sbt_hint {font-size: 10px;background: rgba(196, 196, 196, 0.4);padding: 13px;border-radius: 16px;border: 1px solid rgba(250, 98, 138, 0.2);margin-top: 15px;
+display: flex;}
+.sbt_hint  p{color:#828AA6; margin:0 !important;font-size: 10px !important;}
+.icon_hint i {color: #FA628A;font-size: 26px;margin-right: 10px;}
+.sbt_text_font > label ,.sbt_font_options>label{font-size: 13px;display: block;color: #2C2E3F;padding-bottom: 5px; font-weight:500;}
+.sbt_text_font input {height: 46px;width: 100%;background: #F5F5F5;border: 1px solid rgba(126, 120, 120, 0.63);padding-left: 10px;margin-bottom: 20px;}
+.sbt_font_options ul > li {	max-width: 50%;	width: 100%;margin: 3px 0;}
+.sbt_menu_items > li > a::after {width: 22px;height: 2px;position: absolute;background:#EFE529;content: "";bottom: 0;left: 0;right: 0;margin: 0 auto;}
+.sbt_sub_total {display: flex;justify-content: space-between;align-content: center;padding: 20px;background: rgba(196, 196, 196, 0.7);border-radius: 16px;
+	text-transform: uppercase;color: #fff;font-weight: 600;	height: 60px;}
+.btn_sbt_cart {display: flex;justify-content: space-between;padding: 10px 0; align-items:center;}
+.sbt_crt_btn {background: #FA628A;display: inline-flex; align-items:center; padding: 0px 20px;border-radius: 15px;font-size: 14px;text-decoration: none;color: #fff;width: 46%;height:48px;text-align: center; justify-content:center;}
+.sbt_gr{background:rgba(92, 84, 86, 0.44);display: inline-flex; align-items:center;padding: 0px 20px;border-radius: 15px;font-size: 14px;text-decoration: none;color: #fff;width: 46%; height:48px;justify-content:center;text-align: center;}
+.sbt_menu_items .active a ,.sbt_menu_items li:hover a{background: #FADCEB;}
+.btn_sbt_cart a:hover {opacity: .7; transition-duration:.35s;}
+.slider_font_sbt img {min-height: 645px; object-fit:cover;}
+.tab_ct:not(.active){display:none;}
+.color_pick {margin-top: 15px !important;}
+.color_pick > li {	max-width: 33.33% !important;width: 100% !important; padding:0 8px; margin:0px 0 10px 0 !important;}
+.color_pick > li span {font-size: 9px;}
+.color_pick > li > a {height: 8px;	width: 100%;	display: block;	border-radius: 50px;}
+.lipstick a {background: #FC43BD;}
+.solare_flare a {background: #FFA800;}
+.mint a {background: #82F925;}
+.rosey a {background: #F59CBC;}
+.tiger a {background: #ECF02A;}
+.candy a {background:#FF2828;}
+.denim a {background:#3244EB;}
+.lavender a {background:#DC78FF;}
+.gold_fizz a {background:#FF7E55;}
+.maliblue a {background:#74CBE8;}
+.ballerina a {background:#EF2CB8;}
+.sulphur a {background:#FFF739;}
+.sushi a {background:#86EA58;}
+.sherbet a {background:#ED9A9A;}
+.antique a {background:#FFF1DC;}
+.ruby a{background:#F11D1D;}
+.cobalt a{background:#2B41E7;}
+.snow a{background:#EAEAEA;}
+.txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
+.txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;}
+.sl_ide {position: relative;}
+.next_sl {position: absolute;top:44%;color:#FA628A;right: 30px;font-size: 60px; cursor:pointer;}
+.prev_sl {position: absolute;top: 44%;color:#FA628A;	left: 30px;font-size: 60px; cursor:pointer;}
+.slider_font_sbt {position:relative ;}
+.sbt_container ul {
+    list-style: none !important;
+    margin: 0px !important;
+}
+section.sbt_container {
+    background: #f5f5f5;
+    padding: 10px;
+}
+a.prev {text-decoration: none;}
+a.next {text-decoration: none;}
+h2.gb_small{font-size: 24px;}
+h2.gb_medium{font-size: 26px}
+h2.gb_large{font-size: 28px;}
+h2.gb_big{font-size: 30px;}
+.sbt_font_options ul li a {text-decoration: none;color: #000;}
+.gb_ModernTalking-Regular{font-family: 'ModernTalking-Regular.woff'}
+.gb_Bashore{font-family: 'ModernTalking-Regular.woff'}
+.gb_thistails-regular{font-family: 'thistails-regular.woff'}
+.gb_Shorelines-Script-Bold{font-family: 'Shorelines-Script-Bold.woff'}
+.gb_thistails-sans{font-family: 'thistails-sans.woff'}
+.gb_ShaimusOutline-Regular{font-family: 'ShaimusOutline-Regular.woff'}
+.gb_RoadCrew-Regular{font-family: 'RoadCrew-Regular.woff'}
+.active_font {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
+.color_pick li.active_color {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
+.active_size {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px;padding-bottom: 10px; text-align: center;}
+

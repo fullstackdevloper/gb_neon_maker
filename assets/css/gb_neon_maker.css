@@ -113,10 +113,10 @@ section.sbt_container {
 }
 a.prev {text-decoration: none;}
 a.next {text-decoration: none;}
-h2.gb_small{font-size: 24px;}
-h2.gb_medium{font-size: 26px}
-h2.gb_large{font-size: 28px;}
-h2.gb_big{font-size: 30px;}
+h2.gb_small{font-size: 24px;margin:5px !important;}
+h2.gb_medium{font-size: 30px;margin:5px !important;}
+h2.gb_normal{font-size: 36px;margin:5px !important;}
+h2.gb_large{font-size: 42px;margin:5px !important;}
 .sbt_font_options ul li a {text-decoration: none;color: #000;}
 .gb_ModernTalking-Regular{font-family: 'ModernTalking-Regular.woff'}
 .gb_Bashore{font-family: 'ModernTalking-Regular.woff'}
@@ -127,5 +127,19 @@ h2.gb_big{font-size: 30px;}
 .gb_RoadCrew-Regular{font-family: 'RoadCrew-Regular.woff'}
 .active_font {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
 .color_pick li.active_color {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
-.active_size {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px;padding-bottom: 10px; text-align: center;}
+.active_size {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px;padding-bottom: 10px; text-align: center;border: 2px solid #888888;display: block;text-decoration: none;}
+
+/* css for on/off button */
+
+.gb_onoffswitch {position: relative; width: 90px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;}
+.gb_onoffswitch-checkbox {display: none !important;}
+.gb_onoffswitch-label {display: block  !important; overflow: hidden; cursor: pointer;border: 2px solid #999999; border-radius: 20px;}
+.gb_onoffswitch-inner {display: block; width: 200%; margin-left: -100%;transition: margin 0.3s ease-in 0s;}
+.gb_onoffswitch-inner:before, .gb_onoffswitch-inner:after {display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;box-sizing: border-box;}
+.gb_onoffswitch-inner:before {content: "ON";padding-left: 10px;background-color: #34A7C1; color: #FFFFFF;}
+.gb_onoffswitch-inner:after {content: "OFF";padding-right: 10px;background-color: #EEEEEE; color: #999999;text-align: right;}
+.gb_onoffswitch-switch {display: block; width: 18px; margin: 6px;background: #FFFFFF;position: absolute; top: 0;bottom: 0;right: 56px;border: 2px solid #999999; border-radius: 20px;transition: all 0.3s ease-in 0s;}
+.gb_onoffswitch-checkbox:checked + .gb_onoffswitch-label .gb_onoffswitch-inner {margin-left: 0;}
+.gb_onoffswitch-checkbox:checked + .gb_onoffswitch-label .gb_onoffswitch-switch {right: 0px;}
+/* end css for on/off button*/
 

@@ -135,6 +135,7 @@ class NeonMaker {
 
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
             )
         );
     }

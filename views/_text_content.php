@@ -5,42 +5,42 @@
         <label>Choose a font</label>
         <ul>
             <li>
-                <a onclick="GbNeonmaker.changeFont('ModernTalking-Regular');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'ModernTalking-Regular');" href="javascript:void(0);">
                     <span class="gb_ModernTalking-Regular">Modern Talking</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('Bashore');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'Bashore');" href="javascript:void(0);">
                     <span class="gb_Bashore">Bashore</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('thistails-regular');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'thistails-regular');" href="javascript:void(0);">
                     <span class="gb_thistails-regular">Silhouette</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('Shorelines-Script-Bold');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'Shorelines-Script-Bold');" href="javascript:void(0);">
                     <span class="gb_Shorelines-Script-Bold">Shorelines</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('thistails-sans');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'thistails-sans');" href="javascript:void(0);">
                     <span class="gb_thistails-sans">Thistail</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('ShaimusOutline-Regular');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'ShaimusOutline-Regular');" href="javascript:void(0);">
                     <span class="gb_ShaimusOutline-Regular">Shaimus</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('Courier');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'Courier');" href="javascript:void(0);">
                     <span class="gb_Courier">Courier</span>
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont('RoadCrew-Regular');" href="javascript:void(0);">
+                <a onclick="GbNeonmaker.changeFont(this,'RoadCrew-Regular');" href="javascript:void(0);">
                     <span class="gb_RoadCrew-Regular">Road Crew</span>
                 </a>
             </li>

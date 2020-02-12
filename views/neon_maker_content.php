@@ -36,7 +36,13 @@
             </div>
             <div class="wd_7 result_effect">
                 <div class="slider_font_sbt">
-
+                    <div class="gb_onoffswitch">
+                        <input type="checkbox" onchange="GbNeonmaker.onOffswitch(this);" name="gb_onoffswitch" class="gb_onoffswitch-checkbox" id="gb_myonoffswitch">
+                        <label class="gb_onoffswitch-label" for="gb_myonoffswitch">
+                            <span class="gb_onoffswitch-inner"></span>
+                            <span class="gb_onoffswitch-switch"></span>
+                        </label>
+                    </div>
                     <div class="sl_ide">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg1.jpg" alt="bg1">
 						<img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg2.jpg" alt="bgnext">

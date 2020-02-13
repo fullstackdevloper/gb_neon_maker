@@ -19,28 +19,41 @@ class NeonMakerActions {
     }
 
     /*
-     * NeonMaker ajax handlers 
-     * 
+     * NeonMaker ajax handlers
+     *
      * @return Array
      */
 
     private function AjaxActions() {
         return [
-            ['name' => 'test', 'callback' => 'testfunction'],
+            ['name' => 'gb_insert_order', 'callback' => 'saveOrderRecords'],
         ];
     }
-    
-    public function testfunction() {
-        // NeonMaker()->engine->getView('testview', ['data' => ['as', 'asfasf']]);
-        
-        wp_send_json($response);
-        return ;
+
+    /**
+     * Save order records
+     */
+    public function saveOrderRecords() {
+        global $wpdb;
+        $prefix = $wpdb->prefix;
+        $formdata=json_encode($_POST['formdata']);
+        $data = array(
+            'content' => $formdata,
+            'created' => date('Y-m-d h:i:s') ,
+            'modified' => date('Y-m-d h:i:s') ,
+        );
+        $wpdb->insert("{$prefix}gb_orders", $data, array('%s'));
+        $lastid = $wpdb->insert_id;
+        $success=array('status' => 'success', 'lastid' => $lastid);
+        wp_send_json($success);
+        return;
     }
+
     /**
      * actions init method
      */
     public function NeonMakerActionsInit() {
-        
+
     }
 }
 

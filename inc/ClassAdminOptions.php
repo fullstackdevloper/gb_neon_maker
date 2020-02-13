@@ -20,10 +20,12 @@ class NeonMakerOptions {
      */
     public function NeonMaker__plugin_page() {
         add_menu_page(
-                'NeonMaker Options', 'Neon Maker', 'manage_options', 'NeonMaker_options', [$this, 'NeonMaker_options_page']
+                'NeonMaker Options', 'Neon Maker', 'manage_options', 'NeonMaker_options', [$this, 'NeonMaker_orders_page']
         );
+        add_submenu_page('NeonMaker_options', 'Neon Maker Orders', 'Orders', 'manage_options', 'NeonMaker_options', [$this, 'NeonMaker_orders_page']);
+        add_submenu_page('NeonMaker_options', 'Neon Maker Inquiries', 'Inquiries', 'manage_options', 'gb-inquiries', [$this, 'NeonMaker_inquiries_page']);
+        add_submenu_page('NeonMaker_options', 'Neon Maker Setting', 'Setting', 'manage_options', 'gb-setting',  [$this, 'NeonMaker_options_page']);
     }
-
     /**
      * Options page callback
      */
@@ -42,6 +44,40 @@ class NeonMakerOptions {
     }
 
     /**
+     * Orders page callback
+     */
+    public function NeonMaker_orders_page() {
+        // Set class property
+        include_once GB_NEON_MAKER_ABSPATH . '/inc/ClassOrdersDetails.php';
+        $dataprovider = new OrdersDetails();
+        $dataprovider->prepare_items();
+        $this->options = get_option('NeonMaker_options');
+        echo '<div class="wrap">';
+        echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Orders Detail', 'gb_neon_maker'));
+        echo $dataprovider->search_box( 'Search', 'search_id' );
+        echo $dataprovider->views();
+        echo $dataprovider->display();
+        echo '</div>';
+    }
+
+    /**
+     * Inquiries page callback
+     */
+    public function NeonMaker_inquiries_page() {
+        // Set class property
+        include_once GB_NEON_MAKER_ABSPATH . '/inc/ClassInquiriesDetails.php';
+        $dataprovider = new InquiriesDetails();
+        $dataprovider->prepare_items();
+        $this->options = get_option('NeonMaker_options');
+        echo '<div class="wrap">';
+        echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
+        echo $dataprovider->search_box( 'Search', 'search_id' );
+        echo $dataprovider->views();
+        echo $dataprovider->display();
+        echo '</div>';
+    }
+
+    /**
      * Register and add settings
      */
     public function page_init() {
@@ -56,12 +92,12 @@ class NeonMakerOptions {
                 [$this, 'general_setting'], // Callback
                 'NeonMaker_options' // Page
         );
-        
+
         add_settings_field(
-                'default_text', __('Default Text', 'kidcircle'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
+                'default_text', __('Default Text', 'neonmaker'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
         );
     }
-    
+
     public function default_text() {
         ?>
         <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[default_text]' value='<?php $this->displayValue('default_text'); ?>'>
@@ -73,15 +109,15 @@ class NeonMakerOptions {
      * @param array $input Contains all settings fields as array keys
      */
     public function sanitize($input) {
-        
+
         return $input;
     }
-    
+
     /**
      * display value from array
      * @param String $key
      * @param bolean $return
-     * 
+     *
      * @return String value from options
      */
     private function displayValue($key, $return = false) {

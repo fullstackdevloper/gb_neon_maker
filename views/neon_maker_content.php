@@ -30,7 +30,7 @@
                     <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >$ <span id="gb_total">450</span></span>
                 </div>
                 <div class="btn_sbt_cart">
-                    <a href="#" class="sbt_crt_btn"><?php _e("Buy Now", "gb_neon_maker"); ?></a>
+                    <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("Buy Now", "gb_neon_maker"); ?></a>
                     <a href="#"  class="sbt_gr"><?php _e("IT'S NOT QUITE RIGHT", "gb_neon_maker"); ?></a>
                 </div>
             </div>

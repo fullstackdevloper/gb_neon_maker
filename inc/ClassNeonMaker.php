@@ -80,11 +80,58 @@ class NeonMaker {
     }
 
     /*
-     * NeonMaker instalation hook
+     * NeonMaker installation hook
      */
 
     public function NeonMaker_plugin_install() {
+        global $wpdb;
+        $prefix=$wpdb->prefix;
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        $gb_orders=$this->NeonMaker_orders($prefix);          //40
+        $gb_inquiries=$this->NeonMaker_inquiries($prefix);          //40
+    }
 
+    /**
+     * @method create gb_orders table
+     * @pqaram string
+     * @return string
+     */
+    public function NeonMaker_orders($prefix){
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        global $wpdb;
+        $sql="CREATE TABLE `{$prefix}gb_orders` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `content` varchar(100) NOT NULL,
+        `created` datetime NOT NULL,
+        `modified` datetime NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB;";
+
+        $response=dbDelta( $sql );
+        return $response;
+    }
+
+    /**
+     * @method create gb_inquiries table
+     * @pqaram string
+     * @return string
+     */
+    public function NeonMaker_inquiries($prefix){
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        global $wpdb;
+        $sql="CREATE TABLE `{$prefix}gb_inquiries` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `name` varchar(100) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        `phone` varchar(100) NOT NULL,
+        `website` varchar(150) NOT NULL,
+        `created` datetime NOT NULL,
+        `modified` datetime NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB;";
+
+        $response=dbDelta( $sql );
+        return $response;
     }
 
     /**

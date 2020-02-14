@@ -8,8 +8,8 @@
 var GbNeonmaker;
 (function ($) {
     var $this,slideIndex = 1;
-    var neonConfigurations = {"font":"ModernTalking-Regular","text":NeonMaker_ajax.default_value,"size":"small","color":"#FF2828"};
-    var shadow = false;
+    var price = Number(NeonMaker_ajax.default_price);
+    var neonConfigurations = {"font": "Shorelines-Script-Bold", "text":NeonMaker_ajax.default_value, "size": "small", "color": "#2C2E3F", "onoffswitch": "false", "price": price};
     GbNeonmaker = {
         settings: {
 
@@ -37,15 +37,18 @@ var GbNeonmaker;
         },
         changeNeonText: function(elem) {
             $("#gb_neon_text").text($(elem).val());
+            neonConfigurations.price = price;
             neonConfigurations.text = $(elem).val();
             $this.calculation();
         },
         changeFont: function(elem,fontType) {
             //alert(fontType);
+
             $("#gb_neon_text").css("font-family", `'${fontType}.woff'`);
             $('.sbt_font_options ul li').removeClass('active_font');
             $(elem).parents('li').addClass('active_font');
-            neonConfigurations.font=fontType;
+            neonConfigurations.price = price;
+            neonConfigurations.font = fontType;
             $this.calculation();
         },
         changeColor: function(elem,fontColor) {
@@ -59,11 +62,11 @@ var GbNeonmaker;
 
             $('.sbt_font_options ul li').removeClass('active_color');
             $(elem).parents('li').addClass('active_color');
-            neonConfigurations.color=fontColor;
-            $this.calculation();
+            neonConfigurations.color = fontColor;
         },
         changeSize: function(elem,size) {
-            neonConfigurations.size=size;
+            neonConfigurations.price = price;
+            neonConfigurations.size = size;
             $('.sbt_text_font a').removeClass('active_size');
             $(elem).addClass('active_size');
             $this.calculation();
@@ -72,12 +75,14 @@ var GbNeonmaker;
         {
             var i;
             var slides = document.getElementsByClassName("gb_slides");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+            if(slides.length>0){
+                if (n > slides.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = slides.length}
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[slideIndex-1].style.display = "block";
             }
-            slides[slideIndex-1].style.display = "block";
         },
         plusSlides:function(n)
         {
@@ -86,25 +91,29 @@ var GbNeonmaker;
         onOffswitch:function(elem)
         {
             var sel = $(elem).prop("checked");
-            var shadow_color='rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+neonConfigurations.color+' 0px 0px 20px, '+neonConfigurations.color+' 0px 0px 30px, '+neonConfigurations.color+' 0px 0px 40px, '+neonConfigurations.color+' 0px 0px 55px, '+neonConfigurations.color+' 0px 0px 75px';
+            var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+neonConfigurations.color+' 0px 0px 20px, '+neonConfigurations.color+' 0px 0px 30px, '+neonConfigurations.color+' 0px 0px 40px, '+neonConfigurations.color+' 0px 0px 55px, '+neonConfigurations.color+' 0px 0px 75px';
             if(sel == true){
                 $('#gb_neon_text').css({"text-shadow": shadow_color, "color":"#fff"});
             }else {
                 $('#gb_neon_text').removeAttr('style');
                 $("#gb_neon_text").css("color", neonConfigurations.color);
             }
+            neonConfigurations.onOffswitch = sel;
         },
         calculation:function() {
             var i;
             var font = neonConfigurations.font;
-            var string=neonConfigurations.text;
-            var size =neonConfigurations.size;
-            let price = 450;
+            var string = neonConfigurations.text;
+            var size = neonConfigurations.size;
+            let price = neonConfigurations.price;
             for(i = 0; i < string.length; i++) {
-                var char=string[i];
+                var char = string[i];
                 price = price + $this.getPrice(char, font, size);
             }
-            $('#gb_total').html(price);
+            console.log(neonConfigurations);
+            var totalPrice = price.toFixed(2);
+            $('#gb_total').html(totalPrice);
+            neonConfigurations.price = totalPrice;
         },
         getPrice: function(alphabet, font, size) {
             var priceSeting = {
@@ -420,11 +429,11 @@ var GbNeonmaker;
             return 0;
         },
         buyNow:function(elem) {
-            var ajaxurl=NeonMaker_ajax.ajax_url;
+            var ajaxurl = NeonMaker_ajax.ajax_url;
             var formdata = { action: 'gb_insert_order', formdata: neonConfigurations };
-            jQuery.post(ajaxurl, formdata, function (data) {
+            $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
-                    alert("Your data with ID:  "+data.lastid+" inserted ");
+                    alert("Your data with ID:  " + data.lastid + " inserted ");
                 }
             });
         }

@@ -62,10 +62,9 @@ class OrdersDetails extends WP_List_Table
 		$sql = "select * From {$prefix}gb_orders";
 		//echo "<pre>"; print_r($_REQUEST); echo "</pre>";
 		//die();
-		$conditions=array();
 		if(isset($_REQUEST['s']))
 		{
-			$conditions[]= 'title LIKE "%'.$_REQUEST['s'].'%"';
+			$sql .= ' where content LIKE "%'.$_REQUEST['s'].'%"';
 		}
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY "' . esc_sql( $_REQUEST['orderby'] ).'"';
@@ -89,6 +88,12 @@ class OrdersDetails extends WP_List_Table
 			'<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['id']
 		);
 	}
+
+    function column_Actions( $item ) {
+        return sprintf(
+            'Delete'
+        );
+    }
     function column_text( $item ) {
         $text = json_decode($item['content'])->text;
         $delete_nonce = wp_create_nonce( 'gb_delete_orders' );
@@ -108,6 +113,9 @@ class OrdersDetails extends WP_List_Table
     }
     function column_color( $item ) {
         return json_decode($item['content'])->color;
+    }
+    function column_price( $item ) {
+        return json_decode($item['content'])->price;
     }
 	function column_content( $item ) {
 
@@ -154,6 +162,7 @@ class OrdersDetails extends WP_List_Table
             'font'    => __( 'Font', 'gb_neon_maker' ),
             'size'    => __( 'Size', 'gb_neon_maker' ),
             'color'    => __( 'Color', 'gb_neon_maker' ),
+            'price'    => __( 'Price', 'gb_neon_maker' ),
 			'created'		=>__( 'Created', 'gb_neon_maker' ),
 			'modified'    => __( 'Modified', 'gb_neon_maker' ),
 		];

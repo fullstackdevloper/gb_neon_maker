@@ -101,7 +101,7 @@ class NeonMaker {
         global $wpdb;
         $sql="CREATE TABLE `{$prefix}gb_orders` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `content` varchar(100) NOT NULL,
+        `content` text NOT NULL,
         `created` datetime NOT NULL,
         `modified` datetime NOT NULL,
         PRIMARY KEY (`id`)
@@ -183,6 +183,7 @@ class NeonMaker {
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
+                'default_price' => $this->engine->getValue('default_price', $NeonMakerSetting, false),
             )
         );
     }

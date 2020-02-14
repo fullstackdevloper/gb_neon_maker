@@ -54,9 +54,11 @@ class NeonMakerOptions {
         $this->options = get_option('NeonMaker_options');
         echo '<div class="wrap">';
         echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Orders Detail', 'gb_neon_maker'));
+        echo '<form action="" method="post">';
         echo $dataprovider->search_box( 'Search', 'search_id' );
         echo $dataprovider->views();
         echo $dataprovider->display();
+        echo '</form>';
         echo '</div>';
     }
 
@@ -71,6 +73,7 @@ class NeonMakerOptions {
         $this->options = get_option('NeonMaker_options');
         echo '<div class="wrap">';
         echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
+        echo '<form action="" method="post">';
         echo $dataprovider->search_box( 'Search', 'search_id' );
         echo $dataprovider->views();
         echo $dataprovider->display();
@@ -96,11 +99,23 @@ class NeonMakerOptions {
         add_settings_field(
                 'default_text', __('Default Text', 'neonmaker'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
         );
+        add_settings_field(
+                'default_price', __('Default Price', 'neonmaker'), [$this, 'default_price'], 'NeonMaker_options', 'NeonMaker_general'
+        );
     }
 
     public function default_text() {
         ?>
         <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[default_text]' value='<?php $this->displayValue('default_text'); ?>'>
+        <?php
+    }
+
+    /**
+     * default price
+     */
+    public function default_price() {
+        ?>
+        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[default_price]' value='<?php $this->displayValue('default_price'); ?>'>
         <?php
     }
     /**

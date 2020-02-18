@@ -4,7 +4,7 @@
     <div class="sbt_font_options">
         <label>Choose a font</label>
         <ul>
-            <li>
+            <li class="active_font">
                 <a onclick="GbNeonmaker.changeFont(this,'ModernTalking-Regular');" href="javascript:void(0);">
                     <span class="gb_ModernTalking-Regular">Modern Talking</span>
                 </a>

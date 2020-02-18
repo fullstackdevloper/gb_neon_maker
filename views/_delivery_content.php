@@ -1,5 +1,10 @@
 <div class="sbt_text_font">
     <label><?php _e("Choose a Delivery Option", "gb_neon_maker"); ?></label>
+    <ul class="choose_delivery">
+        <a onclick="GbNeonmaker.Delivery('Standard delivery');" href="javascript:void(0);"><li class="spaced_screw_kit"><span>Standard delivery</span></li></a>
+        <a onclick="GbNeonmaker.Delivery('Priority delivery');" href="javascript:void(0);"><li class="flush_screw_kit"><span>Priority delivery</span></li></a>
+        <a onclick="GbNeonmaker.Delivery('International delivery');" href="javascript:void(0);"><li class="hanging_wire_kit"><span>International delivery</span></li></a>
+    </ul>
 </div>
 <div class="sbt_hint">
     <div class="icon_hint">

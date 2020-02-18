@@ -32,13 +32,13 @@ class NeonMakerOptions {
     public function NeonMaker_options_page() {
         // Set class property
         $this->options = get_option('NeonMaker_options');
-        echo '<div class="wrap">';
+       echo '<div class="wrap">';
         echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Settings', 'gb_neon_maker'));
         echo '<form method="post" action="options.php">';
         // This prints out all hidden setting fields
-        settings_fields('NeonMaker_option_group');
-        do_settings_sections('NeonMaker_options');
-        submit_button();
+        echo settings_fields('NeonMaker_option_group');
+        echo do_settings_sections('NeonMaker_options');
+        echo submit_button();
         echo '</form>';
         echo '</div>';
     }
@@ -71,13 +71,14 @@ class NeonMakerOptions {
         $dataprovider = new InquiriesDetails();
         $dataprovider->prepare_items();
         $this->options = get_option('NeonMaker_options');
-        echo '<div class="wrap">';
-        echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
-        echo '<form action="" method="post">';
-        echo $dataprovider->search_box( 'Search', 'search_id' );
-        echo $dataprovider->views();
-        echo $dataprovider->display();
-        echo '</div>';
+        $html = '<div class="wrap">';
+        $html .= wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
+        $html .= '<form action="" method="post">';
+        $html .= $dataprovider->search_box( 'Search', 'search_id' );
+        $html .= $dataprovider->views();
+        $html .= $dataprovider->display();
+        $html .= '</div>';
+        echo $html;
     }
 
     /**
@@ -95,12 +96,21 @@ class NeonMakerOptions {
                 [$this, 'general_setting'], // Callback
                 'NeonMaker_options' // Page
         );
+        add_settings_section(
+                'NeonMaker_payment', // ID
+                'Payment Setting', // Title
+                [$this, 'payment_setting'], // Callback
+                'NeonMaker_options' // Page
+        );
 
         add_settings_field(
                 'default_text', __('Default Text', 'neonmaker'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
         );
         add_settings_field(
-                'default_price', __('Default Price', 'neonmaker'), [$this, 'default_price'], 'NeonMaker_options', 'NeonMaker_general'
+                'stripe_key', __('Stripe Key', 'neonmaker'), [$this, 'stripe_key'], 'NeonMaker_options', 'NeonMaker_payment'
+        );
+        add_settings_field(
+                'stripe_secret', __('Stripe Secret', 'neonmaker'), [$this, 'stripe_secret'], 'NeonMaker_options', 'NeonMaker_payment'
         );
     }
 
@@ -110,14 +120,21 @@ class NeonMakerOptions {
         <?php
     }
 
-    /**
-     * default price
-     */
-    public function default_price() {
+    public function stripe_key() {
         ?>
-        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[default_price]' value='<?php $this->displayValue('default_price'); ?>'>
+        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[stripe_key]' value='<?php $this->displayValue('stripe_key'); ?>'>
         <?php
     }
+
+    /**
+     * stripe key
+     */
+    public function stripe_secret() {
+        ?>
+        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[stripe_secret]' value='<?php $this->displayValue('stripe_secret'); ?>'>
+        <?php
+    }
+
     /**
      * Sanitize each setting field as needed
      *
@@ -147,6 +164,9 @@ class NeonMakerOptions {
      * Print the NeonMaker api information
      */
     public function general_setting() {
+        print sprintf('');
+    }
+    public function payment_setting() {
         print sprintf('');
     }
 }

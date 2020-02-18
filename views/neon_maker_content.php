@@ -60,3 +60,15 @@
     </div>
 </section>
 </div>
+<div class="gb_display_data">
+    <div class="gb_stripe_form"><a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
+        <span class="paymentErrors alert-danger"></span>
+        <form id="stripe" onsubmit="event.preventDefault();GbNeonmaker.stripePayment(this);" method="POST">
+            <input type="text" id="cardNumber" autocomplete="off" name="card-number" placeholder="Card Number" required>
+            <input type="text" id="cardCVC" autocomplete="off" name="cvc" placeholder="CCV" required>
+            <input type="text" id="cardExpMonth" autocomplete="off" name="month" placeholder="MM" required>
+            <input type="text" id="cardExpYear" autocomplete="off" name="year" placeholder="YYYY" required>
+            <input class="black button" name="dostripe" type="submit" value="Pay Now">
+        </form>
+    </div>
+</div>

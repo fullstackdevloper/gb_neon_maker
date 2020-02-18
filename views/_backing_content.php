@@ -1,16 +1,16 @@
 <div class="sbt_text_font">
     <label><?php _e("Choose a Backing Type", "gb_neon_maker"); ?></label>
     <ul class="gb_backing_shape">
-        <li class="option-1"><a href="javascript:void(0);"></a><span>Cut around acrylic</span></li>
-        <li class="option-1"><a href="javascript:void(0);"></a><span>Square acrylic</span></li>
-        <li class="option-1"><a href="javascript:void(0);"></a><span>Stand </span></li>
+        <a onclick="GbNeonmaker.changeBacking(this,'Cut around acrylic');" href="javascript:void(0);"><li class="option-1"><span>Cut around acrylic</span></li></a>
+        <a onclick="GbNeonmaker.changeBacking(this,'Square acrylic');" href="javascript:void(0);"><li class="option-1"><span>Square acrylic</span></li></a>
+        <a onclick="GbNeonmaker.changeBacking(this,'Stand');" href="javascript:void(0);"><li class="option-1"><span>Stand </span></li></a>
     </ul>
     <div class="sbt_backing_options2">
-        <label>Choose a Backing color</label>
+        <label><?php _e("Choose a Backing color", "gb_neon_maker"); ?></label>
         <ul class="gb_backing_color">
-            <li class="gb_acrylic"><a href="javascript:void(0);"></a><span>clear acrylic</span></li>
-            <li class="gb_acrylic"><a href="javascript:void(0);"></a><span>white acrylic</span></li>
-            <li class="gb_acrylic"><a href="javascript:void(0);"></a><span>black acrylic</span></li>
+            <a onclick="GbNeonmaker.changeBacking(this,'clear acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>clear acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBacking(this,'white acrylic');" href="javascript:void(0);" ><li class="gb_acrylic"><span>white acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBacking(this,'black acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>black acrylic</span></li></a>
         </ul>
     </div>
 </div>

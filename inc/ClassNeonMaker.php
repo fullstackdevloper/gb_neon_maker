@@ -174,8 +174,8 @@ class NeonMaker {
         global $post;
         global $NeonMakerSetting;
 
-        //wp_register_script('slider', GB_NEON_MAKER_URL . '/assets/js/gb_neon_slider.js', [], GB_NEON_MAKER_VERSION);
-        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery'), GB_NEON_MAKER_VERSION);
+        wp_register_script('stripe', 'https://js.stripe.com/v2/', [], GB_NEON_MAKER_VERSION);
+        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe'), GB_NEON_MAKER_VERSION);
         wp_enqueue_style('NeonMaker_style', GB_NEON_MAKER_URL . '/assets/css/gb_neon_maker.css', array(), GB_NEON_MAKER_VERSION);
 
 
@@ -183,7 +183,7 @@ class NeonMaker {
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
-                'default_price' => $this->engine->getValue('default_price', $NeonMakerSetting, false),
+                'stripe_key' => $this->engine->getValue('stripe_key', $NeonMakerSetting, false),
             )
         );
     }
@@ -206,3 +206,4 @@ class NeonMaker {
     }
 
 }
+?>

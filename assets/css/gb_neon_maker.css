@@ -129,6 +129,13 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 .color_pick li.active_color {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
 .active_size {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px;padding-bottom: 10px; text-align: center;border: 2px solid #888888;display: block;text-decoration: none;}
 
+/* stripe popup */
+.gb_stripe_form {width: 400px; margin: 20px auto;padding: 20px;background: #fff}
+.gb_display_data {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;}
+input.black.button {width: 100%;}
+a.gb_close {float: right;}
+/* end stripe */
+
 /* css for on/off button */
 
 .gb_onoffswitch {position: relative; width: 90px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;}

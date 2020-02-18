@@ -584,7 +584,7 @@ var GbNeonmaker;
             var formdata = { action: 'gb_submit_payment', data: stripeToken};
             $.post(ajaxurl, formdata, function (data) {
                 //jQuery(".paymentErrors").html("Payment"+ data.status);
-                alert("Payment"+ data.status);
+                alert("Payment "+ data.status);
             });
         }
     }

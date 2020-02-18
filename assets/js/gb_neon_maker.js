@@ -572,14 +572,14 @@ var GbNeonmaker;
     };
     GbNeonmaker.initilaize();
     function handleStripeResponse(status, response) {
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         if (response.error) {
             jQuery(".paymentErrors").html(response.error.message);
         } else {
             var payForm = $("#stripe");
             //get stripe token id from response
             var stripeToken = response['id'];
-            console.log(neonConfigurations.price);
+            //console.log(neonConfigurations.price);
             var ajaxurl = NeonMaker_ajax.ajax_url;
             var formdata = { action: 'gb_submit_payment', data: stripeToken};
             $.post(ajaxurl, formdata, function (data) {

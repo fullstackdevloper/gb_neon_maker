@@ -1,7 +1,7 @@
 <div class="sbt_text_font">
     <label><?php _e("Enter Text Below", "gb_neon_maker"); ?></label>
-    <input type="text" id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);" Value="<?php $this->getValue('default_text', $NeonMakerSetting); ?>">
-    <!--<textarea id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php //$this->getValue('default_text', $NeonMakerSetting); ?></textarea>-->
+    <!--<input type="text" id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);" Value="<?php //$this->getValue('default_text', $NeonMakerSetting); ?>">-->
+    <textarea id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php $this->getValue('default_text', $NeonMakerSetting); ?></textarea>
     <div class="sbt_font_options">
         <label>Choose a font</label>
         <ul>

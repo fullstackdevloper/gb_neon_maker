@@ -1005,14 +1005,14 @@ var GbNeonmaker;
             });
         },
         changeNeonText: function(elem) {
-            /*var newLines = $(elem).val().split("\n").length;
-            //alert(newLines);
-            var lines = 1;
-            if (newLines > 2) {
-                var lastChar = elem.value.length - 1;
-                elem.value = elem.value.substring(0, lastChar);
-            }*/
-            $("#gb_neon_text").text($(elem).val());
+            newLines = $(elem).val().split("\n").length;
+            $(elem).keydown(function(event) {
+                if(event.keyCode == 13 && newLines >= 2) {
+                    return false;
+                }
+            });
+            var textareaValue = $(elem).val();
+            $("#gb_neon_text").html(textareaValue.replace(/\r?\n/g, '<br />'));
             neonConfigurations.price = price;
             neonConfigurations.text = $(elem).val();
             $this.calculation();

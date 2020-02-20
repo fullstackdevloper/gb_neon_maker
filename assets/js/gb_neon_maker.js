@@ -1018,7 +1018,7 @@ var GbNeonmaker;
             $this.calculation();
         },
 
-        changeFont: function(elem,fontType) {
+        changeFont: function(elem, fontType) {
             //alert(fontType);
 
             $("#gb_neon_text").css("font-family", `'${fontType}.woff'`);
@@ -1028,7 +1028,7 @@ var GbNeonmaker;
             neonConfigurations.font = fontType;
             $this.calculation();
         },
-        changeColor: function(elem,fontColor) {
+        changeColor: function(elem, fontColor) {
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
             if(onoffswitch == true) {
                 var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+fontColor+' 0px 0px 20px, '+fontColor+' 0px 0px 30px, '+fontColor+' 0px 0px 40px, '+fontColor+' 0px 0px 55px, '+fontColor+' 0px 0px 75px';
@@ -1041,24 +1041,32 @@ var GbNeonmaker;
             $(elem).parents('li').addClass('active_color');
             neonConfigurations.color = fontColor;
         },
-        changeSize: function(elem,size) {
+        changeSize: function(elem, size) {
             neonConfigurations.price = price;
             neonConfigurations.size = size;
             $('.sbt_text_font a').removeClass('active_size');
             $(elem).addClass('active_size');
             $this.calculation();
         },
-        changeBacking: function(elem,backingsize) {
-            $('.sbt_text_font a').removeClass('active_size');
-            $(elem).addClass('active_size');
+        changeBackingType: function(elem, backingType) {
+            $('.sbt_text_font a').removeClass('active_btype');
+            $(elem).addClass('active_btype');
+            neonConfigurations.backingType = backingType;
         },
-        changeFixture: function(elem,fixture) {
-            $('.sbt_text_font a').removeClass('active_size');
-            $(elem).addClass('active_size');
+        changeBackingColor: function(elem, backingColor) {
+            $('.sbt_text_font a').removeClass('active_bcolor');
+            $(elem).addClass('active_bcolor');
+            neonConfigurations.backingColor = backingColor;
         },
-        changeDelivery: function(elem,delivery) {
+        changeFixture: function(elem, fixture) {
             $('.sbt_text_font a').removeClass('active_size');
             $(elem).addClass('active_size');
+            neonConfigurations.fixture = fixture;
+        },
+        changeDelivery: function(elem, delivery) {
+            $('.sbt_text_font a').removeClass('active_size');
+            $(elem).addClass('active_size');
+            neonConfigurations.delivery = delivery;
         },
         showSlides:function(n)
         {
@@ -1094,30 +1102,31 @@ var GbNeonmaker;
             var font = neonConfigurations.font;
             var string = neonConfigurations.text;
             var size = neonConfigurations.size;
-            var price = 0, maxHeight = 0, length = 0;
+            var key = window.event.keyCode;
+            var price = 0, maxHeight = 0, length = 0,lenghtLine2 = 0;
             for(i = 0; i < string.length; i++) {
                 var char = string[i];
                 height = $this.getPrice(char, font, size, 'height');
                 maxHeight = ( height > maxHeight ) ? height : maxHeight;
                 length = length + $this.getPrice(char, font, size, 'length');
-                /*var key = window.event.keyCode;
                 if(key == 13){
                     lenghtLine1 =  length;
-                }*/
+                }
                 price = price + $this.getPrice(char, font, size, 'text');
             }
-            /*var countLines = $("#gb_default_value").val().split(/\r|\r\n|\n/).length;
+            var countLines = $("#gb_default_value").val().split(/\r|\r\n|\n/).length;
+            /* two line code height and lenght */
             if(countLines == 2){
-                heightInc = maxHeight + 4.5;
+                heightInc = Math.ceil((maxHeight + 4.5) / 1) * 1;
                 lenghtLine2 = length - lenghtLine1;
                 maxLenght = ( lenghtLine1 > lenghtLine2 ) ? lenghtLine1 : lenghtLine2;
-                lenghtInc = maxLenght + 3;
+                lenghtInc = Math.ceil((maxLenght + 3) / 1) * 1;
             }
-            else{*/
-                /* adding +3 in height and width */
+            else{
+                /* adding +3 in height and lenght */
                 heightInc = Math.ceil((maxHeight + 3) / 1) * 1;
                 lenghtInc = Math.ceil((length + 3) / 1) * 1;
-           // }
+            }
 
             /* getting volume Formula used: (((MaxHeight +10) + (Length + 10)) * 10 ) / 5000*/
             getVol = ((heightInc + 10) * (lenghtInc + 10) * 10 ) / 5000;
@@ -1186,7 +1195,7 @@ var GbNeonmaker;
             }
             return shippingPrice[vol];
         },
-        getPrice: function (alphabet, font, size, type) {
+        getPrice:function (alphabet, font, size, type) {
             let priceSeting = $this.settings.configurations;
             if ((alphabet in priceSeting && font in priceSeting[alphabet] && size in priceSeting[alphabet][font])) {
                 return priceSeting[alphabet][font][size][type];
@@ -1194,18 +1203,22 @@ var GbNeonmaker;
             return 0;
         },
         buyNow:function(elem) {
-            var ajaxurl = NeonMaker_ajax.ajax_url;
-            var formdata = { action: 'gb_insert_order', formdata: neonConfigurations };
-            $.post(ajaxurl, formdata, function (data) {
-                if (data.status == 'success') {
-                    //alert("Your data with ID:  " + data.lastid + " inserted ");
-                    $('.gb_display_data').css('display', 'block');
-                }
-            });
+            //$this.canvasToImg();
+            $('.gb_display_data').css('display', 'block');
+
         },
-        stripePayment: function(elem)
+        inquiryForm:function(elem) {
+            $('.gb_inquiry_popup').css('display', 'block');
+        },
+        stripePayment:function(elem)
         {
-            Stripe.setPublishableKey(NeonMaker_ajax.stripe_key);
+            if(NeonMaker_ajax.payment_mode = 'test')
+            {
+                var stripe_key = NeonMaker_ajax.test_stripe_key;
+            }else {
+                var stripe_key = NeonMaker_ajax.live_stripe_key;
+            }
+            Stripe.setPublishableKey(stripe_key);
             // create stripe token to make payment
             Stripe.createToken({
                 number: jQuery('#cardNumber').val(),
@@ -1213,33 +1226,49 @@ var GbNeonmaker;
                 exp_month: jQuery('#cardExpMonth').val(),
                 exp_year: jQuery('#cardExpYear').val()
             },
-            handleStripeResponse);
+            $this.handleStripeResponse);
             return false;
         },
-        round_to_precision: function (x, precision) {
-            var y = +x + (precision === undefined ? 0.5 : precision/2);
-            return y - (y % (precision === undefined ? 1 : +precision));
+        handleStripeResponse:function(status, response){
+            if (response.error) {
+                jQuery(".paymentErrors").html(response.error.message);
+            } else {
+                var stripeToken = response['id'];
+                var ajaxurl = NeonMaker_ajax.ajax_url;
+                //var stripe_secret = stripe_secret;
+                var formdata = { action: 'gb_submit_payment', data: stripeToken, formvalues: neonConfigurations };
+                    $.post(ajaxurl, formdata, function (data) {
+                    jQuery(".paymentErrors").html("Payment "+ data.status);
+                    if(data.status == 'success'){
+                        $this.saveOrders(neonConfigurations, data.transactionData);
+                    }
+                });
+            }
+        },
+        saveOrders:function(formdata, tdata) {
+            var ajaxurl = NeonMaker_ajax.ajax_url;
+            var formdata = { action: 'gb_insert_order', formdata: formdata, transection: tdata };
+            $.post(ajaxurl, formdata, function (data) {
+                if (data.status == 'success') {
+                    alert("Your Order information are stored! ");
+                    $('.gb_display_data').css('display', 'none');
+                }
+            });
+        },
+        inquiryFormSubmit: function (elem) {
+            var inquiryFormdata = $('#gb_inquiry').serialize();
+            var ajaxurl = NeonMaker_ajax.ajax_url;
+            var formdata = { action: 'gb_submit_inquiry', formdata: inquiryFormdata };
+            $.post(ajaxurl, formdata, function (data) {
+                if (data.status == 'success') {
+                    alert("Thank you for submitted your information");
+                    $('.gb_inquiry_popup').css('display', 'none');
+                }
+            });
         },
         closeBtn: function (elem) {
             $('.gb_display_data').css('display', 'none');
         }
     };
     GbNeonmaker.initilaize();
-    function handleStripeResponse(status, response) {
-        //console.log(JSON.stringify(response));
-        if (response.error) {
-            jQuery(".paymentErrors").html(response.error.message);
-        } else {
-            //var payForm = $("#stripe");
-            //get stripe token id from response
-            var stripeToken = response['id'];
-            //console.log(neonConfigurations.price);
-            var ajaxurl = NeonMaker_ajax.ajax_url;
-            var formdata = { action: 'gb_submit_payment', data: stripeToken};
-            $.post(ajaxurl, formdata, function (data) {
-                //jQuery(".paymentErrors").html("Payment"+ data.status);
-                alert("Payment "+ data.status);
-            });
-        }
-    }
 })(jQuery);

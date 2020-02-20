@@ -31,7 +31,7 @@
                 </div>
                 <div class="btn_sbt_cart">
                     <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("Buy Now", "gb_neon_maker"); ?></a>
-                    <a href="#"  class="sbt_gr"><?php _e("IT'S NOT QUITE RIGHT", "gb_neon_maker"); ?></a>
+                    <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);" class="sbt_gr"><?php _e("IT'S NOT QUITE RIGHT", "gb_neon_maker"); ?></a>
                 </div>
             </div>
             <div class="wd_7 result_effect">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="sl_ide">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg1.jpg" alt="bg1">
-						<img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg2.jpg" alt="bgnext">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg2.jpg" alt="bgnext">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg3.jpg" alt="bgnext">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg4.jpg" alt="bgnext">
                         <div class="txt_over">
@@ -60,8 +60,11 @@
     </div>
 </section>
 </div>
+
+<!-- payment form for Stripe -->
 <div class="gb_display_data">
-    <div class="gb_stripe_form"><a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
+    <div class="gb_stripe_form">
+        <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
         <span class="paymentErrors alert-danger"></span>
         <form id="stripe" onsubmit="event.preventDefault();GbNeonmaker.stripePayment(this);" method="POST">
             <input type="text" id="cardNumber" autocomplete="off" name="card-number" placeholder="Card Number" required>
@@ -70,5 +73,29 @@
             <input type="text" id="cardExpYear" autocomplete="off" name="year" placeholder="YYYY" required>
             <input class="black button" name="dostripe" type="submit" value="Pay Now">
         </form>
+    </div>
+</div>
+<!-- end payment form for Stripe -->
+
+<!-- Inquiry form -->
+<div class="gb_inquiry_popup">
+    <div class="gb_inquiry_container">
+        <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
+        <h6>Inquiry Form</h6>
+      <form id="gb_inquiry" class="gb_inquiry_form" method="POST" onsubmit="event.preventDefault();GbNeonmaker.inquiryFormSubmit(this);">
+        <label for="fname">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name.." required>
+
+        <label for="fname">Email Address </label>
+        <input type="email" id="email" name="email" placeholder="Your email.." required>
+
+        <label for="fname">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Your phone.." required>
+
+        <label for="fname">Website Name</label>
+        <input type="text" id="website" name="website" placeholder="Your website.." required>
+
+        <input type="submit" value="Submit">
+      </form>
     </div>
 </div>

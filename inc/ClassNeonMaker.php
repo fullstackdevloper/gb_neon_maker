@@ -183,7 +183,11 @@ class NeonMaker {
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
-                'stripe_key' => $this->engine->getValue('stripe_key', $NeonMakerSetting, false),
+                'payment_mode' => $this->engine->getValue('payment_mode', $NeonMakerSetting, false),
+                'test_stripe_key' => $this->engine->getValue('test_stripe_key', $NeonMakerSetting, false),
+                'test_stripe_secret' => $this->engine->getValue('test_stripe_secret', $NeonMakerSetting, false),
+                'live_stripe_key' => $this->engine->getValue('live_stripe_key', $NeonMakerSetting, false),
+                'live_stripe_secret' => $this->engine->getValue('live_stripe_secret', $NeonMakerSetting, false)
             )
         );
     }

@@ -1,16 +1,16 @@
 <div class="sbt_text_font">
     <label><?php _e("Choose a Backing Type", "gb_neon_maker"); ?></label>
     <ul class="gb_backing_shape">
-        <a onclick="GbNeonmaker.changeBacking(this,'Cut around acrylic');" href="javascript:void(0);"><li class="option-1"><span>Cut around acrylic</span></li></a>
-        <a onclick="GbNeonmaker.changeBacking(this,'Square acrylic');" href="javascript:void(0);"><li class="option-1"><span>Square acrylic</span></li></a>
-        <a onclick="GbNeonmaker.changeBacking(this,'Stand');" href="javascript:void(0);"><li class="option-1"><span>Stand </span></li></a>
+        <a onclick="GbNeonmaker.changeBackingType(this,'Cut around acrylic');" href="javascript:void(0);"><li class="option-1"><span>Cut around acrylic</span></li></a>
+        <a onclick="GbNeonmaker.changeBackingType(this,'Square acrylic');" href="javascript:void(0);"><li class="option-1"><span>Square acrylic</span></li></a>
+        <a onclick="GbNeonmaker.changeBackingType(this,'Stand');" href="javascript:void(0);"><li class="option-1"><span>Stand </span></li></a>
     </ul>
     <div class="sbt_backing_options2">
         <label><?php _e("Choose a Backing color", "gb_neon_maker"); ?></label>
         <ul class="gb_backing_color">
-            <a onclick="GbNeonmaker.changeBacking(this,'clear acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>clear acrylic</span></li></a>
-            <a onclick="GbNeonmaker.changeBacking(this,'white acrylic');" href="javascript:void(0);" ><li class="gb_acrylic"><span>white acrylic</span></li></a>
-            <a onclick="GbNeonmaker.changeBacking(this,'black acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>black acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'clear acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>clear acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'white acrylic');" href="javascript:void(0);" ><li class="gb_acrylic"><span>white acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'black acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>black acrylic</span></li></a>
         </ul>
     </div>
 </div>

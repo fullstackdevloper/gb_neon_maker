@@ -43,7 +43,6 @@ class InquiriesDetails extends WP_List_Table
 		] );
 
 		$this->items =$data;
-		//echo "<pre>";print_r($this->items);die;
 	}
 
 
@@ -60,15 +59,13 @@ class InquiriesDetails extends WP_List_Table
 		global $wpdb;
 		$prefix=$wpdb->prefix;
 		$sql = "select * From {$prefix}gb_inquiries";
-		//echo "<pre>"; print_r($_REQUEST); echo "</pre>";
-		//die();
 		$conditions=array();
 		if(isset($_REQUEST['s']))
 		{
 			$sql .= ' where name LIKE "%'.$_REQUEST['s'].'%"';
 		}
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			$sql .= ' ORDER BY "' . esc_sql( $_REQUEST['orderby'] ).'"';
+			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] ).'';
 			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
 		}
 
@@ -196,6 +193,8 @@ class InquiriesDetails extends WP_List_Table
 	public function get_sortable_columns() {
 		$sortable_columns = array(
 			'name' => array( 'name', true ),
+            'email' => array( 'email', true ),
+            'phone' => array( 'phone', true ),
 			'created' => array( 'created', false ),
 			'modified' => array( 'modified', false ),
 		);

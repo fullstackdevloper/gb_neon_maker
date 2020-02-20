@@ -71,13 +71,13 @@ class NeonMakerOptions {
         $dataprovider = new InquiriesDetails();
         $dataprovider->prepare_items();
         $this->options = get_option('NeonMaker_options');
-        $html = '<div class="wrap">';
-        $html .= wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
-        $html .= '<form action="" method="post">';
-        $html .= $dataprovider->search_box( 'Search', 'search_id' );
-        $html .= $dataprovider->views();
-        $html .= $dataprovider->display();
-        $html .= '</div>';
+        echo '<div class="wrap">';
+        echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Inquiries', 'gb_neon_maker'));
+        echo '<form action="" method="post">';
+        echo $dataprovider->search_box( 'Search', 'search_id' );
+        echo $dataprovider->views();
+        echo $dataprovider->display();
+        echo '</div>';
         echo $html;
     }
 
@@ -96,21 +96,31 @@ class NeonMakerOptions {
                 [$this, 'general_setting'], // Callback
                 'NeonMaker_options' // Page
         );
+        add_settings_field(
+                'default_text', __('Default Text', 'neonmaker'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
+        );
+
+        /*  add section for stripe payment gateway */
         add_settings_section(
                 'NeonMaker_payment', // ID
                 'Payment Setting', // Title
                 [$this, 'payment_setting'], // Callback
                 'NeonMaker_options' // Page
         );
-
         add_settings_field(
-                'default_text', __('Default Text', 'neonmaker'), [$this, 'default_text'], 'NeonMaker_options', 'NeonMaker_general'
+                'payment_mode', __('Payment Mode', 'neonmaker'), [$this, 'payment_mode'], 'NeonMaker_options', 'NeonMaker_payment'
         );
         add_settings_field(
-                'stripe_key', __('Stripe Key', 'neonmaker'), [$this, 'stripe_key'], 'NeonMaker_options', 'NeonMaker_payment'
+                'test_stripe_key', __('Test Stripe Key', 'neonmaker'), [$this, 'test_stripe_key'], 'NeonMaker_options', 'NeonMaker_payment'
         );
         add_settings_field(
-                'stripe_secret', __('Stripe Secret', 'neonmaker'), [$this, 'stripe_secret'], 'NeonMaker_options', 'NeonMaker_payment'
+                'test_stripe_secret', __('Test Stripe Secret', 'neonmaker'), [$this, 'test_stripe_secret'], 'NeonMaker_options', 'NeonMaker_payment'
+        );
+        add_settings_field(
+                'live_stripe_key', __('Live Stripe Key', 'neonmaker'), [$this, 'live_stripe_key'], 'NeonMaker_options', 'NeonMaker_payment'
+        );
+        add_settings_field(
+                'live_stripe_secret', __('Live Stripe Secret', 'neonmaker'), [$this, 'live_stripe_secret'], 'NeonMaker_options', 'NeonMaker_payment'
         );
     }
 
@@ -119,19 +129,51 @@ class NeonMakerOptions {
         <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[default_text]' value='<?php $this->displayValue('default_text'); ?>'>
         <?php
     }
-
-    public function stripe_key() {
+    /**
+     * Test mode stripe key
+     */
+    public function test_stripe_key() {
         ?>
-        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[stripe_key]' value='<?php $this->displayValue('stripe_key'); ?>'>
+        <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[test_stripe_key]' value='<?php $this->displayValue('test_stripe_key'); ?>'>
         <?php
     }
 
     /**
-     * stripe key
+     * Test mode stripe secret
      */
-    public function stripe_secret() {
+    public function test_stripe_secret() {
         ?>
-        <input type='text' style="width:20%; min-width:300px;" name='NeonMaker_options[stripe_secret]' value='<?php $this->displayValue('stripe_secret'); ?>'>
+        <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[test_stripe_secret]' value='<?php $this->displayValue('test_stripe_secret'); ?>'>
+        <?php
+    }
+
+    /**
+     * enable/disable test mode of payment gateway
+     */
+    public function payment_mode() {
+        ?>
+        <select style="width:50%; min-width:300px;" name="NeonMaker_options[payment_mode]">
+            <option <?php echo $this->displayValue('payment_mode', true) == 'test' ? 'selected' : ''; ?> value="test">Test</option>
+            <option <?php echo $this->displayValue('payment_mode', true) == 'live' ? 'selected' : ''; ?> value="live">Live</option>
+        </select>
+        <?php
+    }
+
+    /**
+     * Test mode stripe key
+     */
+    public function live_stripe_key() {
+        ?>
+        <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[live_stripe_key]' value='<?php $this->displayValue('live_stripe_key'); ?>'>
+        <?php
+    }
+
+    /**
+     * Test mode stripe secret
+     */
+    public function live_stripe_secret() {
+        ?>
+        <input type='text' style="width:50%; min-width:300px;" name='NeonMaker_options[live_stripe_secret]' value='<?php $this->displayValue('live_stripe_secret'); ?>'>
         <?php
     }
 

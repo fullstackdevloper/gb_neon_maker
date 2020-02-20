@@ -43,7 +43,6 @@ class OrdersDetails extends WP_List_Table
 		] );
 
 		$this->items =$data;
-		//echo "<pre>";print_r($this->items);die;
 	}
 
 
@@ -60,21 +59,66 @@ class OrdersDetails extends WP_List_Table
 		global $wpdb;
 		$prefix=$wpdb->prefix;
 		$sql = "select * From {$prefix}gb_orders";
-		//echo "<pre>"; print_r($_REQUEST); echo "</pre>";
-		//die();
-		if(isset($_REQUEST['s']))
-		{
-			$sql .= ' where content LIKE "%'.$_REQUEST['s'].'%"';
-		}
-		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			$sql .= ' ORDER BY "' . esc_sql( $_REQUEST['orderby'] ).'"';
-			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
-		}
+        if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'view'){
+            $sql .=  " where id = ".$_REQUEST['order_id'];
+            $result = $wpdb->get_results($sql);
+            foreach ($result as $key => $value) {
+                $transection_logs = json_decode($value->transection_logs);
+                $content = json_decode($value->content);
+                $html = '<div class="gb_order_detail gb_width100"><h1> Order Details </h1>';
+                $html .= '<div class="gb_tool_detail gb_width50" >';
+                $html .= '<h3>Selected Tool Details </h3>';
+                if(isset($content) && $content != '') {
+                    $html .= '<ul>';
+                    $html .= '<li> <b>Text : </b>'.@$content->text.'</li>';
+                    $html .= '<li> <b>Font : </b>'.@$content->font.'</li>';
+                    $html .= '<li> <b>Size : </b>'.@$content->size.'</li>';
+                    $html .= '<li> <b>Color : </b>'.@$content->color.'</li>';
+                    $html .= '<li> <b>Price : </b>'.@$content->price.'</li>';
+                    $html .= '<li> <b>Backing Type : </b>'.@$content->backingType.'</li>';
+                    $html .= '<li> <b>Backing color : </b>'.@$content->backingColor.'</li>';
+                    $html .= '<li> <b>Fixture : '.@$content->fixture.'</li>';
+                    $html .= '<li> <b>Delivery : </b>'.@$content->delivery.'</li>';
+                    $html .= '<li> <b>Image :  </b></li>';
+                    $html .= '</ul>';
+                }
+                $html .= '</div>';
+                $html .= '<div class="gb_payment_detail gb_width50" >';
+                $html .= '<h3>Payment Details </h3>';
+                if(isset($transection_logs)) {
+                    $html .= '<ul>';
+                    $html .= '<li><b> id : </b>'.$transection_logs->id.'</li>';
+                    $html .= '<li><b> amount : </b>'.(($transection_logs->amount)/100).'</li>';
+                    $html .= '<li><b> balance_transaction : </b>'.$transection_logs->balance_transaction.'</li>';
+                    $html .= '<li><b> created : </b>'.$transection_logs->created.'</li>';
+                    $html .= '<li><b> currency : </b>'.$transection_logs->currency.'</li>';
+                    $html .= '<li><b> customer : </b>'.$transection_logs->customer.'</li>';
+                    $html .= '<li><b> description : </b>'.$transection_logs->description.'</li>';
+                    $html .= '<li><b> livemode : </b>'.$transection_logs->livemode.'</li>';
+                    $html .= '<li><b> payment_method : </b>'.$transection_logs->payment_method.'</li>';
+                    $html .= '<li><b> status : </b>'.$transection_logs->status.'</li>';
+                    $html .= '</ul>';
+                }
+                $html .= '</div>';
+                $html .= '</div>';
+            }
+            echo $html;
+            die;
+        }else {
+    		if(isset($_REQUEST['s']))
+    		{
+    			$sql .= ' where content LIKE "%'.$_REQUEST['s'].'%"';
+    		}
+    		if ( ! empty( $_REQUEST['orderby'] ) ) {
+    			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] ).'';
+    			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
+    		}
 
-		$sql .= " LIMIT $per_page";
-		$sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
-		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
-		return $result;
+    		$sql .= " LIMIT $per_page";
+    		$sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
+    		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
+    		return $result;
+        }
 	}
 	/**
 	 * Render the bulk edit checkbox
@@ -89,6 +133,9 @@ class OrdersDetails extends WP_List_Table
 		);
 	}
 
+    function column_id( $item ) {
+        return $item['id'];
+    }
     function column_Actions( $item ) {
         return sprintf(
             'Delete'
@@ -99,7 +146,8 @@ class OrdersDetails extends WP_List_Table
         $delete_nonce = wp_create_nonce( 'gb_delete_orders' );
         $content = '<strong>' . $text. '</strong>';
         $actions = [
-            'delete' => sprintf( "<a onclick=\"return confirm('are you sure to delete ".$item['id']." id ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce )
+            'delete' => sprintf( "<a onclick=\"return confirm('are you sure to delete ".$item['id']." id ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce ),
+            'view'=>sprintf( "<a href='?page=%s&action=%s&order_id=%s'>View</a>", esc_attr( $_REQUEST['page'] ), 'view', absint( $item['id'] ))
         ];
         return $content . $this->row_actions( $actions );
 
@@ -158,7 +206,8 @@ class OrdersDetails extends WP_List_Table
 	function get_columns() {
 		$columns = [
 			'cb'      => '<input type="checkbox" />',
-			'text'    => __( 'Text', 'gb_neon_maker' ),
+			'id'    => __( 'ID', 'gb_neon_maker' ),
+            'text'    => __( 'Text', 'gb_neon_maker' ),
             'font'    => __( 'Font', 'gb_neon_maker' ),
             'size'    => __( 'Size', 'gb_neon_maker' ),
             'color'    => __( 'Color', 'gb_neon_maker' ),

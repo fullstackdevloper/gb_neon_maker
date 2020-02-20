@@ -28,49 +28,51 @@ class NeonMakerActions {
         return [
             ['name' => 'gb_insert_order', 'callback' => 'saveOrderRecords'],
             ['name' => 'gb_submit_payment', 'callback' => 'submitPayments'],
+            ['name' => 'gb_submit_inquiry', 'callback' => 'submitInquiries'],
         ];
     }
 
     /**
-     * Save order records
+     * Submit payments order records
      */
     public function submitPayments() {
         global $wpdb;
         $prefix = $wpdb->prefix;
         /* get stripe keys*/
         $option = get_option('NeonMaker_options');
-
         include_once GB_NEON_MAKER_ABSPATH . '/stripe/init.php';
-        \Stripe\Stripe::setApiKey($option['stripe_secret']);
+        if($option['payment_mode'] = 'test')
+        {
+            $stripe_secret = $option['test_stripe_secret'];
+        }else {
+            $stripe_secret = $option['live_stripe_secret'];
+        }
+        \Stripe\Stripe::setApiKey($stripe_secret);
         //add customer to stripe
         $customer = \Stripe\Customer::create(array(
             'source' => $_POST['data']
         ));
+        //print_r($_POST['formvalues']);
         // item details for which payment made
-        $itemName = "Neon marker element";
-        $itemNumber = "NEONMARKER987654321";
-        $itemPrice = 50;
+        $itemName = "Neon marker for text - ".$_POST['formvalues']['text']." - ".$_POST['formvalues']['size'] ;
+        $itemPrice = $_POST['formvalues']['price'] * 100;
         $currency = "usd";
-        $orderID = "NM987654321";
 
         // details for which payment performed
         $payDetails = \Stripe\Charge::create(array(
             'customer' => $customer->id,
             'amount' => $itemPrice,
             'currency' => $currency,
-            'description' => $itemName,
-            'metadata' => array(
-            'order_id' => $orderID
-            )
+            'description' => $itemName
         ));
         // get payment details
         $paymenyResponse = $payDetails->jsonSerialize();
-
+        //print_r($paymenyResponse);
         // check whether the payment is successful
         if($paymenyResponse['status'] == 'succeeded'){
-           $success=array('status' => 'success');
+           $success=array('status' => 'success', 'transactionData' => $paymenyResponse);
         }else {
-            $success=array('status' => 'Failed');
+            $success=array('status' => 'Failed', 'transactionData' => '');
         }
         wp_send_json($success);
         return;
@@ -83,12 +85,36 @@ class NeonMakerActions {
         global $wpdb;
         $prefix = $wpdb->prefix;
         $formdata = json_encode($_POST['formdata']);
+        $transection_logs = json_encode($_POST['transection']);
         $data = array(
             'content' => $formdata,
+            'transection_logs' => $transection_logs,
             'created' => date('Y-m-d h:i:s') ,
             'modified' => date('Y-m-d h:i:s') ,
         );
         $wpdb->insert("{$prefix}gb_orders", $data, array('%s'));
+        $lastid = $wpdb->insert_id;
+        $success=array('status' => 'success', 'lastid' => $lastid);
+        wp_send_json($success);
+        return;
+    }
+
+    /**
+     * Submit Inquiries
+     */
+    public function submitInquiries() {
+        global $wpdb;
+        $prefix = $wpdb->prefix;
+        parse_str($_POST['formdata'], $output);
+        $data = array(
+            'name' => $output['name'],
+            'email' => $output['email'],
+            'phone' => $output['phone'],
+            'website' => $output['website'],
+            'created' => date('Y-m-d h:i:s') ,
+            'modified' => date('Y-m-d h:i:s') ,
+        );
+        $wpdb->insert("{$prefix}gb_inquiries", $data, array('%s'));
         $lastid = $wpdb->insert_id;
         $success=array('status' => 'success', 'lastid' => $lastid);
         wp_send_json($success);

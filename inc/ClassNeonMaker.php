@@ -101,7 +101,8 @@ class NeonMaker {
         global $wpdb;
         $sql="CREATE TABLE `{$prefix}gb_orders` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `content` text NOT NULL,
+        `content` text NULL,
+        `transection_logs` text NULL,
         `created` datetime NOT NULL,
         `modified` datetime NOT NULL,
         PRIMARY KEY (`id`)
@@ -123,8 +124,8 @@ class NeonMaker {
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `name` varchar(100) NOT NULL,
         `email` varchar(100) NOT NULL,
-        `phone` varchar(100) NOT NULL,
-        `website` varchar(150) NOT NULL,
+        `phone` varchar(100) NULL,
+        `website` varchar(150) NULL,
         `created` datetime NOT NULL,
         `modified` datetime NOT NULL,
         PRIMARY KEY (`id`)

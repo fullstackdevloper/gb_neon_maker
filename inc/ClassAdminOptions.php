@@ -78,7 +78,6 @@ class NeonMakerOptions {
         echo $dataprovider->views();
         echo $dataprovider->display();
         echo '</div>';
-        echo $html;
     }
 
     /**
@@ -212,5 +211,5 @@ class NeonMakerOptions {
         print sprintf('');
     }
 }
-
 return new NeonMakerOptions();
+?>

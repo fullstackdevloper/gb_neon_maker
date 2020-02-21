@@ -49,7 +49,7 @@
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg3.jpg" alt="bgnext">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg4.jpg" alt="bgnext">
                         <div class="txt_over">
-                            <h1 id="gb_neon_text"><?php $this->getValue('default_text', $NeonMakerSetting); ?></h1>
+                            <span id="gb_neon_text"><?php $this->getValue('default_text', $NeonMakerSetting); ?></span>
                         </div>
                     </div>
                     <div class="prev_sl"><a class="prev" onclick="GbNeonmaker.plusSlides(-1);">&#10094;</a></div>
@@ -60,7 +60,7 @@
     </div>
 </section>
 </div>
-
+<div class="gb_sc"></div>
 <!-- payment form for Stripe -->
 <div class="gb_display_data">
     <div class="gb_stripe_form">
@@ -83,18 +83,15 @@
         <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
         <h6>Inquiry Form</h6>
       <form id="gb_inquiry" class="gb_inquiry_form" method="POST" onsubmit="event.preventDefault();GbNeonmaker.inquiryFormSubmit(this);">
-        <label for="fname">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name.." required>
-
-        <label for="fname">Email Address </label>
+        <input type="text" id="fname" name="fname" placeholder="Your First Nam.." required>
+        <input type="text" id="lname" name="lname" placeholder="Your Last Nam.." required>
+        <input type="text" id="company" name="company" placeholder="Your Company..">
         <input type="email" id="email" name="email" placeholder="Your email.." required>
-
-        <label for="fname">Phone Number</label>
-        <input type="text" id="phone" name="phone" placeholder="Your phone.." required>
-
-        <label for="fname">Website Name</label>
-        <input type="text" id="website" name="website" placeholder="Your website.." required>
-
+        <input type="text" id="phone" name="phone" placeholder="Your Phone.." required>
+        <textarea name="street" id="street" placeholder="Your Street address.."></textarea>
+        <input type="text" id="state" name="state" placeholder="Your State.." required>
+        <input type="text" id="city" name="city" placeholder="Your City.." required>
+        <input type="text" id="postcode" name="postcode" placeholder="Your Postcode.." required>
         <input type="submit" value="Submit">
       </form>
     </div>

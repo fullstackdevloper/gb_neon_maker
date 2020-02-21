@@ -1,5 +1,4 @@
 <?php
-
 /*
  * NeonMaker Core funtions
  * @package NeonMaker
@@ -10,7 +9,7 @@ class NeonMakerCore {
 
 
     /**
-     * class constructor 
+     * class constructor
      * @global type $NeonMakerSetting
      */
     function __construct() {
@@ -42,13 +41,13 @@ class NeonMakerCore {
         $html = ob_get_clean();
         return $html;
     }
-    
+
     /**
      * get value from array/object if set
-     * 
+     *
      * @param String $key
      * @param Mixed $Data
-     * 
+     *
      * return Mixed
      */
     public function getValue($key, $Data, $print = true) {
@@ -72,7 +71,7 @@ class NeonMakerCore {
 
         return false;
     }
-    
+
     /**
      * get the hint for text
      * @return Html
@@ -81,3 +80,4 @@ class NeonMakerCore {
         return __("If you have another font in mind, would like multiple fonts, or would like to incorporate an image or logo, click (it's not quote right) and let us know more.", 'gb_neon_maker');
     }
 }
+?>

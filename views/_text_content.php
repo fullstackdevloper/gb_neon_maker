@@ -11,8 +11,8 @@
                 </a>
             </li>
             <li>
-                <a onclick="GbNeonmaker.changeFont(this,'Bashore');" href="javascript:void(0);">
-                    <span class="gb_Bashore">Bashore</span>
+                <a onclick="GbNeonmaker.changeFont(this,'Bayshore');" href="javascript:void(0);">
+                    <span class="gb_Bashore">Bayshore</span>
                 </a>
             </li>
             <li>

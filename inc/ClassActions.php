@@ -86,9 +86,11 @@ class NeonMakerActions {
         $prefix = $wpdb->prefix;
         $formdata = json_encode($_POST['formdata']);
         $transection_logs = json_encode($_POST['transection']);
+        $baseimg = $_POST['baseimg'];
         $data = array(
             'content' => $formdata,
             'transection_logs' => $transection_logs,
+            'baseimg' => $baseimg,
             'created' => date('Y-m-d h:i:s') ,
             'modified' => date('Y-m-d h:i:s') ,
         );
@@ -107,10 +109,15 @@ class NeonMakerActions {
         $prefix = $wpdb->prefix;
         parse_str($_POST['formdata'], $output);
         $data = array(
-            'name' => $output['name'],
+            'fname' => $output['fname'],
+            'lname' => $output['lname'],
+            'company' => $output['company'],
             'email' => $output['email'],
             'phone' => $output['phone'],
-            'website' => $output['website'],
+            'street' => $output['street'],
+            'city' => $output['city'],
+            'state' => $output['state'],
+            'postcode' => $output['postcode'],
             'created' => date('Y-m-d h:i:s') ,
             'modified' => date('Y-m-d h:i:s') ,
         );
@@ -128,5 +135,5 @@ class NeonMakerActions {
 
     }
 }
-
 return new NeonMakerActions();
+?>

@@ -79,7 +79,7 @@ class OrdersDetails extends WP_List_Table
                     $html .= '<li> <b>Backing color : </b>'.@$content->backingColor.'</li>';
                     $html .= '<li> <b>Fixture : '.@$content->fixture.'</li>';
                     $html .= '<li> <b>Delivery : </b>'.@$content->delivery.'</li>';
-                    $html .= '<li> <b>Image :  </b></li>';
+                    $html .= '<li> <b>Image :  </b><img src="'.@$value->baseimg.'" ></li>';
                     $html .= '</ul>';
                 }
                 $html .= '</div>';
@@ -133,9 +133,6 @@ class OrdersDetails extends WP_List_Table
 		);
 	}
 
-    function column_id( $item ) {
-        return $item['id'];
-    }
     function column_Actions( $item ) {
         return sprintf(
             'Delete'
@@ -146,7 +143,7 @@ class OrdersDetails extends WP_List_Table
         $delete_nonce = wp_create_nonce( 'gb_delete_orders' );
         $content = '<strong>' . $text. '</strong>';
         $actions = [
-            'delete' => sprintf( "<a onclick=\"return confirm('are you sure to delete ".$item['id']." id ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce ),
+            'delete' => sprintf( "<a onclick=\"return confirm('are you sure to delete ".$text." text ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce ),
             'view'=>sprintf( "<a href='?page=%s&action=%s&order_id=%s'>View</a>", esc_attr( $_REQUEST['page'] ), 'view', absint( $item['id'] ))
         ];
         return $content . $this->row_actions( $actions );
@@ -206,7 +203,6 @@ class OrdersDetails extends WP_List_Table
 	function get_columns() {
 		$columns = [
 			'cb'      => '<input type="checkbox" />',
-			'id'    => __( 'ID', 'gb_neon_maker' ),
             'text'    => __( 'Text', 'gb_neon_maker' ),
             'font'    => __( 'Font', 'gb_neon_maker' ),
             'size'    => __( 'Size', 'gb_neon_maker' ),
@@ -235,7 +231,6 @@ class OrdersDetails extends WP_List_Table
 	 */
 	public function get_sortable_columns() {
 		$sortable_columns = array(
-			'id' => array( 'id', true ),
 			'created' => array( 'created', false ),
 			'modified' => array( 'modified', false ),
 		);
@@ -266,7 +261,6 @@ class OrdersDetails extends WP_List_Table
     public function column_default( $item, $column_name )
     {
         switch( $column_name ) {
-            case 'id':
             case 'text':
             case 'font':
             case 'size':
@@ -291,9 +285,9 @@ class OrdersDetails extends WP_List_Table
 			}
 			else {
 				self::delete_item( absint( $_GET['__ID'] ) );
-				$redirect=admin_url('admin.php?page=gb_orders');
+				/*$redirect=admin_url('admin.php?page=gb_orders');
 				wp_redirect($redirect);
-				exit;
+				exit;*/
 			}
 
 		}
@@ -302,19 +296,15 @@ class OrdersDetails extends WP_List_Table
 		if ( ( isset( $_POST['action'] ) && $_POST['action'] == 'bulk-delete' )
 		     || ( isset( $_POST['action2'] ) && $_POST['action2'] == 'bulk-delete' )
 		) {
-
 			$delete_ids = esc_sql( $_POST['bulk-delete'] );
-
 			// loop over the array of record IDs and delete them
 			foreach ( $delete_ids as $id ) {
 				self::delete_item( $id );
-
 			}
-
-			$redirect=admin_url('admin.php?page=gb_orders');
-			wp_redirect($redirect);
-				exit;
-			exit;
+			//$redirect=admin_url('admin.php?page=gb_orders');
+			//wp_redirect($redirect);
+				//exit;
+			//exit;
 		}
 	}
 

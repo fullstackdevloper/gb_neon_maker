@@ -59,20 +59,46 @@ class InquiriesDetails extends WP_List_Table
 		global $wpdb;
 		$prefix=$wpdb->prefix;
 		$sql = "select * From {$prefix}gb_inquiries";
-		$conditions=array();
-		if(isset($_REQUEST['s']))
-		{
-			$sql .= ' where name LIKE "%'.$_REQUEST['s'].'%"';
-		}
-		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] ).'';
-			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
-		}
+        if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'view'){
+            $sql .=  " where id = ".$_REQUEST['inquiry_id'];
+            $result = $wpdb->get_results($sql);
+            foreach ($result as $key => $value) {
+                $html = '<div class="gb_inq_detail gb_width100"><h1> Inquiry Details </h1>';
+                $html .= '<div class="gb_inq_detail gb_width50" >';
+                $html .= '<ul>';
+                $html .= '<li> <b>First name : </b>'.$value->fname.'</li>';
+                $html .= '<li> <b>Last name : </b>'.$value->lname.'</li>';
+                if(isset($value->company) && $value->company != ''){
+                    $html .= '<li> <b>Company : </b>'.$value->company.'</li>';
+                }
+                $html .= '<li> <b>Email address : </b>'.$value->email.'</li>';
+                $html .= '<li> <b>Phone number : </b>'.$value->phone.'</li>';
+                if(isset($value->street) && $value->street != ''){
+                    $html .= '<li> <b>Street address : </b>'.$value->street.'</li>';
+                }
+                $html .= '<li> <b>City : </b>'.$value->city.'</li>';
+                $html .= '<li> <b>State : '.$value->state.'</li>';
+                $html .= '<li> <b>Postcode : </b>'.$value->postcode.'</li>';
+                $html .= '</ul>';
+                $html .= '</div>';
+            }
+            echo $html;
+            die;
+        }else {
+    		if(isset($_REQUEST['s']))
+    		{
+    			$sql .= ' where fname LIKE "%'.$_REQUEST['s'].'%"';
+    		}
+    		if ( ! empty( $_REQUEST['orderby'] ) ) {
+    			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] ).'';
+    			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
+    		}
 
-		$sql .= " LIMIT $per_page";
-		$sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
-		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
-		return $result;
+    		$sql .= " LIMIT $per_page";
+    		$sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
+    		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
+    		return $result;
+        }
 	}
 	/**
 	 * Render the bulk edit checkbox
@@ -94,12 +120,13 @@ class InquiriesDetails extends WP_List_Table
      * @return string
      *
      */
-	function column_name( $item ) {
+	function column_fname( $item ) {
 
 		$delete_nonce = wp_create_nonce( 'bx_delete_inquiries' );
-		$name = '<strong>' . $item['name']. '</strong>';
+		$name = '<strong>' . $item['fname']. '</strong>';
 		$actions = [
-			'delete'=>sprintf( "<a onclick=\"return confirm('are you sure to delete ".$item['name']." Name ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce )
+			'delete'=>sprintf( "<a onclick=\"return confirm('are you sure to delete ".$item['fname']." Name ?')\" href='?page=%s&action=%s&__ID=%s&_wpnonce=%s'>Delete</a>", esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $delete_nonce ),
+            'view'=>sprintf( "<a href='?page=%s&action=%s&inquiry_id=%s'>View</a>", esc_attr( $_REQUEST['page'] ), 'view', absint( $item['id'] ))
 		];
 
 		return $name . $this->row_actions( $actions );
@@ -112,6 +139,11 @@ class InquiriesDetails extends WP_List_Table
      * @return string
      *
      */
+    function column_lname($item)
+    {
+        return $item['lname'];
+    }
+
     function column_email($item)
     {
         return $item['email'];
@@ -129,10 +161,6 @@ class InquiriesDetails extends WP_List_Table
         return $item['phone'];
     }
 
-    function column_website($item)
-    {
-        return $item['website'];
-    }
 	/*
 	 *
 	 * name: created date
@@ -165,10 +193,10 @@ class InquiriesDetails extends WP_List_Table
 	function get_columns() {
 		$columns = [
 			'cb'      => '<input type="checkbox" />',
-			'name'    => __( 'Name', 'gb_neon_maker' ),
+			'fname'    => __( 'First Name', 'gb_neon_maker' ),
+            'lname'    => __( 'Last Name', 'gb_neon_maker' ),
             'email'    => __( 'Email', 'gb_neon_maker' ),
             'phone'    => __( 'Phone', 'gb_neon_maker' ),
-            'website'    => __( 'Website', 'gb_neon_maker' ),
             'created'       =>__( 'Created', 'gb_neon_maker' ),
 			'modified'    => __( 'Modified', 'gb_neon_maker' ),
 		];
@@ -192,7 +220,8 @@ class InquiriesDetails extends WP_List_Table
 	 */
 	public function get_sortable_columns() {
 		$sortable_columns = array(
-			'name' => array( 'name', true ),
+			'fname' => array( 'fname', true ),
+            'lname' => array( 'lname', true ),
             'email' => array( 'email', true ),
             'phone' => array( 'phone', true ),
 			'created' => array( 'created', false ),
@@ -226,7 +255,7 @@ class InquiriesDetails extends WP_List_Table
     {
         switch( $column_name ) {
             case 'id':
-            case 'name':
+            case 'fname':
             case 'created':
 			case 'modified':
                 return $item[$column_name];
@@ -247,9 +276,9 @@ class InquiriesDetails extends WP_List_Table
 			}
 			else {
 				self::delete_item( absint( $_GET['__ID'] ) );
-				$redirect=admin_url('admin.php?page=gb_inquiries');
+				/*$redirect=admin_url('admin.php?page=gb_inquiries');
 				wp_redirect($redirect);
-				exit;
+				exit;*/
 			}
 
 		}
@@ -266,11 +295,10 @@ class InquiriesDetails extends WP_List_Table
 				self::delete_item( $id );
 
 			}
-
-			$redirect=admin_url('admin.php?page=gb_inquiries');
+			/*$redirect=admin_url('admin.php?page=gb_inquiries');
 			wp_redirect($redirect);
 				exit;
-			exit;
+			exit;*/
 		}
 	}
 

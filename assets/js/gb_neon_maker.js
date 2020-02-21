@@ -7,8 +7,11 @@
  */
 var GbNeonmaker;
 (function ($) {
-    var $this,slideIndex = 1;
-    var price = Number(NeonMaker_ajax.default_price);
+    var $this,slideIndex = 1, price = 0;
+    var heightInc = 3;
+    var LenghtInc = 3;
+    var baseEncodeImg = [];
+    var twoLineHeightInc = 4.5;
     var neonConfigurations = {"font": "ModernTalking-Regular", "text":NeonMaker_ajax.default_value, "size": "small", "color": "#2C2E3F", "onoffswitch": "false", "price": price};
     GbNeonmaker = {
         settings: {
@@ -1059,13 +1062,13 @@ var GbNeonmaker;
             neonConfigurations.backingColor = backingColor;
         },
         changeFixture: function(elem, fixture) {
-            $('.sbt_text_font a').removeClass('active_size');
-            $(elem).addClass('active_size');
+            $('.sbt_text_font a').removeClass('active_fixture');
+            $(elem).addClass('active_fixture');
             neonConfigurations.fixture = fixture;
         },
         changeDelivery: function(elem, delivery) {
-            $('.sbt_text_font a').removeClass('active_size');
-            $(elem).addClass('active_size');
+            $('.sbt_text_font a').removeClass('active_delivery');
+            $(elem).addClass('active_delivery');
             neonConfigurations.delivery = delivery;
         },
         showSlides:function(n)
@@ -1098,50 +1101,38 @@ var GbNeonmaker;
             neonConfigurations.onOffswitch = sel;
         },
         calculation:function() {
-            var i;
+            var i, j;
             var font = neonConfigurations.font;
             var string = neonConfigurations.text;
             var size = neonConfigurations.size;
-            var key = window.event.keyCode;
-            var price = 0, maxHeight = 0, length = 0,lenghtLine2 = 0;
-            for(i = 0; i < string.length; i++) {
-                var char = string[i];
-                height = $this.getPrice(char, font, size, 'height');
-                maxHeight = ( height > maxHeight ) ? height : maxHeight;
-                length = length + $this.getPrice(char, font, size, 'length');
-                if(key == 13){
-                    lenghtLine1 =  length;
+            var price = 0, length = 0,maxLength = 0,avgHeight = 0;
+            var lines = $('#gb_default_value').val().split('\n');
+            for(var j = 0;j < lines.length;j++){
+                var length = 0, height = 0, maxHeight = 0;
+                for(i = 0; i < string.length; i++) {
+                    var char = lines[j][i];
+                    length = length + $this.getPrice(char, font, size, 'length');
+                    height = $this.getPrice(char, font, size, 'height');
+                    maxHeight = ( height > maxHeight ) ? height : maxHeight;
+                    price = price + $this.getPrice(char, font, size, 'text');
                 }
-                price = price + $this.getPrice(char, font, size, 'text');
+                avgHeight = avgHeight + maxHeight;
+                maxLength = ( length > maxLength ) ? length : maxLength;
             }
-            var countLines = $("#gb_default_value").val().split(/\r|\r\n|\n/).length;
-            /* two line code height and lenght */
-            if(countLines == 2){
-                heightInc = Math.ceil((maxHeight + 4.5) / 1) * 1;
-                lenghtLine2 = length - lenghtLine1;
-                maxLenght = ( lenghtLine1 > lenghtLine2 ) ? lenghtLine1 : lenghtLine2;
-                lenghtInc = Math.ceil((maxLenght + 3) / 1) * 1;
+            if(lines.length == 2){
+                incrementH = twoLineHeightInc;
+            }else {
+                incrementH = heightInc;
             }
-            else{
-                /* adding +3 in height and lenght */
-                heightInc = Math.ceil((maxHeight + 3) / 1) * 1;
-                lenghtInc = Math.ceil((length + 3) / 1) * 1;
-            }
+            getHeight = Math.ceil((avgHeight + incrementH) / 1) * 1;
+            getLenght = Math.ceil((maxLength + LenghtInc) / 1) * 1;
 
             /* getting volume Formula used: (((MaxHeight +10) + (Length + 10)) * 10 ) / 5000*/
-            getVol = ((heightInc + 10) * (lenghtInc + 10) * 10 ) / 5000;
+            getVol = ((getHeight + 10) * (getLenght + 10) * 10 ) / 5000;
             volume = Math.ceil(getVol / 0.5) * 0.5;
 
             /* formula used : ((shiping price in RMB)* 1.2) * 0.25 */
             var shipping = ( ($this.getShipping(volume)) * 1.2 ) * 0.25;
-
-            /* console values */
-
-            /*console.log("Rope Price : "+ price);
-            console.log("height : " + heightInc);
-            console.log("lenght : " + lenghtInc);
-            console.log("volume : " + volume);
-            console.log("shipping : " + shipping);*/
 
             /* formula for total price : ( Rope Price +  Shipping +  Other ) * Multiplier */
             priceSum = ( price + shipping + 90) * 1.5;
@@ -1203,9 +1194,7 @@ var GbNeonmaker;
             return 0;
         },
         buyNow:function(elem) {
-            //$this.canvasToImg();
             $('.gb_display_data').css('display', 'block');
-
         },
         inquiryForm:function(elem) {
             $('.gb_inquiry_popup').css('display', 'block');
@@ -1233,6 +1222,7 @@ var GbNeonmaker;
             if (response.error) {
                 jQuery(".paymentErrors").html(response.error.message);
             } else {
+                $this.screenShot();
                 var stripeToken = response['id'];
                 var ajaxurl = NeonMaker_ajax.ajax_url;
                 //var stripe_secret = stripe_secret;
@@ -1240,14 +1230,14 @@ var GbNeonmaker;
                     $.post(ajaxurl, formdata, function (data) {
                     jQuery(".paymentErrors").html("Payment "+ data.status);
                     if(data.status == 'success'){
-                        $this.saveOrders(neonConfigurations, data.transactionData);
+                        $this.saveOrders(neonConfigurations, data.transactionData, baseEncodeImg.textImg);
                     }
                 });
             }
         },
-        saveOrders:function(formdata, tdata) {
+        saveOrders:function(formdata, tdata, baseimg) {
             var ajaxurl = NeonMaker_ajax.ajax_url;
-            var formdata = { action: 'gb_insert_order', formdata: formdata, transection: tdata };
+            var formdata = { action: 'gb_insert_order', formdata: formdata, transection: tdata, baseimg: baseimg };
             $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
                     alert("Your Order information are stored! ");
@@ -1266,8 +1256,18 @@ var GbNeonmaker;
                 }
             });
         },
+        screenShot: function (){
+            var encodeImage = jQuery(".sl_ide").get(0);
+            html2canvas(encodeImage).then(function(canvas) {
+                var canvasWidth = canvas.width;
+                var canvasHeight = canvas.height;
+                var encode = canvas.toDataURL('image/jpeg', 0.5);
+                baseEncodeImg.textImg = encode;
+            });
+        },
         closeBtn: function (elem) {
             $('.gb_display_data').css('display', 'none');
+            $('.gb_inquiry_popup').css('display', 'none');
         }
     };
     GbNeonmaker.initilaize();

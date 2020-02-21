@@ -103,6 +103,7 @@ class NeonMaker {
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `content` text NULL,
         `transection_logs` text NULL,
+        `baseimg` text NULL,
         `created` datetime NOT NULL,
         `modified` datetime NOT NULL,
         PRIMARY KEY (`id`)
@@ -122,10 +123,15 @@ class NeonMaker {
         global $wpdb;
         $sql="CREATE TABLE `{$prefix}gb_inquiries` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `name` varchar(100) NOT NULL,
+        `fname` varchar(100) NOT NULL,
+        `lname` varchar(100) NOT NULL,
+        `company` varchar(100) NULL,
         `email` varchar(100) NOT NULL,
-        `phone` varchar(100) NULL,
-        `website` varchar(150) NULL,
+        `phone` varchar(100) NOT NULL,
+        `street` varchar(150) NULL,
+        `city` varchar(150) NOT NULL,
+        `state` varchar(150) NOT NULL,
+        `postcode` varchar(150) NOT NULL,
         `created` datetime NOT NULL,
         `modified` datetime NOT NULL,
         PRIMARY KEY (`id`)
@@ -176,7 +182,9 @@ class NeonMaker {
         global $NeonMakerSetting;
 
         wp_register_script('stripe', 'https://js.stripe.com/v2/', [], GB_NEON_MAKER_VERSION);
-        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe'), GB_NEON_MAKER_VERSION);
+        wp_register_script('html2canvas', GB_NEON_MAKER_URL . "/assets/js/html2canvas.min.js", [], GB_NEON_MAKER_VERSION);
+        wp_register_script('canvas2image', GB_NEON_MAKER_URL . "/assets/js/canvas2image.js", [], GB_NEON_MAKER_VERSION);
+        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe', 'html2canvas', 'canvas2image'), GB_NEON_MAKER_VERSION);
         wp_enqueue_style('NeonMaker_style', GB_NEON_MAKER_URL . '/assets/css/gb_neon_maker.css', array(), GB_NEON_MAKER_VERSION);
 
 
@@ -209,6 +217,5 @@ class NeonMaker {
             define($name, $value);
         }
     }
-
 }
 ?>

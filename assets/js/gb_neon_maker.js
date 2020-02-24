@@ -1195,9 +1195,11 @@ var GbNeonmaker;
         },
         buyNow:function(elem) {
             $('.gb_display_data').css('display', 'block');
+            $this.displayLayout(neonConfigurations);
         },
         inquiryForm:function(elem) {
             $('.gb_inquiry_popup').css('display', 'block');
+            $this.displayLayout(neonConfigurations);
         },
         stripePayment:function(elem)
         {
@@ -1213,7 +1215,14 @@ var GbNeonmaker;
                 number: jQuery('#cardNumber').val(),
                 cvc: jQuery('#cardCVC').val(),
                 exp_month: jQuery('#cardExpMonth').val(),
-                exp_year: jQuery('#cardExpYear').val()
+                exp_year: jQuery('#cardExpYear').val(),
+                name: jQuery('#fname').val(),
+                address_line1: jQuery('#address1').val(),
+                address_line2: jQuery('#address2').val(),
+                address_city: jQuery('#city').val(),
+                address_state: jQuery('#state').val(),
+                address_zip: jQuery('#postcode').val(),
+                address_country: jQuery('#country').val(),
             },
             $this.handleStripeResponse);
             return false;
@@ -1222,7 +1231,7 @@ var GbNeonmaker;
             if (response.error) {
                 jQuery(".paymentErrors").html(response.error.message);
             } else {
-                $this.screenShot();
+                //$this.screenShot();
                 var stripeToken = response['id'];
                 var ajaxurl = NeonMaker_ajax.ajax_url;
                 //var stripe_secret = stripe_secret;
@@ -1241,14 +1250,14 @@ var GbNeonmaker;
             $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
                     alert("Your Order information are stored! ");
-                    $('.gb_display_data').css('display', 'none');
+                    //$('.gb_display_data').css('display', 'none');
                 }
             });
         },
         inquiryFormSubmit: function (elem) {
             var inquiryFormdata = $('#gb_inquiry').serialize();
             var ajaxurl = NeonMaker_ajax.ajax_url;
-            var formdata = { action: 'gb_submit_inquiry', formdata: inquiryFormdata };
+            var formdata = { action: 'gb_submit_inquiry', formdata: inquiryFormdata, toolData: neonConfigurations };
             $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
                     alert("Thank you for submitted your information");
@@ -1264,6 +1273,18 @@ var GbNeonmaker;
                 var encode = canvas.toDataURL('image/jpeg', 0.5);
                 baseEncodeImg.textImg = encode;
             });
+        },
+        displayLayout: function (config) {
+            var sel = $('#gb_myonoffswitch').prop("checked");
+            $('.gb_neon_layout').text(config.text);
+            var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+neonConfigurations.color+' 0px 0px 20px, '+neonConfigurations.color+' 0px 0px 30px, '+neonConfigurations.color+' 0px 0px 40px, '+neonConfigurations.color+' 0px 0px 55px, '+neonConfigurations.color+' 0px 0px 75px';
+            if(sel == true){
+                $(".gb_neon_layout").css({"text-shadow": shadow_color, "color":"#fff"});
+                $(".gb_neon_layout").css("font-family", `'${config.font}.woff'`);
+            }else {
+                $(".gb_neon_layout").css({"text-shadow": "none", "color":config.color});
+                $(".gb_neon_layout").css("font-family", `'${config.font}.woff'`);
+            }
         },
         closeBtn: function (elem) {
             $('.gb_display_data').css('display', 'none');

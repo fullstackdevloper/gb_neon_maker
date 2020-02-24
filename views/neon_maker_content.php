@@ -64,14 +64,32 @@
 <!-- payment form for Stripe -->
 <div class="gb_display_data">
     <div class="gb_stripe_form">
-        <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
-        <span class="paymentErrors alert-danger"></span>
         <form id="stripe" onsubmit="event.preventDefault();GbNeonmaker.stripePayment(this);" method="POST">
-            <input type="text" id="cardNumber" autocomplete="off" name="card-number" placeholder="Card Number" required>
-            <input type="text" id="cardCVC" autocomplete="off" name="cvc" placeholder="CCV" required>
-            <input type="text" id="cardExpMonth" autocomplete="off" name="month" placeholder="MM" required>
-            <input type="text" id="cardExpYear" autocomplete="off" name="year" placeholder="YYYY" required>
+        <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
+        <div class="gb_order_sign gb_column3">
+            <h5>Order </h5>
+            <p> Custom LED neon sign </p>
+            <div class="tool_details" >
+                <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
+            </div>
+        </div>
+        <div class="gb_order_delivery gb_column3">
+            <h6> DELIVERY </h6>
+             <?php
+            foreach( $this->stripeOrderDeliveryForm() as $key => $field) {
+                echo $this->neonCustomFields($field);
+            } ?>
+        </div>
+        <div class="gb_order_payment gb_column3">
+            <h6> PAYMENT </h6>
+            <span class="paymentErrors alert-danger"></span>
+            <p> Pay now via </p>
+            <?php
+            foreach( $this->stripeFormFields() as $key => $field) {
+                echo $this->neonCustomFields($field);
+            } ?>
             <input class="black button" name="dostripe" type="submit" value="Pay Now">
+        </div>
         </form>
     </div>
 </div>
@@ -81,17 +99,17 @@
 <div class="gb_inquiry_popup">
     <div class="gb_inquiry_container">
         <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
-        <h6>Inquiry Form</h6>
-      <form id="gb_inquiry" class="gb_inquiry_form" method="POST" onsubmit="event.preventDefault();GbNeonmaker.inquiryFormSubmit(this);">
-        <input type="text" id="fname" name="fname" placeholder="Your First Nam.." required>
-        <input type="text" id="lname" name="lname" placeholder="Your Last Nam.." required>
-        <input type="text" id="company" name="company" placeholder="Your Company..">
-        <input type="email" id="email" name="email" placeholder="Your email.." required>
-        <input type="text" id="phone" name="phone" placeholder="Your Phone.." required>
-        <textarea name="street" id="street" placeholder="Your Street address.."></textarea>
-        <input type="text" id="state" name="state" placeholder="Your State.." required>
-        <input type="text" id="city" name="city" placeholder="Your City.." required>
-        <input type="text" id="postcode" name="postcode" placeholder="Your Postcode.." required>
+        <!--<h6><?php _e("IT’S NOT QUITE RIGHT", "gb_neon_maker"); ?></h6>-->
+        <p>
+            <?php //print apply_filters('gb_inquiry_form_text', $this->inquiryFormText()); ?>
+            <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
+        </p>
+        <form id="gb_inquiry" class="gb_inquiry_form" method="POST" onsubmit="event.preventDefault();GbNeonmaker.inquiryFormSubmit(this);">
+            <div class="gb_tool_preview"></div>
+        <?php
+        foreach( $this->inquiryFormFields() as $key => $field) {
+            echo $this->neonCustomFields($field);
+        } ?>
         <input type="submit" value="Submit">
       </form>
     </div>

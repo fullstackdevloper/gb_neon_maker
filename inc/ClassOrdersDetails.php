@@ -64,6 +64,7 @@ class OrdersDetails extends WP_List_Table
             $result = $wpdb->get_results($sql);
             foreach ($result as $key => $value) {
                 $transection_logs = json_decode($value->transection_logs);
+                $billing_details = $transection_logs->billing_details->address;
                 $content = json_decode($value->content);
                 $html = '<div class="gb_order_detail gb_width100"><h1> Order Details </h1>';
                 $html .= '<div class="gb_tool_detail gb_width50" >';
@@ -75,10 +76,18 @@ class OrdersDetails extends WP_List_Table
                     $html .= '<li> <b>Size : </b>'.@$content->size.'</li>';
                     $html .= '<li> <b>Color : </b>'.@$content->color.'</li>';
                     $html .= '<li> <b>Price : </b>'.@$content->price.'</li>';
-                    $html .= '<li> <b>Backing Type : </b>'.@$content->backingType.'</li>';
-                    $html .= '<li> <b>Backing color : </b>'.@$content->backingColor.'</li>';
-                    $html .= '<li> <b>Fixture : '.@$content->fixture.'</li>';
-                    $html .= '<li> <b>Delivery : </b>'.@$content->delivery.'</li>';
+                    if(isset($content->backingType) && $content->backingType != '') {
+                        $html .= '<li> <b>Backing Type : </b>'.$content->backingType.'</li>';
+                    }
+                    if(isset($content->backingColor) && $content->backingColor != '') {
+                        $html .= '<li> <b>Backing color : </b>'.$content->backingColor.'</li>';
+                    }
+                    if(isset($content->fixture) && $content->fixture != '') {
+                            $html .= '<li> <b>Fixture : '.$content->fixture.'</li>';
+                    }
+                    if(isset($content->delivery) && $content->delivery != '') {
+                        $html .= '<li> <b>Delivery : </b>'.$content->delivery.'</li>';
+                    }
                     $html .= '<li> <b>Image :  </b><img src="'.@$value->baseimg.'" ></li>';
                     $html .= '</ul>';
                 }
@@ -90,6 +99,12 @@ class OrdersDetails extends WP_List_Table
                     $html .= '<li><b> id : </b>'.$transection_logs->id.'</li>';
                     $html .= '<li><b> amount : </b>'.(($transection_logs->amount)/100).'</li>';
                     $html .= '<li><b> balance_transaction : </b>'.$transection_logs->balance_transaction.'</li>';
+                    $html .= '<li><b> city : </b>'.$billing_details->city.'</li>';
+                    $html .= '<li><b> country : </b>'.$billing_details->country.'</li>';
+                    $html .= '<li><b> Address line1 : </b>'.$billing_details->line1.'</li>';
+                    $html .= '<li><b> Address line2 : </b>'.$billing_details->line2.'</li>';
+                    $html .= '<li><b> postal_code : </b>'.$billing_details->postal_code.'</li>';
+                    $html .= '<li><b> state : </b>'.$billing_details->state.'</li>';
                     $html .= '<li><b> created : </b>'.$transection_logs->created.'</li>';
                     $html .= '<li><b> currency : </b>'.$transection_logs->currency.'</li>';
                     $html .= '<li><b> customer : </b>'.$transection_logs->customer.'</li>';

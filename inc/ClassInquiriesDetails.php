@@ -63,23 +63,41 @@ class InquiriesDetails extends WP_List_Table
             $sql .=  " where id = ".$_REQUEST['inquiry_id'];
             $result = $wpdb->get_results($sql);
             foreach ($result as $key => $value) {
+                $content = json_decode($value->content);
                 $html = '<div class="gb_inq_detail gb_width100"><h1> Inquiry Details </h1>';
                 $html .= '<div class="gb_inq_detail gb_width50" >';
                 $html .= '<ul>';
                 $html .= '<li> <b>First name : </b>'.$value->fname.'</li>';
                 $html .= '<li> <b>Last name : </b>'.$value->lname.'</li>';
-                if(isset($value->company) && $value->company != ''){
-                    $html .= '<li> <b>Company : </b>'.$value->company.'</li>';
-                }
                 $html .= '<li> <b>Email address : </b>'.$value->email.'</li>';
                 $html .= '<li> <b>Phone number : </b>'.$value->phone.'</li>';
-                if(isset($value->street) && $value->street != ''){
-                    $html .= '<li> <b>Street address : </b>'.$value->street.'</li>';
-                }
-                $html .= '<li> <b>City : </b>'.$value->city.'</li>';
-                $html .= '<li> <b>State : '.$value->state.'</li>';
-                $html .= '<li> <b>Postcode : </b>'.$value->postcode.'</li>';
+                $html .= '<li> <b>Tell us your neon vision : </b>'.$value->comment.'</li>';
                 $html .= '</ul>';
+                $html .= '</div>';
+                 $html .= '<div class="gb_inq_detail gb_width50" >';
+                if(isset($content) && $content != '') {
+                    $html .= '<ul>';
+                    $html .= '<li> <b>Text : </b>'.@$content->text.'</li>';
+                    $html .= '<li> <b>Font : </b>'.@$content->font.'</li>';
+                    $html .= '<li> <b>Size : </b>'.@$content->size.'</li>';
+                    $html .= '<li> <b>Color : </b>'.@$content->color.'</li>';
+                    $html .= '<li> <b>Price : </b>'.@$content->price.'</li>';
+                    if(isset($content->backingType) && $content->backingType != '') {
+                        $html .= '<li> <b>Backing Type : </b>'.$content->backingType.'</li>';
+                    }
+                    if(isset($content->backingColor) && $content->backingColor != '') {
+                        $html .= '<li> <b>Backing color : </b>'.$content->backingColor.'</li>';
+                    }
+                    if(isset($content->fixture) && $content->fixture != '') {
+                            $html .= '<li> <b>Fixture : '.$content->fixture.'</li>';
+                    }
+                    if(isset($content->delivery) && $content->delivery != '') {
+                        $html .= '<li> <b>Delivery : </b>'.$content->delivery.'</li>';
+                    }
+                    $html .= '<li> <b>Image :  </b>  <h2 style="font-family:'.$content->font.'; color: '.$content->color.'">'.$content->text.' </h2> </li>';
+                    $html .= '</ul>';
+                }
+                $html .= '</div>';
                 $html .= '</div>';
             }
             echo $html;

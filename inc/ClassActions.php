@@ -108,19 +108,15 @@ class NeonMakerActions {
         global $wpdb;
         $prefix = $wpdb->prefix;
         parse_str($_POST['formdata'], $output);
-        $data = array(
-            'fname' => $output['fname'],
-            'lname' => $output['lname'],
-            'company' => $output['company'],
-            'email' => $output['email'],
-            'phone' => $output['phone'],
-            'street' => $output['street'],
-            'city' => $output['city'],
-            'state' => $output['state'],
-            'postcode' => $output['postcode'],
+        foreach ($output as $key => $value) {
+            $data1[$key] = $value;
+        }
+        $data2 = array(
+            'content' => json_encode($_POST['toolData']),
             'created' => date('Y-m-d h:i:s') ,
             'modified' => date('Y-m-d h:i:s') ,
         );
+        $data = array_merge($data1,$data2);
         $wpdb->insert("{$prefix}gb_inquiries", $data, array('%s'));
         $lastid = $wpdb->insert_id;
         $success=array('status' => 'success', 'lastid' => $lastid);

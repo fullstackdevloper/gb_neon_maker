@@ -179,9 +179,7 @@ class NeonMaker {
         global $NeonMakerSetting;
 
         wp_register_script('stripe', 'https://js.stripe.com/v2/', [], GB_NEON_MAKER_VERSION);
-        wp_register_script('html2canvas', GB_NEON_MAKER_URL . "/assets/js/html2canvas.min.js", [], GB_NEON_MAKER_VERSION);
-        wp_register_script('canvas2image', GB_NEON_MAKER_URL . "/assets/js/canvas2image.js", [], GB_NEON_MAKER_VERSION);
-        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe', 'html2canvas', 'canvas2image'), GB_NEON_MAKER_VERSION);
+        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe'), GB_NEON_MAKER_VERSION);
         wp_enqueue_style('NeonMaker_style', GB_NEON_MAKER_URL . '/assets/css/gb_neon_maker.css', array(), GB_NEON_MAKER_VERSION);
 
 

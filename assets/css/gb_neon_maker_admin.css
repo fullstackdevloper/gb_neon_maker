@@ -1,2 +1,52 @@
+@font-face {
+    font-family: 'Avenir Next LT Pro';
+    src:url('fonts/Avenger-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ModernTalking-Regular.woff';
+    src:url('fonts/ModernTalking-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RoadCrew-Regular.woff';
+    src:url('fonts/RoadCrew-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ShaimusOutline-Regular.woff';
+    src:url('fonts/ShaimusOutline-Regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Shorelines-Script-Bold.woff';
+    src:url('fonts/Shorelines-Script-Bold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'thistails-regular.woff';
+    src:url('fonts/thistails-regular.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'thistails-sans.woff';
+    src:url('fonts/thistails-sans.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap');
 .gb_width100 {width: 100%;}
 .gb_width50 {width: 50%;float: left;}
+.gb_slides{ width: 100%; }
+.gb_tool_detail ul li img {min-height: 645px;object-fit: cover;}
+.admin_txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
+.admin_txt_over  span{ font-weight: bold;}
+.gb_tool_detail ul {position: relative;}

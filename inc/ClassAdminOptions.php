@@ -32,7 +32,7 @@ class NeonMakerOptions {
     public function NeonMaker_options_page() {
         // Set class property
         $this->options = get_option('NeonMaker_options');
-       echo '<div class="wrap">';
+        echo '<div class="wrap">';
         echo wp_sprintf('<h1>%s</h1>', __('NeonMaker Settings', 'gb_neon_maker'));
         echo '<form method="post" action="options.php">';
         // This prints out all hidden setting fields

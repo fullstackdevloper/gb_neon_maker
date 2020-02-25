@@ -88,7 +88,10 @@ class OrdersDetails extends WP_List_Table
                     if(isset($content->delivery) && $content->delivery != '') {
                         $html .= '<li> <b>Delivery : </b>'.$content->delivery.'</li>';
                     }
-                    $html .= '<li> <b>Image :  </b><img src="'.@$value->baseimg.'" ></li>';
+                    $font = "'$content->font.woff'";
+                    $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over">
+                            <span style="font-family:'.$font.';color: '.$content->color.'">'.$content->text.'</span>
+                        </div></li>';
                     $html .= '</ul>';
                 }
                 $html .= '</div>';

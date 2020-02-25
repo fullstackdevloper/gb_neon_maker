@@ -44,10 +44,11 @@
                         </label>
                     </div>
                     <div class="sl_ide">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg1.jpg" alt="bg1">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg2.jpg" alt="bgnext">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg3.jpg" alt="bgnext">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bg4.jpg" alt="bgnext">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Young_Adults_Looking_At_Neon_Sign.jpg" alt="">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Cafe-Background-For-Neon-Sign.jpg" alt="">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Desk-Background-For-Neon-Sign-Quote-Tool.jpg" alt="">
+                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Kids-Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
                         <div class="txt_over">
                             <span id="gb_neon_text"><?php $this->getValue('default_text', $NeonMakerSetting); ?></span>
                         </div>
@@ -71,6 +72,9 @@
             <p> Custom LED neon sign </p>
             <div class="tool_details" >
                 <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
+                <div class="gb_selected_options"> </div>
+                <div class="gb_final_price"> </div>
+
             </div>
         </div>
         <div class="gb_order_delivery gb_column3">
@@ -84,6 +88,8 @@
             <h6> PAYMENT </h6>
             <span class="paymentErrors alert-danger"></span>
             <p> Pay now via </p>
+            <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/payment.jpg" alt="paymentmethod">
+            <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/stripe.jpg" alt="paymentmethod">
             <?php
             foreach( $this->stripeFormFields() as $key => $field) {
                 echo $this->neonCustomFields($field);
@@ -99,9 +105,9 @@
 <div class="gb_inquiry_popup">
     <div class="gb_inquiry_container">
         <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
-        <!--<h6><?php _e("IT’S NOT QUITE RIGHT", "gb_neon_maker"); ?></h6>-->
+        <h6><?php _e("IT’S NOT QUITE RIGHT", "gb_neon_maker"); ?></h6>
+        <p> <?php print apply_filters('gb_inquiry_form_text', $this->inquiryFormText()); ?></p>
         <p>
-            <?php //print apply_filters('gb_inquiry_form_text', $this->inquiryFormText()); ?>
             <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
         </p>
         <form id="gb_inquiry" class="gb_inquiry_form" method="POST" onsubmit="event.preventDefault();GbNeonmaker.inquiryFormSubmit(this);">

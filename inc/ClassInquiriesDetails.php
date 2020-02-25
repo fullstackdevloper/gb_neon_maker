@@ -72,6 +72,10 @@ class InquiriesDetails extends WP_List_Table
                 $html .= '<li> <b>Email address : </b>'.$value->email.'</li>';
                 $html .= '<li> <b>Phone number : </b>'.$value->phone.'</li>';
                 $html .= '<li> <b>Tell us your neon vision : </b>'.$value->comment.'</li>';
+                $font = "'$content->font.woff'";
+                $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over" style="top:356px !important;left:-300px !important;">
+                            <span style="font-family:'.$font.';color: '.$content->color.'">'.$content->text.'</span>
+                        </div></li>';
                 $html .= '</ul>';
                 $html .= '</div>';
                  $html .= '<div class="gb_inq_detail gb_width50" >';
@@ -94,7 +98,6 @@ class InquiriesDetails extends WP_List_Table
                     if(isset($content->delivery) && $content->delivery != '') {
                         $html .= '<li> <b>Delivery : </b>'.$content->delivery.'</li>';
                     }
-                    $html .= '<li> <b>Image :  </b>  <h2 style="font-family:'.$content->font.'; color: '.$content->color.'">'.$content->text.' </h2> </li>';
                     $html .= '</ul>';
                 }
                 $html .= '</div>';

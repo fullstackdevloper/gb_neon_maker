@@ -99,7 +99,7 @@ display: flex;}
 .snow a{background:#EAEAEA;}
 .txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
 /* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
-.txt_over  span{font-family: 'ModernTalking-Regular.woff';color:#000;;font-size:6.4rem; font-weight: bold;}
+.txt_over  span{font-family: 'ModernTalking-Regular.woff';color:#000;font-weight: bold;}
 .sl_ide {position: relative;}
 .next_sl {position: absolute;top:44%;color:#FA628A;right: 30px;font-size: 60px; cursor:pointer;}
 .prev_sl {position: absolute;top: 44%;color:#FA628A;	left: 30px;font-size: 60px; cursor:pointer;}
@@ -128,18 +128,15 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 .gb_RoadCrew-Regular{font-family: 'RoadCrew-Regular.woff'}
 .color_pick li.active_color {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
 .active_font, .active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px;padding-bottom: 10px; text-align: center;border: 2px solid #888888;display: block;text-decoration: none;}
-.gb_txt_preview  span{font-family: 'ModernTalking-Regular.woff';color:rgb(44, 46, 63);font-size:6.4rem; font-weight: bold;}
+.gb_txt_preview  span{font-family: 'ModernTalking-Regular.woff';color:rgb(44, 46, 63);font-weight: bold;}
 /* stripe popup */
-.gb_stripe_form {width: 95%; min-width: 400px; margin: 20px auto;padding: 20px;background: #fff}
-.gb_display_data {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;}
+.gb_stripe_form {width: 90%; min-width: 400px; margin: 20px auto;padding: 20px;background: #fff}
+.gb_display_data {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;overflow-y: auto;}
 input.black.button {width: 100%;}
-a.gb_close {float: right;}
-#stripe input {width:100%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical}
-.gb_column3 {width: 30%;display: inline-table;min-width:400px;}
-.neon_tool_layout {width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
-/* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
-.neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:6.4rem; font-weight: bold;}
-
+a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 600;}
+.gb_column3 {width: 100%;display: inline-table;max-width:400px;}
+.neon_tool_layout {width: 100%;height: 100%;font-size: 50px;text-align: left;}
+.neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:5.5rem; font-weight: bold;}
 /* end stripe */
 
 /* css for on/off button */
@@ -157,9 +154,29 @@ a.gb_close {float: right;}
 /* end css for on/off button*/
 
 /* css for inquiry form */
-.gb_inquiry_popup {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;}
-.gb_inquiry_container {border-radius: 5px;background-color: #f2f2f2;padding: 20px;width: 50%;min-width: 400px; margin: auto;}
-.gb_inquiry_container input[type=text], [type=email], select, textarea {width: 45%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;display: inline;
+.gb_inquiry_popup {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;overflow-y: auto;}
+.gb_inquiry_container {border-radius: 5px;background-color: #f2f2f2;padding: 20px;width: 100%;max-width: 415px; margin: auto;}
+.gb_inquiry_container input[type=text], [type=email], select, textarea {width: 100%; padding: 12px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;display: inline;
 }
 /* end css for inquiry form */
 
+/** Modal Css **/
+.gb_order_sign {max-width: 300px;}
+.gb_order_payment {margin-left: 25px;}
+#stripe h5, #stripe h6 {margin: 10px 0 10px;}
+.gb_order_sign p {font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 16px;line-height: 20px;color: #000000;}
+.gb_selected_options p, .gb_order_payment p, .gb_inquiry_container p, .gb_order_delivery p {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #4D4D4D;}
+.gb_order_delivery #firstname {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;border-radius: 0;}
+.gb_order_delivery #lastname {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;}
+.gb_order_delivery #company {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;border-radius: 0;}
+.gb_order_delivery #phonenumber {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;}
+#stripe input {width:100%;max-width: 380px;height: 45px; border: 1px solid #CDCDCD;border-radius: 0px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical}
+#stripe input.button {line-height: 10px;text-decoration: none;border-radius: 50px;}
+#gb_inquiry input {margin: 6px auto 15px;width: 100%;max-width: 264px;display: block;border: 1px solid #CDCDCD;border-radius: 0;box-sizing: border-box;background: #f2f2f2;height: 45px;}
+#gb_inquiry textarea {width: 100%;max-width: 264px;margin: 6px auto 15px;display: block;border: 1px solid #CDCDCD;border-radius: 0;box-sizing: border-box;background: #f2f2f2;height: 175px;}
+#gb_inquiry input[type="submit"] {background: #FA628A;border-radius: 49px;width: 100%;max-width: 159px;height: 44px;line-height: 6px;text-decoration: none;margin: 6px 54px 15px auto;}
+.gb_inquiry_container a.gb_close {margin-top: 20px;}
+.gb_inquiry_container h6 {font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 16px;line-height: 20px;color: #4D4D4D;text-align: center;
+margin-bottom: 15px;}
+.gb_inquiry_container p {width: 100%;max-width: 70%;margin: 0 auto;}
+.gb_order_delivery p {width: 100%;max-width: 92%;}

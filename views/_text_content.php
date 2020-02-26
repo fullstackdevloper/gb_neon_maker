@@ -50,7 +50,7 @@
 </div>
 <div class="sbt_hint">
     <div class="icon_hint">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
+       <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
         <?php print apply_filters('gb_text_hint', $this->logoTextHint()); ?>

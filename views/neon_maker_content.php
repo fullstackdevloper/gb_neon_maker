@@ -68,8 +68,8 @@
         <form id="stripe" onsubmit="event.preventDefault();GbNeonmaker.stripePayment(this);" method="POST">
         <a class="gb_close" href="#" onclick="GbNeonmaker.closeBtn(this);" > X </a>
         <div class="gb_order_sign gb_column3">
-            <h5>Order </h5>
-            <p> Custom LED neon sign </p>
+            <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/bag.png" alt="paymentmethod"> Order </h5>
+            <p><span>Custom LED neon sign</span></p>
             <div class="tool_details" >
                 <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
                 <div class="gb_selected_options"> </div>
@@ -78,18 +78,26 @@
             </div>
         </div>
         <div class="gb_order_delivery gb_column3">
-            <h6> DELIVERY </h6>
+           <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/van.png" alt="paymentmethod"> DELIVERY </h5>
+            <p><span>Deliver to</span></p>
+            <p>Shipping is free for all Australian customers. If you have selected ‘priority’ or ‘international’ shipping, delivery price has already been added to your total.</p>
              <?php
             foreach( $this->stripeOrderDeliveryForm() as $key => $field) {
                 echo $this->neonCustomFields($field);
             } ?>
         </div>
         <div class="gb_order_payment gb_column3">
-            <h6> PAYMENT </h6>
+            <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/credit-card.png" alt="paymentmethod"> PAYMENT </h5>
             <span class="paymentErrors alert-danger"></span>
-            <p> Pay now via </p>
-            <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/payment.jpg" alt="paymentmethod">
-            <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/stripe.jpg" alt="paymentmethod">
+            <p><span>Pay now via</span></p>
+            <div class="gb_payment_option">
+                 <a href="#"><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/mc_symbol.png" alt="paymentmethod"></a>
+                 <a href="#"><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Visa_Inc_log.png" alt="paymentmethod"></a>
+                 <a href="#"><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/American_Express_logo.png" alt="paymentmethod"></a>
+            </div>
+            <div class="gb_payment_option">
+                <a href="#"><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/powered_by_stripe.png" alt="paymentmethod"></a>
+            </div>
             <?php
             foreach( $this->stripeFormFields() as $key => $field) {
                 echo $this->neonCustomFields($field);

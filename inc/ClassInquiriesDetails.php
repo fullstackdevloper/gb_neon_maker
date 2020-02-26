@@ -64,6 +64,13 @@ class InquiriesDetails extends WP_List_Table
             $result = $wpdb->get_results($sql);
             foreach ($result as $key => $value) {
                 $content = json_decode($value->content);
+                $shadow_color="";
+                if($content->onoffswitch == 'false') {
+                    $style = "font-family:'".$content->font.".woff';color: ".$content->color;
+                }else {
+                    $shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '.$content->color.' 0px 0px 20px, '.$content->color.' 0px 0px 30px, '.$content->color.' 0px 0px 40px, '.$content->color.' 0px 0px 55px, '.$content->color.' 0px 0px 75px';
+                    $style = "text-shadow:'.$shadow_color.';color: #fff";
+                }
                 $html = '<div class="gb_inq_detail gb_width100"><h1> Inquiry Details </h1>';
                 $html .= '<div class="gb_inq_detail gb_width50" >';
                 $html .= '<ul>';
@@ -72,9 +79,8 @@ class InquiriesDetails extends WP_List_Table
                 $html .= '<li> <b>Email address : </b>'.$value->email.'</li>';
                 $html .= '<li> <b>Phone number : </b>'.$value->phone.'</li>';
                 $html .= '<li> <b>Tell us your neon vision : </b>'.$value->comment.'</li>';
-                $font = "'$content->font.woff'";
-                $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over" style="top:356px !important;left:-300px !important;">
-                            <span style="font-family:'.$font.';color: '.$content->color.'">'.$content->text.'</span>
+                $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over">
+                            <span style="'.$style.'">'.$content->text.'</span>
                         </div></li>';
                 $html .= '</ul>';
                 $html .= '</div>';

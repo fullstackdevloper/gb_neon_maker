@@ -144,7 +144,6 @@ class NeonMaker {
     public function init() {
 
     }
-
     /**
      * Define NeonMaker Constants.
      */
@@ -186,6 +185,7 @@ class NeonMaker {
 
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'configuration'=> file_get_contents(GB_NEON_MAKER_ABSPATH."setting.json"),
                 'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
                 'payment_mode' => $this->engine->getValue('payment_mode', $NeonMakerSetting, false),
                 'test_stripe_key' => $this->engine->getValue('test_stripe_key', $NeonMakerSetting, false),

@@ -25,7 +25,7 @@
 </div>
 <div class="sbt_hint">
     <div class="icon_hint">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
         <?php print apply_filters('gb_backing_hint', __("View actual color chart here. some colours have a white jacket when turned off and other have a colured jacket.</br>If you'd like to multiple neon colours. click it's not quite right' and let us know more.", "gb_neon_maker")); ?>

@@ -50,3 +50,7 @@
 .admin_txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
 .admin_txt_over  span{ font-weight: bold;}
 .gb_tool_detail ul {position: relative;}
+.gb_tool_detail ul li, .gb_payment_detail ul li, .gb_inq_detail ul li {padding: 10px;border: 1px solid #ccc;margin-right: 20px;}
+.gb_tool_detail ul li, .gb_inq_detail ul li {
+    position: relative;
+}

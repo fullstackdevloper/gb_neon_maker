@@ -89,7 +89,7 @@ class NeonMakerCore {
             ["name" =>  "lname", "placeholder" => "", "label" => "Last Name*", "type" => "text", "id" => 'lname', 'required' => true ],
             ["name" =>  "phone", "placeholder" => "", "label" => "Phone number*", "type" => "text", "id" => 'phone', 'required' => true ],
             ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'email', 'required' => true ],
-            ["name" =>  "comment", "placeholder" => "Tell us your neon vision", "label" => "Tell us your neon vision", "type" => "textarea", "id" => 'comment' ],
+            ["name" =>  "comment", "placeholder" => "", "label" => "Tell us your neon vision", "type" => "textarea", "id" => 'comment' ],
         ];
         return $fileds;
     }
@@ -103,7 +103,7 @@ class NeonMakerCore {
                 ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'firstname', 'required' => true ],
                 ["name" =>  "lname", "placeholder" => "", "label" => "Last Name", "type" => "text", "id" => 'lastname', 'required' => true ],
                 ["name" =>  "company", "placeholder" => "", "label" => "Company (if applicable)", "type" => "text", "id" => 'company'],
-                ["name" =>  "phone", "placeholder" => "Phone", "label" => "Phone number*", "type" => "text", "id" => 'phonenumber', 'required' => true],
+                ["name" =>  "phone", "placeholder" => "", "label" => "Phone number*", "type" => "text", "id" => 'phonenumber', 'required' => true],
                 ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'emailid', 'required' => true],
                 ["name" =>  "address1", "placeholder" => "", "label" => "Delivery address*", "type" => "text", "id" => 'address1', 'required' => true],
                 ["name" =>  "address2", "placeholder" => "", "type" => "text", "id" => 'address2'],

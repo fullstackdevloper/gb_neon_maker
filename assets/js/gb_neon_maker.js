@@ -31,8 +31,7 @@ var GbNeonmaker;
             $this.sideBarEvents(slideIndex);
             $this.showSlides(slideIndex);
             $this.calculation();
-            $this.onOffswitch();
-
+            //$this.onOffswitch();
         },
         sideBarEvents: function () {
             $('.sbt_menu_items>li').click(function () {

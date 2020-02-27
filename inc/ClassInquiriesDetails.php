@@ -64,11 +64,11 @@ class InquiriesDetails extends WP_List_Table
             foreach ($result as $key => $value) {
                 $content = json_decode($value->content);
                 $shadow_color="";
-                if($content->onOffswitch == false) {
-                    $style = wp_sprintf("font-family:'%s.woff';color: %s", $content->font, $content->color);
-                }else {
+                if($content->onOffswitch == 'true') {
                     $shadow_color = wp_sprintf("rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, %s 0px 0px 20px, %s 0px 0px 30px, %s 0px 0px 40px, %s 0px 0px 55px, %s 0px 0px 75px", $content->color,  $content->color, $content->color, $content->color, $content->color);
                     $style = wp_sprintf("font-family:'%s.woff';text-shadow:%s;color: #fff", $content->font, $shadow_color);
+                }else {
+                    $style = wp_sprintf("font-family:'%s.woff';color: %s", $content->font, $content->color);
                 }
                 $html = '<div class="gb_inq_detail gb_width100"><h1> Inquiry Details </h1>';
                 $html .= '<div class="gb_inq_detail gb_width50" >';

@@ -43,6 +43,74 @@
     font-weight: 500;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('popupfont/Montserrat-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap');
 img{max-width:100%;}
 html,body{margin:0; padding:0;font-family: 'Montserrat', sans-serif; }
@@ -130,7 +198,7 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 input.black.button {width: 100%;}
 a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 500;color: rgba(0, 0, 0, 0.54);}
 .gb_column3 {width: 100%;display: inline-table;max-width:33%;}
-.neon_tool_layout {width: 100%;height: 100%;font-size: 50px;text-align: left;}
+.neon_tool_layout {width: 100%;height: 100%;font-size: 50px;text-align: left;margin-bottom: 50px;}
 /* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
 .neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:5.5rem; font-weight: bold;}
 
@@ -158,7 +226,6 @@ a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 500;
 /* end css for inquiry form */
 
 /** Modal Css **/
-.gb_order_sign {max-width: 330px;}
 .gb_order_payment {margin-left: 25px;}
 #stripe h5, #stripe h6 {margin: 10px 0 10px;}
 #stripe h5 img {margin-right: 10px;}
@@ -167,7 +234,7 @@ a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 500;
 .gb_selected_options p, .gb_order_payment p, .gb_inquiry_container p, .gb_order_delivery p {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #4D4D4D;}
 .gb_order_delivery #firstname {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;border-radius: 0;}
 .gb_order_delivery #lastname {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;}
-.gb_order_delivery #company {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;border-radius: 0;}
+.gb_order_delivery #company {width:100%;max-width: 181px;border-radius: 0;clear: both;float: left;}
 .gb_order_delivery #phonenumber {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;}
 #stripe input {width:100%;max-width: 380px;height: 45px; border: 1px solid #CDCDCD;border-radius: 0px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical}
 #stripe input.button {line-height: 10px;text-decoration: none;border-radius: 50px;}
@@ -210,6 +277,13 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
 .sbt_text_font > label , .sbt_font_options>label{font-size: 12px;display: block;color: #2C2E3F;padding-bottom: 5px; font-weight:600;line-height: 15px;font-family: Montserrat;text-transform: uppercase;}
 .sbt_text_font textarea {margin-bottom: 20px;height: 9rem;}
 .sbt_menu_items > li > a > span {padding-top: 5px;font-weight: 600;}
+.gb_order_delivery label, .gb_inquiry_form label, .gb_order_payment label {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #4D4D4D;}
+.gb_order_sign {max-width: 320px;margin-left: 20px;}
+.gb_inquiry_form label {width: 100%;max-width: 264px;margin: 0 auto;}
+.gb_order_delivery label#fname, .gb_order_delivery label#company {display: block;width: 100%;max-width: 202px !important;float: left;clear: both;}
+.gb_final_price {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 16px;line-height: 20px;color: #4D4D4D;padding-top: 30px;
+}
+
 
 @media only screen and (min-width: 100px) and (max-width: 767px) {
     .gb_stripe_form {min-width: 350px;}
@@ -218,7 +292,7 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
     .gb_order_delivery #firstname, .gb_order_delivery #lastname, .gb_order_delivery #company, .gb_order_delivery #phonenumber {max-width: 100%;margin:6px 0 16px;}
     .gb_order_payment {margin-left: 0;}
     .gb_inquiry_container {max-width: 360px;margin: 8px auto;padding: 10px 20px;}
-    #gb_inquiry input[type="submit"] {margin: 6px 0px 15px auto;}
+    #gb_inquiry input[type="submit"] {margin: 6px 26px 15px auto;}
     .gb_inquiry_container a.gb_close {margin-top: 0;}
 
    /** Front End **/
@@ -232,4 +306,6 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
    .prev_sl {left: 10px;top:40%;}
    .next_sl {right:10px;top:40%;}
    .sbt_hint {margin: 15px 0px 0;}
+   .gb_order_sign {margin-left: 0;}
+   .gb_order_delivery label#fname, .gb_order_delivery label#company {max-width: 100% !important;}
 }

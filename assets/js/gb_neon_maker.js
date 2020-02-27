@@ -143,7 +143,7 @@ var GbNeonmaker;
             var backingType = neonConfigurations.backingType;
             var delivery = neonConfigurations.delivery;
             var price = 0, length = 0,maxLength = 0,avgHeight = 0;
-            var lines = $('#gb_default_value').val().split('\n');
+            var lines = string.split('\n');
             for(var j = 0;j < lines.length;j++){
                 var length = 0, height = 0, maxHeight = 0;
                 for(i = 0; i < string.length; i++) {

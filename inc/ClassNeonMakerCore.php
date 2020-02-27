@@ -103,14 +103,14 @@ class NeonMakerCore {
                 ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'firstname', 'required' => true ],
                 ["name" =>  "lname", "placeholder" => "", "label" => "Last Name", "type" => "text", "id" => 'lastname', 'required' => true ],
                 ["name" =>  "company", "placeholder" => "", "label" => "Company (if applicable)", "type" => "text", "id" => 'company'],
-                ["name" =>  "phone", "placeholder" => "Phone", "label" => "Phone", "type" => "text", "id" => 'phonenumber', 'required' => true],
-                ["name" =>  "email", "placeholder" => "", "label" => "Email address", "type" => "email", "id" => 'emailid', 'required' => true],
-                ["name" =>  "address1", "placeholder" => "", "label" => "Delivery address 1", "type" => "text", "id" => 'address1'],
+                ["name" =>  "phone", "placeholder" => "Phone", "label" => "Phone number*", "type" => "text", "id" => 'phonenumber', 'required' => true],
+                ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'emailid', 'required' => true],
+                ["name" =>  "address1", "placeholder" => "", "label" => "Delivery address*", "type" => "text", "id" => 'address1', 'required' => true],
                 ["name" =>  "address2", "placeholder" => "", "type" => "text", "id" => 'address2'],
-                ["name" =>  "city", "placeholder" => "", "type" => "text", "label" => "City", "id" => 'city', 'required' => true],
-                ["name" =>  "state", "placeholder" => "", "label" => "State/Territory", "type" => "text", "id" => 'state', 'required' => true],
-                ["name" =>  "postcode", "placeholder" => "", "label" => "Postcode", "type" => "text", "id" => 'postcode', 'required' => true ],
-                ["name" =>  "country", "placeholder" => "", "label" => "Country", "type" => "text", "id" => 'country', 'required' => true ],
+                ["name" =>  "city", "placeholder" => "", "type" => "text", "label" => "City*", "id" => 'city', 'required' => true],
+                ["name" =>  "state", "placeholder" => "", "label" => "State/Territory*", "type" => "text", "id" => 'state', 'required' => true],
+                ["name" =>  "postcode", "placeholder" => "", "label" => "Postcode*", "type" => "text", "id" => 'postcode', 'required' => true ],
+                ["name" =>  "country", "placeholder" => "", "label" => "Country*", "type" => "text", "id" => 'country', 'required' => true ],
         ];
         return $fileds;
     }
@@ -120,10 +120,10 @@ class NeonMakerCore {
      */
     public function stripeFormFields()  {
         $fileds  = [
-            ["name" =>  "card-number", "placeholder" => "Card Number", "type" => "text", "id" => 'cardNumber', 'required' => true],
-            ["name" =>  "cvc", "placeholder" => "CCV", "type" => "text", "id" => 'cardCVC', 'required' => true ],
-            ["name" =>  "month", "placeholder" => "MM", "type" => "text", "id" => 'cardExpMonth', 'required' => true ],
-            ["name" =>  "year", "placeholder" => "YYYY", "type" => "text", "id" => 'cardExpYear', 'required' => true ],
+            ["name" =>  "card-number", "placeholder" => "Card Number", "label" => "Card Number*", "type" => "text", "id" => 'cardNumber', 'required' => true],
+            ["name" =>  "cvc", "placeholder" => "CCV", "label" => "CCV number*", "type" => "text", "id" => 'cardCVC', 'required' => true ],
+            ["name" =>  "month", "placeholder" => "MM", "label" => "Expiry month*", "type" => "text", "id" => 'cardExpMonth', 'required' => true ],
+            ["name" =>  "year", "placeholder" => "YYYY", "label" => "Expiry year*", "type" => "text", "id" => 'cardExpYear', 'required' => true ],
         ];
         return $fileds;
     }

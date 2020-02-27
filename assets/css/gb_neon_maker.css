@@ -56,9 +56,7 @@ body{background:#f5f5f5;}
 .result_tabs { max-width: calc(100% - 80px); padding: 0 15px; width:100%;}
 .sbt_font_options ul {list-style: none; padding: 0; margin:10px 0 0 0;  display: flex;flex-wrap: wrap;}
 .sbt_menu_items > li > a {padding: 5px;background: #fff;border-radius: 6px;margin-bottom: 8px;width: 80px;height: 80px;display: flex;align-items: center;flex-direction: column;justify-content: center;text-decoration: none;color: #828AA6;text-transform: uppercase;font-weight: 500;    font-size: 12px; position:relative; transition-duration:.35s;}
-.sbt_menu_items > li > a > span {padding-top: 5px;}
 .sbt_text_font {background: #fff;border-radius: 19px;padding: 20px; min-height: 300px;}
-.sbt_text_font > label ,.sbt_font_options>label{font-size: 13px;display: block;color: #2C2E3F;padding-bottom: 5px; font-weight:500;}
 .sbt_text_font input {height: 46px;width: 100%;background: #F5F5F5;border: 1px solid rgba(126, 120, 120, 0.63);padding-left: 10px;margin-bottom: 20px;}
 .sbt_font_options ul > li { max-width: 50%; width: 100%;margin: 3px 0;}
 .sbt_menu_items > li > a::after {width: 22px;height: 2px;position: absolute;background:#EFE529;content: "";bottom: 0;left: 0;right: 0;margin: 0 auto;}
@@ -196,7 +194,7 @@ margin-bottom: 15px;}
 display: flex;align-items: start;}
 .sbt_hint  p{margin:0 !important;font-style: normal;font-weight: 600;font-size: 9px;color: #828AA6;width: 100%;max-width: 80%;}
 .icon_hint img {margin-right: 20px;}
-.gb_backing_type label, .sbt_backing_options2 label, .sbt_fixtures label, .gb_delivery label {font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #2C2E3F;font-family: Montserrat;padding: 0 15px;}
+.gb_backing_type label, .sbt_backing_options2 label, .sbt_fixtures label, .gb_delivery label {font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #2C2E3F;font-family: Montserrat;padding: 0 15px;text-transform: uppercase;}
 .gb_backing_type ul.gb_backing_shape a.active_btype, .sbt_backing_options2 ul.gb_backing_color a.active_bcolor, .sbt_fixtures ul.choose_fixture a.active_fixture, .gb_delivery ul.choose_delivery a.active_delivery {border: unset;}
 .gb_backing_type ul.gb_backing_shape li, .sbt_backing_options2 ul.gb_backing_color li, .sbt_fixtures ul.choose_fixture li, .gb_delivery ul.choose_delivery li {line-break: auto;margin: 0;padding: 7px 15px;}
 .gb_backing_type ul.gb_backing_shape a, .sbt_backing_options2 ul.gb_backing_color a, .gb_delivery ul.choose_delivery a {text-align: left;}
@@ -206,6 +204,12 @@ display: flex;align-items: start;}
 .sbt_fixtures ul.choose_fixture li {display: flex;justify-content: space-between;align-items: center;}
 .sbt_fixtures ul.choose_fixture li img {margin-right: 30px;}
 
+/****/
+ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);border-radius: 5px;}
+.sbt_font_options ul > li.active_font {border: unset;}
+.sbt_text_font > label , .sbt_font_options>label{font-size: 12px;display: block;color: #2C2E3F;padding-bottom: 5px; font-weight:600;line-height: 15px;font-family: Montserrat;text-transform: uppercase;}
+.sbt_text_font textarea {margin-bottom: 20px;height: 9rem;}
+.sbt_menu_items > li > a > span {padding-top: 5px;font-weight: 600;}
 
 @media only screen and (min-width: 100px) and (max-width: 767px) {
     .gb_stripe_form {min-width: 350px;}
@@ -216,4 +220,16 @@ display: flex;align-items: start;}
     .gb_inquiry_container {max-width: 360px;margin: 8px auto;padding: 10px 20px;}
     #gb_inquiry input[type="submit"] {margin: 6px 0px 15px auto;}
     .gb_inquiry_container a.gb_close {margin-top: 0;}
+
+   /** Front End **/
+   section.sbt_container {padding:10px 0;}
+   .sbt_row {display: block;}
+   .wd_5, .result_tabs, .wd_7  {max-width: 100% !important;padding: 0;margin-bottom: 15px;}
+   .sbt_font_options ul > li {max-width: 100%;margin: 3px 0 20px;}
+   .slider_font_sbt img {min-height: 300px;}
+   .txt_over span {font-size: 4rem;}
+   .txt_over {padding-bottom: 0px;}
+   .prev_sl {left: 10px;top:40%;}
+   .next_sl {right:10px;top:40%;}
+   .sbt_hint {margin: 15px 0px 0;}
 }

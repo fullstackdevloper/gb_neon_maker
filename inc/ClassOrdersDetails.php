@@ -88,9 +88,15 @@ class OrdersDetails extends WP_List_Table
                     if(isset($content->delivery) && $content->delivery != '') {
                         $html .= '<li> <b>Delivery : </b>'.$content->delivery.'</li>';
                     }
-                    $font = "'$content->font.woff'";
+                    $shadow_color="";
+                    if($content->onoffswitch == false) {
+                        $style = wp_sprintf("font-family:'%s.woff';color: %s", $content->font, $content->color);
+                    }else {
+                        $shadow_color = wp_sprintf("rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, %s 0px 0px 20px, %s 0px 0px 30px, %s 0px 0px 40px, %s 0px 0px 55px, %s 0px 0px 75px", $content->color, $content->color, $content->color, $content->color, $content->color);
+                        $style = wp_sprintf("font-family:'%s.woff';text-shadow:%s;color: #fff", $content->font, $shadow_color);
+                    }
                     $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over">
-                            <span style="font-family:'.$font.';color: '.$content->color.'">'.$content->text.'</span>
+                            <span style="'.$style.'">'.$content->text.'</span>
                         </div></li>';
                     $html .= '</ul>';
                 }

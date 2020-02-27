@@ -85,10 +85,10 @@ class NeonMakerCore {
      */
     public function inquiryFormFields()  {
         $fileds  = [
-            ["name" =>  "fname", "placeholder" => "First Name", "label" => "First Name*", "type" => "text", "id" => 'fname' ],
-            ["name" =>  "lname", "placeholder" => "Last Name", "label" => "Last Name*", "type" => "text", "id" => 'lname' ],
-            ["name" =>  "phone", "placeholder" => "Phone number", "label" => "Phone number*", "type" => "text", "id" => 'phone' ],
-            ["name" =>  "email", "placeholder" => "Email address", "label" => "Email address*", "type" => "email", "id" => 'email' ],
+            ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'fname', 'required' => true ],
+            ["name" =>  "lname", "placeholder" => "", "label" => "Last Name*", "type" => "text", "id" => 'lname', 'required' => true ],
+            ["name" =>  "phone", "placeholder" => "", "label" => "Phone number*", "type" => "text", "id" => 'phone', 'required' => true ],
+            ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'email', 'required' => true ],
             ["name" =>  "comment", "placeholder" => "Tell us your neon vision", "label" => "Tell us your neon vision", "type" => "textarea", "id" => 'comment' ],
         ];
         return $fileds;
@@ -100,17 +100,17 @@ class NeonMakerCore {
      */
     public function stripeOrderDeliveryForm()  {
         $fileds  = [
-                ["name" =>  "fname", "placeholder" => "First Name", "type" => "text", "id" => 'firstname', 'required' => true ],
-                ["name" =>  "lname", "placeholder" => "Last Name", "type" => "text", "id" => 'lastname', 'required' => true ],
-                ["name" =>  "company", "placeholder" => "Company", "type" => "text", "id" => 'company'],
-                ["name" =>  "phone", "placeholder" => "Phone", "type" => "text", "id" => 'phonenumber', 'required' => true],
-                ["name" =>  "email", "placeholder" => "Email address", "type" => "email", "id" => 'emailid', 'required' => true],
-                ["name" =>  "address1", "placeholder" => "Delivery address 1", "type" => "text", "id" => 'address1'],
-                ["name" =>  "address2", "placeholder" => "Delivery address 2", "type" => "text", "id" => 'address2'],
-                ["name" =>  "city", "placeholder" => "City", "type" => "text", "id" => 'city', 'required' => true],
-                ["name" =>  "state", "placeholder" => "State/Territory", "type" => "text", "id" => 'state', 'required' => true],
-                ["name" =>  "postcode", "placeholder" => "Postcode", "type" => "text", "id" => 'postcode', 'required' => true ],
-                ["name" =>  "country", "placeholder" => "Country", "type" => "text", "id" => 'country', 'required' => true ],
+                ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'firstname', 'required' => true ],
+                ["name" =>  "lname", "placeholder" => "", "label" => "Last Name", "type" => "text", "id" => 'lastname', 'required' => true ],
+                ["name" =>  "company", "placeholder" => "", "label" => "Company (if applicable)", "type" => "text", "id" => 'company'],
+                ["name" =>  "phone", "placeholder" => "Phone", "label" => "Phone", "type" => "text", "id" => 'phonenumber', 'required' => true],
+                ["name" =>  "email", "placeholder" => "", "label" => "Email address", "type" => "email", "id" => 'emailid', 'required' => true],
+                ["name" =>  "address1", "placeholder" => "", "label" => "Delivery address 1", "type" => "text", "id" => 'address1'],
+                ["name" =>  "address2", "placeholder" => "", "type" => "text", "id" => 'address2'],
+                ["name" =>  "city", "placeholder" => "", "type" => "text", "label" => "City", "id" => 'city', 'required' => true],
+                ["name" =>  "state", "placeholder" => "", "label" => "State/Territory", "type" => "text", "id" => 'state', 'required' => true],
+                ["name" =>  "postcode", "placeholder" => "", "label" => "Postcode", "type" => "text", "id" => 'postcode', 'required' => true ],
+                ["name" =>  "country", "placeholder" => "", "label" => "Country", "type" => "text", "id" => 'country', 'required' => true ],
         ];
         return $fileds;
     }
@@ -134,23 +134,23 @@ class NeonMakerCore {
      */
     public function neonCustomFields($field) {
         $reuired = (isset($field['required']) && $field['required'] == true) ? 'required' : '';
-        //$addlabel = '<label for="'.$field['name'].'">'.$field['label'].'</label>';
+        $addlabel = (isset($field['label']) && $field['label'] != '') ? '<label for="'.$field['name'].'" id="'.$field['name'].'" >'.$field['label'].'</label>' : '';
         switch ($field['type']) {
             case 'text':
-            $inputFiled = '
+            $inputFiled = $addlabel.'
                 <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'>';
                 break;
             case 'email':
-            $inputFiled = '
+            $inputFiled = $addlabel.'
                 <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'>';
                 break;
             case 'textarea':
-                $inputFiled = '<textarea name = "'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></textarea>';
+                $inputFiled = $addlabel.'<textarea name = "'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></textarea>';
                 break;
             case 'checkbox':
-                $inputFiled = '<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
+                $inputFiled = $addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
             case 'radio':
-                $inputFiled = '<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
+                $inputFiled = $addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
                 break;
             default:
                 $inputFiled = '';

@@ -55,9 +55,8 @@ class InquiriesDetails extends WP_List_Table
 	 * @return mixed
 	 */
 	public static function get_neonmaker_inquiries( $per_page = 10, $page_number = 1 ) {
-
 		global $wpdb;
-		$prefix=$wpdb->prefix;
+		$prefix = $wpdb->prefix;
 		$sql = "select * From {$prefix}gb_inquiries";
         if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'view'){
             $sql .=  " where id = ".$_REQUEST['inquiry_id'];
@@ -65,11 +64,11 @@ class InquiriesDetails extends WP_List_Table
             foreach ($result as $key => $value) {
                 $content = json_decode($value->content);
                 $shadow_color="";
-                if($content->onoffswitch == 'false') {
-                    $style = "font-family:'".$content->font.".woff';color: ".$content->color;
+                if($content->onOffswitch == false) {
+                    $style = wp_sprintf("font-family:'%s.woff';color: %s", $content->font, $content->color);
                 }else {
-                    $shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '.$content->color.' 0px 0px 20px, '.$content->color.' 0px 0px 30px, '.$content->color.' 0px 0px 40px, '.$content->color.' 0px 0px 55px, '.$content->color.' 0px 0px 75px';
-                    $style = "text-shadow:'.$shadow_color.';color: #fff";
+                    $shadow_color = wp_sprintf("rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, %s 0px 0px 20px, %s 0px 0px 30px, %s 0px 0px 40px, %s 0px 0px 55px, %s 0px 0px 75px", $content->color,  $content->color, $content->color, $content->color, $content->color);
+                    $style = wp_sprintf("font-family:'%s.woff';text-shadow:%s;color: #fff", $content->font, $shadow_color);
                 }
                 $html = '<div class="gb_inq_detail gb_width100"><h1> Inquiry Details </h1>';
                 $html .= '<div class="gb_inq_detail gb_width50" >';
@@ -79,13 +78,11 @@ class InquiriesDetails extends WP_List_Table
                 $html .= '<li> <b>Email address : </b>'.$value->email.'</li>';
                 $html .= '<li> <b>Phone number : </b>'.$value->phone.'</li>';
                 $html .= '<li> <b>Tell us your neon vision : </b>'.$value->comment.'</li>';
-                $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over">
-                            <span style="'.$style.'">'.$content->text.'</span>
-                        </div></li>';
+                $html .= '<li><img class="gb_slides" src="'.@$content->slideImg.'" ><div class="admin_txt_over"><span style="'.$style.'">'.$content->text.'</span></div></li>';
                 $html .= '</ul>';
                 $html .= '</div>';
-                 $html .= '<div class="gb_inq_detail gb_width50" >';
-                if(isset($content) && $content != '') {
+                $html .= '<div class="gb_inq_detail gb_width50" >';
+                if(!empty($content)) {
                     $html .= '<ul>';
                     $html .= '<li> <b>Text : </b>'.@$content->text.'</li>';
                     $html .= '<li> <b>Font : </b>'.@$content->font.'</li>';
@@ -124,6 +121,7 @@ class InquiriesDetails extends WP_List_Table
     		$sql .= " LIMIT $per_page";
     		$sql .= ' OFFSET ' . ( $page_number - 1 ) * $per_page;
     		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
+
     		return $result;
         }
 	}

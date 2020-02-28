@@ -249,7 +249,7 @@ var GbNeonmaker;
                 return shippingPrice[vol];
             }else {
                 gbVolShipping = false;
-                $('#gb_text_error').text("*Character enter limit Out of reached");
+                $('#gb_text_error').text("*you have reached the limit");
                 return shippingPrice[vol] = shippingPrice[20];
             }
         },

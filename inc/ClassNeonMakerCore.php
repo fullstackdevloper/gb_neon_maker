@@ -164,6 +164,13 @@ class NeonMakerCore {
      */
     public function inquiryFormText() {
         return __("We’ll continue to refine your design until you’re completely satisfied.");
+    } 
+	/**
+     * get the order form text
+     * @return Html
+     */
+    public function orderFormText() {
+        return __("Shipping is free for all Australian customers. If you have selected ‘priority’ or ‘international’ shipping, delivery price has already been added to your total.");
     }
 }
 ?>

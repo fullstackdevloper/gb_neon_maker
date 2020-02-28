@@ -80,7 +80,7 @@
         <div class="gb_order_delivery gb_column3">
            <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/van.png" alt="paymentmethod"> DELIVERY </h5>
             <p><span>Deliver to</span></p>
-            <p>Shipping is free for all Australian customers. If you have selected ‘priority’ or ‘international’ shipping, delivery price has already been added to your total.</p>
+            <p><?php print apply_filters('gb_inquiry_form_text', $this->orderFormText()); ?></p>
              <?php
             foreach( $this->stripeOrderDeliveryForm() as $key => $field) {
                 echo $this->neonCustomFields($field);

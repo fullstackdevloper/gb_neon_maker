@@ -7,7 +7,7 @@
  */
 var GbNeonmaker;
 (function ($) {
-    var $this,slideIndex = 1, price = 0;
+    var $this,slideIndex = 1, price = 0, gbVolShipping = true;
     var heightInc = 3;
     var LenghtInc = 3;
     var backingStandCost = 50;
@@ -46,6 +46,9 @@ var GbNeonmaker;
             newLines = $(elem).val().split("\n").length;
             $(elem).keydown(function(event) {
                 if(event.keyCode == 13 && newLines >= 2) {
+                    return false;
+                }
+                if(gbVolShipping == false && event.keyCode != 8){
                     return false;
                 }
             });
@@ -241,9 +244,13 @@ var GbNeonmaker;
                 20: 776.08,
             }
             if (vol in shippingPrice){
+                gbVolShipping = true;
+                $('#gb_text_error').text("");
                 return shippingPrice[vol];
             }else {
-                return 0;
+                gbVolShipping = false;
+                $('#gb_text_error').text("*Character enter limit Out of reached");
+                return shippingPrice[vol] = shippingPrice[20];
             }
         },
         getPrice:function (alphabet, font, size, type) {

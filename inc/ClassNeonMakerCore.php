@@ -85,11 +85,11 @@ class NeonMakerCore {
      */
     public function inquiryFormFields()  {
         $fileds  = [
-            ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'fname', 'required' => true ],
-            ["name" =>  "lname", "placeholder" => "", "label" => "Last Name*", "type" => "text", "id" => 'lname', 'required' => true ],
-            ["name" =>  "phone", "placeholder" => "", "label" => "Phone number*", "type" => "text", "id" => 'phone', 'required' => true ],
-            ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'email', 'required' => true ],
-            ["name" =>  "comment", "placeholder" => "", "label" => "Tell us your neon vision", "type" => "textarea", "id" => 'comment' ],
+            ["name" =>  "fname", "placeholder" => "", "label" => "First Name*", "type" => "text", "id" => 'gb_fname', 'required' => true ],
+            ["name" =>  "lname", "placeholder" => "", "label" => "Last Name*", "type" => "text", "id" => 'gb_lname', 'required' => true ],
+            ["name" =>  "phone", "placeholder" => "", "label" => "Phone number*", "type" => "text", "id" => 'gb_phone', 'required' => true ],
+            ["name" =>  "email", "placeholder" => "", "label" => "Email address*", "type" => "email", "id" => 'gb_email', 'required' => true ],
+            ["name" =>  "comment", "placeholder" => "", "label" => "Tell us your neon vision", "type" => "textarea", "id" => 'gb_comment' ],
         ];
         return $fileds;
     }
@@ -134,23 +134,23 @@ class NeonMakerCore {
      */
     public function neonCustomFields($field) {
         $reuired = (isset($field['required']) && $field['required'] == true) ? 'required' : '';
-        $addlabel = (isset($field['label']) && $field['label'] != '') ? '<label for="'.$field['name'].'" id="'.$field['name'].'" >'.$field['label'].'</label>' : '';
+        $addlabel = (isset($field['label']) && $field['label'] != '') ? '<label for="'.$field['name'].'" id="gb_'.$field['name'].'" >'.$field['label'].'</label>' : '';
         switch ($field['type']) {
             case 'text':
-            $inputFiled = $addlabel.'
-                <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'>';
+            $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'
+                <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'></div>';
                 break;
             case 'email':
-            $inputFiled = $addlabel.'
-                <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'>';
+            $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'
+                <input type = "'.$field['type'].'" placeholder = "'.$field['placeholder'].'" name = "'.$field['name'].'" id = '.$field['id'].' '.$reuired.'></div>';
                 break;
             case 'textarea':
-                $inputFiled = $addlabel.'<textarea name = "'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></textarea>';
+                $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<textarea name = "'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></textarea></div>';
                 break;
             case 'checkbox':
-                $inputFiled = $addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
+                $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></div>';
             case 'radio':
-                $inputFiled = $addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'>';
+                $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></div>';
                 break;
             default:
                 $inputFiled = '';

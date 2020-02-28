@@ -1,6 +1,6 @@
 <section class="sbt_container">
     <div class="holder_app">
-        <div class="sbt_row">
+        <div class="sbt_row gb_row">
             <!------------menu_side_bar----------------->
             <div class="wd_5 menu_aside">
                 <div class="sbt_row">

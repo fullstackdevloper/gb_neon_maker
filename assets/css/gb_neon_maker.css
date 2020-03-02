@@ -159,21 +159,17 @@ body{background:#f5f5f5;}
 .ruby a{background:#F11D1D;}
 .cobalt a{background:#2B41E7;}
 .snow a{background:#EAEAEA;}
-.txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px; padding-bottom:100px;}
+.txt_over {position: absolute;top: 10px;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px;bottom: 0;padding: 0 80px;}
 /* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
-.txt_over  span{font-family: 'ModernTalking-Regular.woff';color:#000;;font-size:6.4rem; font-weight: bold;text-align: center;}
+.txt_over span{font-family: 'ModernTalking-Regular.woff';color:#FC43BD;;font-size:4rem; font-weight: bold;text-align: center;}
 .sl_ide {position: relative;}
 .next_sl {position: absolute;top:44%;color:#FA628A;right: 30px;font-size: 60px; cursor:pointer;}
 .prev_sl {position: absolute;top: 44%;color:#FA628A;    left: 30px;font-size: 60px; cursor:pointer;}
 .slider_font_sbt {position:relative ;}
-.sbt_container ul {
-    list-style: none !important;
-    margin: 0px !important;
-}
-section.sbt_container {
-    background: #f5f5f5;
-    padding: 10px;
-}
+.sbt_container ul {list-style: none !important;margin: 0px !important;}
+section.sbt_container {background: #f5f5f5;padding: 10px;}
+.sbt_container ul.sbt_menu_items li {margin-bottom: 7px;}
+
 a.prev {text-decoration: none;}
 a.next {text-decoration: none;}
 h2.gb_small{font-size: 24px;margin:5px !important;}
@@ -192,6 +188,7 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 .active_font, .active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {padding-top: 10px;padding-bottom: 10px; text-align: center;border: 1px solid #888888;display: block;text-decoration: none;box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);
     border-radius: 6px;}
 .gb_txt_preview  span{font-family: 'ModernTalking-Regular.woff';color:rgb(44, 46, 63);font-size:6.4rem; font-weight: bold;}
+label.gb_onoffswitch-label {margin: 0px;}
 /* stripe popup */
 .gb_stripe_form {width: 90%; min-width: 400px; margin: 20px auto;padding: 20px;background: #fff}
 .gb_display_data {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;overflow-y: auto;}
@@ -199,15 +196,14 @@ input.black.button {width: 100%;}
 a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 500;color: rgba(0, 0, 0, 0.54);}
 .gb_column3 {width: 100%;display: inline-table;max-width:33%;}
 .neon_tool_layout {width: 100%;height: 100%;font-size: 50px;text-align: left;margin-bottom: 50px;margin-top: 30px;}
-/* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
-.neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:5.5rem; font-weight: bold;}
+.neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:4rem; font-weight: bold;}
 .gb_order_delivery label#gb_email {float: left;width: 100%;}
-
+textarea#gb_default_value {background: #F5F5F5;}
 /* end stripe */
 
 /* css for on/off button */
 
-.gb_onoffswitch {position: relative; width: 90px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;}
+.gb_onoffswitch {position: absolute; width: 90px;-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;margin: 10px;z-index: 100;}
 .gb_onoffswitch-checkbox {display: none !important;}
 .gb_onoffswitch-label {display: block  !important; overflow: hidden; cursor: pointer;border: 2px solid #999999; border-radius: 20px;}
 .gb_onoffswitch-inner {display: block; width: 200%; margin-left: -100%;transition: margin 0.3s ease-in 0s;}
@@ -285,8 +281,7 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
 .gb_order_sign {max-width: 320px;margin-left: 20px;}
 .gb_inquiry_form label {width: 100%;max-width: 264px;margin: 0 auto;display: block;}
 /* .gb_order_delivery label#gb_fname, .gb_order_delivery label#gb_company {display: block;width: 100%;max-width: 202px !important;float: left;clear: both;} */
-.gb_final_price {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 16px;line-height: 20px;color: #4D4D4D;padding-top: 30px;
-}
+.gb_final_price {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 16px;line-height: 20px;color: #4D4D4D;padding-top: 30px;}
 /** **/
 .gb_order_delivery label#phone {width: 100%;max-width: 170px;clear: both;}
 
@@ -307,12 +302,16 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
    .sbt_font_options ul > li {max-width: 100%;margin: 3px 0 20px;}
    .slider_font_sbt img {min-height: 300px;}
    .txt_over span {font-size: 2.5rem;}
-   .txt_over {padding-bottom: 0px;}
+   .txt_over {padding-bottom: 0px; top: 16px;padding: 0 45px;}
    .prev_sl {left: 10px;top:40%;}
    .next_sl {right:10px;top:40%;}
    .sbt_hint {margin: 15px 0px 0;}
-   .gb_order_sign {margin-left: 0;}
+   .gb_order_sign {margin-left: 0;margin-top: 20px;}
    .gb_order_delivery label#gb_fname, .gb_order_delivery label#gb_company {max-width: 100% !important;}
-   .gb_stripe_form a.gb_close {margin-right: -30px;margin-top: -20px;}
+   .gb_stripe_form a.gb_close {margin-right: -30px;margin-top: -20px;overflow: hidden;}
    .gb_order_delivery, .gb_order_payment {margin-top: 50px;}
+   .result_effect {margin-bottom: 15px !important;}
+   .gb_order_delivery .gb_fname, .gb_order_delivery .gb_lname, .gb_order_delivery .gb_company, .gb_order_delivery .gb_phone {max-width:100%;}
+    .gb_lname label, .gb_phone label {margin-left: 0;}
+
 }

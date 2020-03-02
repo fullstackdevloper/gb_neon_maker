@@ -77,7 +77,7 @@ class NeonMakerCore {
      * @return Html
      */
     public function logoTextHint() {
-        return __("If you have another font in mind, would like multiple fonts, or would like to incorporate an image or logo, click (it's not quote right) and let us know more.", 'gb_neon_maker');
+        return __("If you have another font in mind, would like multiple fonts, or would like to incorporate an image or logo, click (it's not quite right) and let us know more.", 'gb_neon_maker');
     }
     /**
      * inquiry form filed
@@ -164,7 +164,7 @@ class NeonMakerCore {
      */
     public function inquiryFormText() {
         return __("We’ll continue to refine your design until you’re completely satisfied.");
-    } 
+    }
 	/**
      * get the order form text
      * @return Html

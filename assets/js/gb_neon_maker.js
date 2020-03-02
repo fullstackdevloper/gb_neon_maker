@@ -15,7 +15,8 @@ var GbNeonmaker;
     var priorityDeliveryCost = 100;
     var internationalDeliveryCost = 150;
     var twoLineHeightInc = 4.5;
-    var neonConfigurations = {"font": "ModernTalking-Regular", "text":NeonMaker_ajax.default_value, "size": "small", "color": "#2C2E3F", "onOffswitch": "false", "price": price, "delivery": "Standard delivery"};
+    var lengthLimit = 160;
+    var neonConfigurations = {"font": "ModernTalking-Regular", "text":NeonMaker_ajax.default_value, "size": "small", "color": "#FC43BD", "onOffswitch": "false", "price": price, "delivery": "Standard delivery"};
     GbNeonmaker = {
         settings: {
             configuration: {}
@@ -31,6 +32,7 @@ var GbNeonmaker;
             $this.sideBarEvents(slideIndex);
             $this.showSlides(slideIndex);
             $this.calculation();
+            $this.changeSize('null', neonConfigurations.size);
             //$this.onOffswitch();
         },
         sideBarEvents: function () {
@@ -48,7 +50,8 @@ var GbNeonmaker;
                 if(event.keyCode == 13 && newLines >= 2) {
                     return false;
                 }
-                if(gbVolShipping == false && event.keyCode != 8){
+                if(neonConfigurations.dynamicLength > lengthLimit &&  event.keyCode != 8){
+                    $('#gb_text_error').text("*you have reached the limit");
                     return false;
                 }
             });
@@ -56,7 +59,17 @@ var GbNeonmaker;
             $("#gb_neon_text").html(textareaValue.replace(/\r?\n/g, '<br />'));
             neonConfigurations.price = price;
             neonConfigurations.text = $(elem).val();
+            if(textareaValue.length >= 16 && textareaValue.length <= 20){
+                $("#gb_neon_text").css("font-size", '3rem');
+            }else if(textareaValue.length > 20){
+                $("#gb_neon_text").css("font-size", '2rem');
+            }else {
+                $("#gb_neon_text").css("font-size", '4rem');
+            }
             $this.calculation();
+            $this.changeSize('null', 'small');
+            $this.changeSize('null', 'large');
+            $this.changeSize('null', 'medium');
         },
         changeFont: function(elem, fontType) {
             $("#gb_neon_text").css("font-family", `'${fontType}.woff'`);
@@ -65,6 +78,15 @@ var GbNeonmaker;
             neonConfigurations.price = price;
             neonConfigurations.font = fontType;
             $this.calculation();
+            $this.changeSize('null', 'small');
+            $this.changeSize('null', 'large');
+            $this.changeSize('null', 'medium');
+            if(neonConfigurations.dynamicLength > lengthLimit){
+                $('#gb_text_error').text("*you have reached the limit");
+                str =  $("#gb_neon_text").val();
+                str.slice(0, str.length - 1);
+                return false;
+            }
         },
         changeColor: function(elem, fontColor) {
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
@@ -82,9 +104,13 @@ var GbNeonmaker;
         changeSize: function(elem, size) {
             neonConfigurations.price = price;
             neonConfigurations.size = size;
-            $('.sbt_text_font a').removeClass('active_size');
-            $(elem).addClass('active_size');
+            if(elem != 'null') {
+                $('.sbt_text_font a').removeClass('active_size');
+                $(elem).addClass('active_size');
+            }
             $this.calculation();
+            $('.gb_len_'+size).text(neonConfigurations.dynamicLength+'- '+Math.floor(neonConfigurations.dynamicLength +10) +'cm');
+            $('.gb_height_'+size).text(neonConfigurations.dynamicHeigth+'- '+Math.floor(neonConfigurations.dynamicHeigth +8) +'cm');
         },
         changeBackingType: function(elem, backingType) {
             $('.sbt_text_font a').removeClass('active_btype');
@@ -159,39 +185,49 @@ var GbNeonmaker;
                 avgHeight = avgHeight + maxHeight;
                 maxLength = ( length > maxLength ) ? length : maxLength;
             }
-            if(lines.length == 2){
-                incrementH = twoLineHeightInc;
+            if(price == 0) {
+                price = 0;
+                shipping = 0;
+                getLenght = 0;
+                getHeight = 0;
             }else {
-                incrementH = heightInc;
+                if(lines.length == 2){
+                    incrementH = twoLineHeightInc;
+                }else {
+                    incrementH = heightInc;
+                }
+                getHeight = Math.ceil((avgHeight + incrementH) / 1) * 1;
+                getLenght = Math.ceil((maxLength + LenghtInc) / 1) * 1;
+                /* getting volume Formula used: (((MaxHeight +10) + (Length + 10)) * 10 ) / 5000*/
+                getVol = ((getHeight + 10) * (getLenght + 10) * 10 ) / 5000;
+                volume = Math.ceil(getVol / 0.5) * 0.5;
+                /* formula used : ((shiping price in RMB)* 1.2) * 0.25 */
+                var shipping = ( ($this.getShipping(volume)) * 1.2 ) * 0.25;
             }
-            getHeight = Math.ceil((avgHeight + incrementH) / 1) * 1;
-            getLenght = Math.ceil((maxLength + LenghtInc) / 1) * 1;
-            /* getting volume Formula used: (((MaxHeight +10) + (Length + 10)) * 10 ) / 5000*/
-            getVol = ((getHeight + 10) * (getLenght + 10) * 10 ) / 5000;
-            volume = Math.ceil(getVol / 0.5) * 0.5;
-            /* formula used : ((shiping price in RMB)* 1.2) * 0.25 */
-            var shipping = ( ($this.getShipping(volume)) * 1.2 ) * 0.25;
-
             /* formula for total price : ( Rope Price +  Shipping +  Other ) * Multiplier */
             priceSum = ( price + shipping + 90) * 1.5;
 
             /* add backing Type price , define backingStandCost = 50 */
-            var backingTypeCost = (backingType == 'Stand') ? backingStandCost:0;
+            var backingTypeCost = (backingType == 'Stand' ) ? backingStandCost:0;
             /* console values */
 
             /*console.log("Rope Price : "+ price);
             console.log("height : " + getHeight);
-            console.log("lenght : " + getLenght);
+            console.log("length : " + getLenght);
             console.log("volume : " + volume);
             console.log("shipping : " + shipping);*/
-
             /* Add delivery cost: standardDeliveryCost = 50, priorityDeliveryCost = 100, internationalDeliveryCost = 150; */
-            if(delivery == 'International delivery'){
-                var deliveryCost = internationalDeliveryCost;
-            }else if(delivery == 'Priority delivery'){
-                var deliveryCost = priorityDeliveryCost;
-            }else {
-                var deliveryCost = standardDeliveryCost;
+            if(price == 0) {
+                deliveryCost = 0;
+            }
+            else {
+                if(delivery == 'International delivery'){
+                    var deliveryCost = internationalDeliveryCost;
+                }else if(delivery == 'Priority delivery'){
+                    var deliveryCost = priorityDeliveryCost;
+                }else {
+                    var deliveryCost = standardDeliveryCost;
+                }
             }
             gb_price = Math.ceil(priceSum / 10) * 10;
 
@@ -199,6 +235,8 @@ var GbNeonmaker;
             var finalPrice = gb_price + backingTypeCost + deliveryCost;
             $('#gb_total').html(finalPrice);
             neonConfigurations.price = finalPrice;
+            neonConfigurations.dynamicLength = getLenght;
+            neonConfigurations.dynamicHeigth = getHeight;
         },
         getShipping: function (vol){
             var shippingPrice = {
@@ -242,6 +280,86 @@ var GbNeonmaker;
                 19: 740.72,
                 19.5: 758.4,
                 20: 776.08,
+                20.5: 813.28,
+                21: 850.48,
+                21.5: 887.68,
+                22: 924.88,
+                22.5: 962.08,
+                23: 999.28,
+                23.5: 1036.48,
+                24: 1073.68,
+                24.5: 1110.88,
+                25: 1148.08,
+                25.5: 1185.28,
+                26: 1222.48,
+                26.5: 1259.68,
+                27: 1296.88,
+                27.5: 1334.08,
+                28: 1371.28,
+                28.5: 1408.48,
+                29: 1445.68,
+                29.5: 1482.88,
+                30: 1520.08,
+                30.5: 1520.08,
+                31:1120.34,
+                31.5:1120.34,
+                32: 1156.48,
+                32.5: 1156.48,
+                33: 1192.62,
+                33.5: 1192.62,
+                34: 1228.76,
+                34.5: 1228.76,
+                35: 1264.9,
+                35.5: 1264.9,
+                36: 1301.04,
+                36.5: 1301.04,
+                37: 1337.18,
+                37.5: 1337.18,
+                38: 1373.32,
+                38.5: 1373.32,
+                39: 1409.46,
+                39.5: 1409.46,
+                40: 1445.6,
+                40.5: 1445.6,
+                41: 1481.74,
+                41.5: 1481.74,
+                42: 1517.88,
+                42.5: 1517.88,
+                43: 1554.02,
+                43.5: 1554.02,
+                44: 1590.16,
+                44.5: 1590.16,
+                45: 1626.3,
+                45.5: 1626.3,
+                46: 1662.44,
+                46.5: 1662.44,
+                47: 1698.58,
+                47.5: 1698.58,
+                48: 1734.72,
+                48.5: 1734.72,
+                49: 1770.86,
+                49.5: 1770.86,
+                50: 1807,
+                50.5: 1807,
+                51: 1843.14,
+                51.5: 1843.14,
+                52: 1879.28,
+                52.5: 1879.28,
+                53: 1915.42,
+                53.5: 1915.42,
+                54: 1951.56,
+                54.5: 1951.56,
+                55: 1987.7,
+                55.5: 1987.7,
+                56: 2023.84,
+                56.5: 2023.84,
+                57: 2059.98,
+                57.5: 2059.98,
+                58: 2096.12,
+                58.5: 2096.12,
+                59: 2132.26,
+                59.5: 2132.26,
+                60: 2168.4
             }
             if (vol in shippingPrice){
                 gbVolShipping = true;
@@ -250,7 +368,7 @@ var GbNeonmaker;
             }else {
                 gbVolShipping = false;
                 $('#gb_text_error').text("*you have reached the limit");
-                return shippingPrice[vol] = shippingPrice[20];
+                return shippingPrice[vol] = shippingPrice[60];
             }
         },
         getPrice:function (alphabet, font, size, type) {

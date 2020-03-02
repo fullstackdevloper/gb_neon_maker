@@ -2,8 +2,8 @@
     <div class="sbt_font_options">
         <label><?php _e("Choose a neon colour", "gb_neon_maker"); ?></label>
         <ul class="color_pick">
-            <li class="lipstick"><a onclick="GbNeonmaker.changeColor(this,'#FC43BD');" href="javascript:void(0);"></a><span>lipstick</span></li>
-            <li class="solare_flare"><a onclick="GbNeonmaker.changeColor(this,'#FFA800');" href="javascript:void(0);"></a><span>Solare Flare</span></li>
+            <li class="lipstick active_color"><a onclick="GbNeonmaker.changeColor(this,'#FC43BD');" href="javascript:void(0);"></a><span>Lipstick</span></li>
+            <li class="solare_flare"><a onclick="GbNeonmaker.changeColor(this,'#FFA800');" href="javascript:void(0);"></a><span>Solar flare</span></li>
             <li class="mint"><a onclick="GbNeonmaker.changeColor(this,'#82F925');" href="javascript:void(0);"></a><span>Mint</span></li>
             <li class="rosey"><a onclick="GbNeonmaker.changeColor(this,'#F59CBC');" href="javascript:void(0);"></a><span>Rosey</span></li>
             <li class="tiger"><a onclick="GbNeonmaker.changeColor(this,'#ECF02A');" href="javascript:void(0);"></a><span>Tiger</span></li>

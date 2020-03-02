@@ -30,7 +30,7 @@
                     <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >$ <span id="gb_total">450</span></span>
                 </div>
                 <div class="btn_sbt_cart">
-                    <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("Buy Now", "gb_neon_maker"); ?></a>
+                    <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("BUY NOW", "gb_neon_maker"); ?></a>
                     <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);" class="sbt_gr"><?php _e("IT'S NOT QUITE RIGHT", "gb_neon_maker"); ?></a>
                 </div>
             </div>
@@ -80,7 +80,7 @@
         <div class="gb_order_delivery gb_column3">
            <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/van.png" alt="paymentmethod"> DELIVERY </h5>
             <p><span>Deliver to</span></p>
-            <p><?php print apply_filters('gb_inquiry_form_text', $this->orderFormText()); ?></p>
+            <p><?php print apply_filters('gb_order_form_text', $this->orderFormText()); ?></p>
              <?php
             foreach( $this->stripeOrderDeliveryForm() as $key => $field) {
                 echo $this->neonCustomFields($field);

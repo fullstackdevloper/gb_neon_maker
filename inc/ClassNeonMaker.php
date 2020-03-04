@@ -153,6 +153,7 @@ class NeonMaker {
         $this->define('GB_NEON_MAKER_URL', plugins_url(basename(GB_NEON_MAKER_ABSPATH)));
         $this->define('GB_NEON_MAKER_VERSION', $this->version);
         $this->define('GB_NEON_MAKER_ROLE', 'km_user');
+        $this->define('GB_NEON_MAKER_CURRENCY', 'A$');
     }
 
     /**

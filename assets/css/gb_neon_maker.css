@@ -44,6 +44,18 @@
     font-style: normal;
 }
 @font-face {
+    font-family: 'Courier.woff';
+    src:url('fonts/Courier.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bayshore.woff';
+    src:url('fonts/Bayshore.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
     font-family: 'Montserrat';
     src: url('popupfont/Montserrat-ThinItalic.woff') format('woff');
     font-weight: 100;
@@ -126,7 +138,7 @@ body{background:#f5f5f5;}
 .sbt_menu_items > li > a {padding: 5px;background: #fff;border-radius: 6px;margin-bottom: 8px;width: 80px;height: 80px;display: flex;align-items: center;flex-direction: column;justify-content: center;text-decoration: none;color: #828AA6;text-transform: uppercase;font-weight: 500;    font-size: 12px; position:relative; transition-duration:.35s;}
 .sbt_text_font {background: #fff;border-radius: 19px;padding: 20px; /*min-height: 300px;*/}
 .sbt_text_font input {height: 46px;width: 100%;background: #F5F5F5;border: 1px solid rgba(126, 120, 120, 0.63);padding-left: 10px;margin-bottom: 20px;}
-.sbt_font_options ul > li { max-width: 50%; width: 100%;margin: 3px 0;line-height: .6;padding: 7px;}
+.sbt_font_options ul > li { max-width: 50%; width: 100%;margin: 3px 0;padding: 7px;}
 .sbt_menu_items > li > a::after {width: 22px;height: 2px;position: absolute;background:#EFE529;content: "";bottom: 0;left: 0;right: 0;margin: 0 auto;}
 .sbt_sub_total {display: flex;justify-content: space-between;align-content: center;padding: 20px;background: rgba(196, 196, 196, 0.7);border-radius: 16px;
     text-transform: uppercase;color: #fff;font-weight: 600; height: 60px;margin-top: 5px;}
@@ -168,7 +180,7 @@ body{background:#f5f5f5;}
 .slider_font_sbt {position:relative ;}
 .sbt_container ul {list-style: none !important;margin: 0px !important;}
 section.sbt_container {background: #f5f5f5;padding: 10px;}
-.sbt_container ul.sbt_menu_items li {margin-bottom: 7px;}
+.sbt_container ul.sbt_menu_items li {margin-bottom: 5px;}
 
 a.prev {text-decoration: none;}
 a.next {text-decoration: none;}
@@ -185,7 +197,7 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 .gb_ShaimusOutline-Regular{font-family: 'ShaimusOutline-Regular.woff'}
 .gb_RoadCrew-Regular{font-family: 'RoadCrew-Regular.woff'}
 /*.color_pick li.active_color {padding-top: 10px; text-align: center;}*/
-.active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {padding-top: 10px;padding-bottom: 10px; text-align: center;border: 1px solid #888888;display: block;}
+.active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {text-align: center;border: 1px solid #888888;display: block;}
 .active_font {display: block;text-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;color: #fff;}
 .gb_txt_preview  span{font-family: 'ModernTalking-Regular.woff';color:rgb(44, 46, 63);font-size:6.4rem; font-weight: bold;}
 label.gb_onoffswitch-label {margin: 0px;}
@@ -253,7 +265,7 @@ margin-bottom: 15px;}
 /** **/
 .sbt_text_font a.active_size, ul.gb_backing_shape a.active_btype, ul.gb_backing_color a.active_bcolor, .sbt_fixtures ul.choose_fixture a.active_fixture, .gb_delivery ul.choose_delivery a.active_delivery {background: #FADCEB;border-radius: 0px;box-shadow: unset;}
 .gb_rectangle {display:flex;justify-content: space-between;align-items: center;padding: 5px 15px;}
-.gb_rectangle h2 {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #2C2E3F;}
+.gb_rectangle h2 {font-family: Montserrat;font-style: normal;font-weight: 500;font-size: 12px;line-height: 15px;color: #2C2E3F;}
 .sbt_text_font a.active_size {padding-top: 0;padding-bottom: 0;border: unset;}
 .gb_lenth small {font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 10px;line-height: 12px;color: #000000;text-decoration: unset;}
 .sbt_text_font a {text-decoration: none;}
@@ -267,7 +279,7 @@ display: flex;align-items: start;}
 .gb_backing_type ul.gb_backing_shape a, .sbt_backing_options2 ul.gb_backing_color a, .gb_delivery ul.choose_delivery a {text-align: left;}
 .gb_backing_type ul.gb_backing_shape li span, .sbt_backing_options2 ul.gb_backing_color li span, .sbt_fixtures ul.choose_fixture li span, .gb_delivery ul.choose_delivery li span {font-weight: 600;font-size: 10px;line-height: 11px;color: #2C2E3F;text-align: left;margin: 0;}
 .sbt_backing_options2 ul.gb_backing_color a {text-align: left;padding: 0;}
-.sbt_fixtures ul.choose_fixture li {display: flex;justify-content: space-between;align-items: center;}
+.sbt_fixtures ul.choose_fixture li {display: flex;justify-content: space-between;align-items: center;min-height: 66px;border-bottom: 2px solid #f5f5f5;}
 .sbt_fixtures ul.choose_fixture li img {margin-right: 30px;}
 span#gb_text_error {font-size: 13px;color: red;}
 /****/
@@ -283,29 +295,38 @@ span#gb_text_error {font-size: 13px;color: red;}
 /** **/
 .gb_order_delivery label#phone {width: 100%;max-width: 170px;clear: both;}
 div#dt3 .sbt_text_font, div#dt4 .sbt_text_font, div#dt5 .sbt_text_font, div#dt6 .sbt_text_font{padding: 15px 0 15px;}
-.sbt_text_font  label, .gb_backing_type label {padding-bottom: 16px;}
+.sbt_text_font  label, .gb_backing_type label {padding-bottom: 16px;border-bottom: 2px solid #f5f5f5;width: 100%;margin-bottom: 0;}
 .sbt_font_options > label {padding-bottom: 15px;}
 .footer-form .contact-btn:hover {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);}
 .gb_order_delivery .gb_lname, .gb_order_delivery .gb_phone {margin-left: 22px;}
 .tab_ct ul {padding-left: 0;}
 .gb_backing_type ul.gb_backing_shape li span.gb_text_info, .gb_delivery ul.choose_delivery li span.gb_text_info {display: block;font-size: 9px;font-weight: 400;font-family: Montserrat;color: #000;}
  div#dt4 .sbt_text_font:first-child {margin-bottom: 10px;}
-.gb_delivery ul.choose_delivery li {display: flex;justify-content: space-between;align-items: center;}
-.gb_delivery ul.choose_delivery li .gb_delivery_price span {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 9px;/* line-height: 11px; */color: #2C2E3F;}
-.gb_delivery ul.choose_delivery li .gb_delivery_price span.gb_sm_info {font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 4px;color: #000000;
+.gb_delivery ul.choose_delivery li {display: flex;justify-content: space-between;align-items: flex-start;min-height: 76px;border-bottom: 2px solid #f5f5f5;}
+.gb_delivery ul.choose_delivery li .gb_delivery_price span {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 9px;/* line-height: 11px; */color: #2C2E3F;margin-top: 12px;}
+.gb_delivery ul.choose_delivery li .gb_delivery_price span.gb_sm_info {font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 7px;color: #000000;
 margin-top: -8px;display:block;}
 .gb_delivery ul.choose_delivery li span.gb_text_info {width: 100%;max-width: 162px;}
-ul.gb_backing_shape a {padding: 5px 0;}
 .sbt_backing_options2 label {padding-bottom: 10px;}
 
+/** New Css**/
+.gb_delivery ul.choose_delivery a .hanging_wire_kit:last-child {border-bottom: 2px solid transparent;}
+.sbt_fixtures ul.choose_fixture li.hanging_wire_kit {border-bottom: unset;}
+.gb_backing_type ul.gb_backing_shape li {min-height: 58px;border-bottom: 2px solid #f5f5f5;}
+.sbt_backing_options2 ul.gb_backing_color li {min-height: 30px;border-bottom: 2px solid #f5f5f5;}
+div#dt3 > .sbt_text_font > a > .gb_rectangle {border-bottom: 2px solid #f5f5f5;}
+.sbt_font_options ul li a:hover {text-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;}
+.sbt_font_options label {border-bottom: 0;}
+div#dt3 > .sbt_text_font > a > .gb_size_last, .gb_backing_type ul.gb_backing_shape li.gb_size_last, .sbt_backing_options2 ul.gb_backing_color .gb_size_last {border-bottom: 0;}
+div#dt4 .sbt_text_font {padding: 15px 0 10px;}
+.gb_delivery .gb_delivery_price {margin-top: 13px;width: 55px;}
+.sbt_fixtures ul.choose_fixture li.hanging_wire_kit img {margin-right: 21px;}
+.gb_backing_type ul.gb_backing_shape li.gb_size_last {display: flex;justify-content: space-between;}
+
 /* color shadow */
+.sbt_font_options ul.color_pick li a:hover {box-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;}
 
-
-/*********************/
-/* .sbt_font_options ul li a:hover {
-    text-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;
-} */
-
+/* media css start */
 @media only screen and (min-width: 100px) and (max-width: 767px) {
     .gb_stripe_form {min-width: 350px;width: 90%;padding: 30px 50px;}
     #stripe h5 {justify-content: center;}
@@ -334,6 +355,8 @@ ul.gb_backing_shape a {padding: 5px 0;}
    .result_effect {margin-bottom: 15px !important;}
    .gb_order_delivery .gb_fname, .gb_order_delivery .gb_lname, .gb_order_delivery .gb_company, .gb_order_delivery .gb_phone {max-width:100%;}
     .gb_lname label, .gb_phone label, .gb_order_delivery .gb_lname, .gb_order_delivery .gb_phone  {margin-left: 0;}
+    .txt_over {padding: 0 40px 80px;}
+    div#dt5 {margin-bottom: 10px;}
 
 }
 

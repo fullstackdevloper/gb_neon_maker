@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="sbt_sub_total">
-                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >A$ <span id="gb_total">450</span></span>
+                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" ><?php echo GB_NEON_MAKER_CURRENCY; ?> <span id="gb_total">450</span></span>
                 </div>
                 <div class="btn_sbt_cart">
                     <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("BUY NOW", "gb_neon_maker"); ?></a>
@@ -47,7 +47,6 @@
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Young_Adults_Looking_At_Neon_Sign.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Cafe-Background-For-Neon-Sign.jpg" alt="">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Desk-Background-For-Neon-Sign-Quote-Tool.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Kids-Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
                         <div class="txt_over">
                             <span id="gb_neon_text"><?php $this->getValue('default_text', $NeonMakerSetting); ?></span>
@@ -73,7 +72,7 @@
             <div class="tool_details" >
                 <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
                 <div class="gb_selected_options"> </div>
-                <div class="gb_final_price"> </div>
+                <div class="gb_pr">Price : <?php echo GB_NEON_MAKER_CURRENCY; ?> <span class="gb_final_price"></span></div>
 
             </div>
         </div>

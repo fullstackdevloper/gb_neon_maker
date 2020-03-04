@@ -12,16 +12,16 @@
      <a onclick="GbNeonmaker.changeSize(this,'medium');" href="javascript:void(0);">
         <div class="gb_rectangle">
             <h2 class="gb_medium"><strong>Medium</strong></h2>
-            <div class="gb_lenth">
+            <div class="gb_lenth" >
                 <small> length:  <span class="gb_len_medium"></span></small><br>
                 <small> height: <span class="gb_height_medium"></span></small><br>
             </div>
         </div>
     </a>
     <a onclick="GbNeonmaker.changeSize(this,'large');" href="javascript:void(0);">
-        <div class="gb_rectangle">
+        <div class="gb_rectangle gb_size_last">
             <h2 class="gb_large"><strong>Large</strong></h2>
-            <div class="gb_lenth">
+            <div class="gb_lenth" >
                 <small> length:  <span class="gb_len_large"></span> </small><br>
                 <small> height:  <span class="gb_height_large"></span></small><br>
             </div>

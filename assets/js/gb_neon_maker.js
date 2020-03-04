@@ -11,7 +11,7 @@ var GbNeonmaker;
     var heightInc = 3;
     var LenghtInc = 3;
     var backingStandCost = 50;
-    var standardDeliveryCost = 50;
+    var standardDeliveryCost = 0;
     var priorityDeliveryCost = 100;
     var internationalDeliveryCost = 150;
     var twoLineHeightInc = 4.5;
@@ -33,10 +33,7 @@ var GbNeonmaker;
             $this.showSlides(slideIndex);
             $this.calculation();
             $this.onOffswitch();
-            $this.hoverColor();
-            $this.changeSize('null', 'small');
-            $this.changeSize('null', 'large');
-            $this.changeSize('null', 'medium');
+            $this.getLengthHeight();
         },
         sideBarEvents: function () {
             $('.sbt_menu_items>li').click(function () {
@@ -50,34 +47,45 @@ var GbNeonmaker;
         changeNeonText: function(elem) {
             newLines = $(elem).val().split("\n").length;
             $this.calculation();
-            $(elem).keydown(function(event) {
-                if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
-                    $('#gb_text_error').html("Max Character Limit Reached. If you want more than current characters, Please contact us.");
-                    return false;
-                }
-                if(event.keyCode == 13 && newLines >= 2) {
-                    return false;
-                }
-            });
+            if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
+                $('#gb_text_error').html('Max Character Limit Reached. If you want more than current characters, Please <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);">contact us</a>');
+                return false;
+            }
+            if(event.keyCode == 13 && newLines >= 2) {
+                return false;
+            }
             var textareaValue = $(elem).val();
             $("#gb_neon_text").html(textareaValue.replace(/\r?\n/g, '<br />'));
             neonConfigurations.price = price;
             neonConfigurations.text = $(elem).val();
-            if(textareaValue.length >= 16 && textareaValue.length <= 20){
-                $("#gb_neon_text").css("font-size", '3rem');
+
+            if(textareaValue.length >= 14 && textareaValue.length <= 20){
+                if(neonConfigurations.font == 'thistails-sans'){
+                    $("#gb_neon_text").css("font-size", '2.5rem');
+                }else {
+                    $("#gb_neon_text").css("font-size", '3rem');
+                }
             }else if(textareaValue.length > 20){
-                $("#gb_neon_text").css("font-size", '2rem');
+                if(neonConfigurations.font == 'thistails-sans'){
+                    $("#gb_neon_text").css("font-size", '1.5rem');
+                }else {
+                    $("#gb_neon_text").css("font-size", '2rem');
+                }
             }else {
-                $("#gb_neon_text").css("font-size", '4rem');
+                if(neonConfigurations.font == 'thistails-sans'){
+                    $("#gb_neon_text").css("font-size", '3.5rem');
+                }else {
+                    $("#gb_neon_text").css("font-size", '4rem');
+                }
             }
-            $this.changeSize('null', 'small');
-            $this.changeSize('null', 'large');
-            $this.changeSize('null', 'medium');
+            $this.getLengthHeight();
         },
         changeFont: function(elem, fontType) {
             $("#gb_neon_text").css("font-family", `'${fontType}.woff'`);
             $('.sbt_font_options ul li').removeClass('active_font');
-            //$(elem).addClass('active_font');
+            if(fontType == 'thistails-sans'){
+                $("#gb_neon_text").css("font-size", '3.5rem');
+            }
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
             $('.sbt_font_options ul li a').removeAttr('style');
             if(onoffswitch == true) {
@@ -95,9 +103,8 @@ var GbNeonmaker;
                 str.slice(0, str.length - 1);
                 return false;
             }
-            $this.changeSize('null', 'small');
-            $this.changeSize('null', 'large');
-            $this.changeSize('null', 'medium');
+            $this.calculation();
+            $this.getLengthHeight();
         },
         changeColor: function(elem, fontColor) {
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
@@ -114,19 +121,15 @@ var GbNeonmaker;
                 }
                 $(elem).css("color", fontColor);
             }
-            //$(elem).parents('li').addClass('active_color');
             neonConfigurations.color = fontColor;
         },
         changeSize: function(elem, size) {
             neonConfigurations.price = price;
             neonConfigurations.size = size;
-            if(elem != 'null') {
-                $('.sbt_text_font a').removeClass('active_size');
-                $(elem).addClass('active_size');
-            }
+            $('.sbt_text_font a').removeClass('active_size');
+            $(elem).addClass('active_size');
             $this.calculation();
-            $('.gb_len_'+size).text(neonConfigurations.dynamicLength+'- '+Math.floor(neonConfigurations.dynamicLength +10) +'cm');
-            $('.gb_height_'+size).text(neonConfigurations.dynamicHeigth+'- '+Math.floor(neonConfigurations.dynamicHeigth +8) +'cm');
+            $this.getLengthHeight();
         },
         changeBackingType: function(elem, backingType) {
             $('.sbt_text_font a').removeClass('active_btype');
@@ -202,49 +205,38 @@ var GbNeonmaker;
                     height = $this.getPrice(char, font, size, 'height');
                     maxHeight = ( height > maxHeight ) ? height : maxHeight;
                     price = price + $this.getPrice(char, font, size, 'text');
-
                 }
                 avgHeight = avgHeight + maxHeight;
                 maxLength = ( length > maxLength ) ? length : maxLength;
             }
-            if(price == 0) {
-                price = 0;
+            if(price == 0) {  /* condition for text box empty */
+                finalPrice = 0;
                 shipping = 0;
                 getLenght = 0;
                 getHeight = 0;
             }else {
                 if(lines.length == 2){
-                    incrementH = twoLineHeightInc;
+                    incrementH = twoLineHeightInc; /* text in two line add height = 4.5 otherwise add = 3*/
                 }else {
                     incrementH = heightInc;
                 }
                 getHeight = Math.ceil((avgHeight + incrementH) / 1) * 1;
                 getLenght = Math.ceil((maxLength + LenghtInc) / 1) * 1;
+
                 /* getting volume Formula used: (((MaxHeight +10) + (Length + 10)) * 10 ) / 5000*/
                 getVol = ((getHeight + 10) * (getLenght + 10) * 10 ) / 5000;
                 volume = Math.ceil(getVol / 0.5) * 0.5;
+
                 /* formula used : ((shiping price in RMB)* 1.2) * 0.25 */
                 var shipping = ( ($this.getShipping(volume)) * 1.2 ) * 0.25;
-            }
-            /* formula for total price : ( Rope Price +  Shipping +  Other ) * Multiplier */
-            priceSum = ( price + shipping + 90) * 1.5;
 
-            /* add backing Type price , define backingStandCost = 50 */
-            var backingTypeCost = (backingType == 'Stand' ) ? backingStandCost:0;
-            /* console values */
+                /* formula for total price : ( Rope Price +  Shipping +  Other ) * Multiplier */
+                priceSum = ( price + shipping + 90) * 1.5;
 
-            console.log("Rope Price : "+ price);
-            console.log("height : " + getHeight);
-            console.log("length : " + getLenght);
-            console.log("volume : " + volume);
-            console.log("shipping : " + shipping);
-            neonConfigurations.dynamicLength = getLenght;
-            neonConfigurations.dynamicHeigth = getHeight;
-            /* Add delivery cost: standardDeliveryCost = 50, priorityDeliveryCost = 100, internationalDeliveryCost = 150; */
-            if(price == 0) {
-                deliveryCost = 0;
-            }
-            else {
+                /* add backing Type price , define backingStandCost = 50 */
+                var backingTypeCost = (backingType == 'Stand' ) ? backingStandCost:0;
+
+                /* delivery cost: standardDeliveryCost = 50, priorityDeliveryCost = 100, internationalDeliveryCost = 150; */
                 if(delivery == 'International delivery'){
                     var deliveryCost = internationalDeliveryCost;
                 }else if(delivery == 'Priority delivery'){
@@ -252,17 +244,21 @@ var GbNeonmaker;
                 }else {
                     var deliveryCost = standardDeliveryCost;
                 }
-            }
-            gb_price = Math.ceil(priceSum / 10) * 10;
 
-            /* final price */
-            var finalPrice = gb_price + backingTypeCost + deliveryCost;
-            $('#gb_total').html(finalPrice);
+                /* total price without delivery option  */
+                gb_price = Math.ceil(priceSum / 10) * 10;
+
+                /* final price */
+                var finalPrice = gb_price + backingTypeCost + deliveryCost;
+
+            }
+
+            /* display dynamic height & Length */
+            neonConfigurations.dynamicLength = getLenght;
+            //neonConfigurations.dynamicHeigth = getHeight;
             neonConfigurations.price = finalPrice;
-            /*neonConfigurations.dynamicLength = getLenght;
-            neonConfigurations.dynamicHeigth = getHeight;
-            console.log("dynamicLength : "+ getLenght);
-            console.log("height : " + getHeight);*/
+
+            $('#gb_total').html(finalPrice);
         },
         getShipping: function (vol){
             var shippingPrice = {
@@ -426,7 +422,7 @@ var GbNeonmaker;
                 configHtml = configHtml + '<p> Delivery: '+neonConfigurations.delivery+'</p>';
             }
             $('.gb_selected_options').html(configHtml);
-            $('.gb_final_price').html("Price : $ "+neonConfigurations.price);
+            $('.gb_final_price').text(neonConfigurations.price);
         },
         inquiryForm:function(elem) {
             $('.gb_inquiry_popup').css('display', 'block');
@@ -510,12 +506,38 @@ var GbNeonmaker;
             $('.gb_display_data').css('display', 'none');
             $('.gb_inquiry_popup').css('display', 'none');
         },
-        hoverColor: function (elem) {
-            $(".sbt_font_options ul li a").hover(function(){
-                var textShadow = "rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, "+neonConfigurations.color+" 0px 0px 30px, "+neonConfigurations.color+" 0px 0px 40px, "+neonConfigurations.color+" 0px 0px 55px, "+neonConfigurations.color+" 0px 0px 75px;";
-              $(this).css("text-shadow", textShadow);
-            });
-        }
+        getLengthHeight: function (){
+            var size = ["small", "medium", "large"];
+            var i;
+            for(k=0; k<3; k++ )
+            {
+                var i, j;
+                var font = neonConfigurations.font;
+                var string = neonConfigurations.text;
+                var length = 0,maxLength = 0,avgHeight = 0;
+                var lines = string.split('\n');
+                for(var j = 0;j < lines.length;j++){
+                    var length = 0, height = 0, maxHeight = 0;
+                    for(i = 0; i < string.length; i++) {
+                        var char = lines[j][i];
+                        length = length + $this.getPrice(char, font, size[k], 'length');
+                        height = $this.getPrice(char, font, size[k], 'height');
+                        maxHeight = ( height > maxHeight ) ? height : maxHeight;
+                    }
+                    avgHeight = avgHeight + maxHeight;
+                    maxLength = ( length > maxLength ) ? length : maxLength;
+                }
+                if(lines.length == 2){
+                    incrementH = twoLineHeightInc; /* text in two line add height = 4.5 otherwise add = 3*/
+                }else {
+                    incrementH = heightInc;
+                }
+                getHeight = Math.ceil((avgHeight + incrementH) / 1) * 1;
+                getLenght = Math.ceil((maxLength + LenghtInc) / 1) * 1;
+                $('.gb_len_'+size[k]).text(getLenght+'- '+Math.floor(getLenght +10) +'cm');
+                $('.gb_height_'+size[k]).text(getHeight+'- '+Math.floor(getHeight +8) +'cm');
+            }
+        },
     };
     GbNeonmaker.initilaize();
 })(jQuery);

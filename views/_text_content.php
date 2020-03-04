@@ -2,7 +2,7 @@
     <label><?php _e("Enter Text Below", "gb_neon_maker"); ?></label>
     <!--<input type="text" id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);" Value="<?php //$this->getValue('default_text', $NeonMakerSetting); ?>">-->
     <span id="gb_text_error"></span>
-    <textarea id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php $this->getValue('default_text', $NeonMakerSetting); ?></textarea>
+    <textarea id="gb_default_value" onkeydown="return GbNeonmaker.changeNeonText(this);" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php $this->getValue('default_text', $NeonMakerSetting); ?></textarea>
     <div class="sbt_font_options">
         <label>Choose a font</label>
         <ul>

@@ -17,20 +17,20 @@
             <a onclick="GbNeonmaker.changeDelivery(this, 'Priority delivery');" href="javascript:void(0);">
                 <li class="flush_screw_kit">
                     <div class="gb_delivery_option">
-                        <span>Priority delivery</span><span class="gb_text_info">Need it in a hurry?</span>
+                        <span>Priority delivery</span><span class="gb_text_info">Need it in a hurry? We'll deliver your sign within 2 weeks for an additional fee (exl WA & TAS)</span>
                     </div>
                     <div class="gb_delivery_price">
-                        <span>A$ 59</span>
+                        <span><?php echo GB_NEON_MAKER_CURRENCY; ?> 100</span>
                     </div>
                 </li>
             </a>
             <a onclick="GbNeonmaker.changeDelivery(this, 'International delivery');" href="javascript:void(0);">
                 <li class="hanging_wire_kit">
                     <div class="gb_delivery_option">
-                        <span>International delivery</span><span class="gb_text_info">TBA</span>
+                        <span>International delivery</span><span class="gb_text_info">We ship worldwide for a flat rate fee!</span>
                     </div>
                     <div class="gb_delivery_price">
-                        <span>A$ 150</span>
+                        <span><?php echo GB_NEON_MAKER_CURRENCY; ?> 150</span>
                     </div>
                 </li>
             </a>

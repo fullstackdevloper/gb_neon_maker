@@ -124,9 +124,9 @@ body{background:#f5f5f5;}
 .result_tabs { max-width: calc(100% - 80px); padding: 0 15px; width:100%;}
 .sbt_font_options ul {list-style: none; padding: 0; margin:10px 0 0 0;  display: flex;flex-wrap: wrap;}
 .sbt_menu_items > li > a {padding: 5px;background: #fff;border-radius: 6px;margin-bottom: 8px;width: 80px;height: 80px;display: flex;align-items: center;flex-direction: column;justify-content: center;text-decoration: none;color: #828AA6;text-transform: uppercase;font-weight: 500;    font-size: 12px; position:relative; transition-duration:.35s;}
-.sbt_text_font {background: #fff;border-radius: 19px;padding: 20px; min-height: 300px;}
+.sbt_text_font {background: #fff;border-radius: 19px;padding: 20px; /*min-height: 300px;*/}
 .sbt_text_font input {height: 46px;width: 100%;background: #F5F5F5;border: 1px solid rgba(126, 120, 120, 0.63);padding-left: 10px;margin-bottom: 20px;}
-.sbt_font_options ul > li { max-width: 50%; width: 100%;margin: 3px 0;}
+.sbt_font_options ul > li { max-width: 50%; width: 100%;margin: 3px 0;line-height: .6;padding: 7px;}
 .sbt_menu_items > li > a::after {width: 22px;height: 2px;position: absolute;background:#EFE529;content: "";bottom: 0;left: 0;right: 0;margin: 0 auto;}
 .sbt_sub_total {display: flex;justify-content: space-between;align-content: center;padding: 20px;background: rgba(196, 196, 196, 0.7);border-radius: 16px;
     text-transform: uppercase;color: #fff;font-weight: 600; height: 60px;margin-top: 5px;}
@@ -138,7 +138,7 @@ body{background:#f5f5f5;}
 .slider_font_sbt img {min-height: 645px; object-fit:cover;}
 .tab_ct:not(.active){display:none;}
 .color_pick {margin-top: 15px !important;}
-.color_pick > li {  max-width: 33.33% !important;width: 100% !important; padding:0 8px; margin:0px 0 10px 0 !important;}
+.color_pick > li {  max-width: 33.33% !important;width: 100% !important; padding:0 8px; margin:0px 0 15px !important;}
 .color_pick > li span {font-size: 9px;}
 .color_pick > li > a {height: 8px;  width: 100%;    display: block; border-radius: 50px;}
 .lipstick a {background: #FC43BD;}
@@ -159,9 +159,9 @@ body{background:#f5f5f5;}
 .ruby a{background:#F11D1D;}
 .cobalt a{background:#2B41E7;}
 .snow a{background:#EAEAEA;}
-.txt_over {position: absolute;top: 10px;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px;bottom: 0;padding: 0 80px;}
+.txt_over {position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;font-size: 50px;padding:0 80px 130px;}
 /* .txt_over  h1{font-family: 'ModernTalking-Regular.woff';color:#F59CBC;} */
-.txt_over span{font-family: 'ModernTalking-Regular.woff';color:#FC43BD;;font-size:4rem; font-weight: bold;text-align: center;}
+.txt_over span{font-family: 'ModernTalking-Regular.woff';color:#FC43BD;font-size:4rem; font-weight: bold;text-align: center;}
 .sl_ide {position: relative;}
 .next_sl {position: absolute;top:44%;color:#FA628A;right: 30px;font-size: 60px; cursor:pointer;}
 .prev_sl {position: absolute;top: 44%;color:#FA628A;    left: 30px;font-size: 60px; cursor:pointer;}
@@ -184,17 +184,17 @@ h2.gb_large{font-size: 42px;margin:5px !important;}
 .gb_thistails-sans{font-family: 'thistails-sans.woff'}
 .gb_ShaimusOutline-Regular{font-family: 'ShaimusOutline-Regular.woff'}
 .gb_RoadCrew-Regular{font-family: 'RoadCrew-Regular.woff'}
-.color_pick li.active_color {box-shadow: 3px 2px 4px 4px #888888;padding-top: 10px; text-align: center;}
-.active_font, .active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {padding-top: 10px;padding-bottom: 10px; text-align: center;border: 1px solid #888888;display: block;text-decoration: none;box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);
-    border-radius: 6px;}
+/*.color_pick li.active_color {padding-top: 10px; text-align: center;}*/
+.active_size, .active_btype, .active_bcolor, .active_fixture, .active_delivery {padding-top: 10px;padding-bottom: 10px; text-align: center;border: 1px solid #888888;display: block;}
+.active_font {display: block;text-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;color: #fff;}
 .gb_txt_preview  span{font-family: 'ModernTalking-Regular.woff';color:rgb(44, 46, 63);font-size:6.4rem; font-weight: bold;}
 label.gb_onoffswitch-label {margin: 0px;}
 /* stripe popup */
-.gb_stripe_form {width: 90%; min-width: 400px; margin: 20px auto;padding: 20px;background: #fff}
+.gb_stripe_form {width: 90%; min-width: 400px; margin: 20px auto;padding:30px 50px;background: #fff}
 .gb_display_data {width: 100%;position: fixed;background: #101010cc;z-index: 9999;height: 100%;top: 0;left: 0; display: none;overflow-y: auto;}
 input.black.button {width: 100%;}
 a.gb_close {float: right;text-decoration: none;font-size: 26px;font-weight: 500;color: rgba(0, 0, 0, 0.54);}
-.gb_column3 {width: 100%;display: inline-table;max-width:33%;}
+.gb_column3 {width: 100%;display: inline-table;max-width:31.5%;}
 .neon_tool_layout {width: 100%;height: 100%;font-size: 50px;text-align: left;margin-bottom: 50px;margin-top: 30px;}
 .neon_tool_layout  span{font-family: 'ModernTalking-Regular.woff';font-size:4rem; font-weight: bold;}
 .gb_order_delivery label#gb_email {float: left;width: 100%;}
@@ -233,7 +233,7 @@ textarea#gb_default_value {background: #F5F5F5;}
 .gb_order_delivery #lastname {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;margin-top: 3px;}
 .gb_order_delivery #company {width:100%;max-width: 181px;border-radius: 0;clear: both;float: left;}
 .gb_order_delivery #phonenumber {width:100%;max-width: 181px;height: 45px;border: 1px solid #CDCDCD;box-sizing: border-box;float: left;margin-left: 20px;border-radius: 0;margin-top: 3px;} */
-#stripe input {width:100%;max-width: 90%;height: 45px; border: 1px solid #CDCDCD;border-radius: 0px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;padding: 0 15px;}
+#stripe input {width:100%;max-width: 100%;height: 45px; border: 1px solid #CDCDCD;border-radius: 0px;box-sizing: border-box;margin-top: 6px;margin-bottom: 16px;resize: vertical;padding: 0 15px;}
 #stripe input.button {line-height: 10px;text-decoration: none;border-radius: 50px;background: #cd2653;color: #fff;font-weight: 700;}
 #gb_inquiry input {margin: 6px auto 15px;width: 100%;max-width: 264px;display: block;border: 1px solid #CDCDCD;border-radius: 0;box-sizing: border-box;background: #f2f2f2;height: 45px;}
 #gb_inquiry textarea {width: 100%;max-width: 264px;margin: 6px auto 15px;display: block;border: 1px solid #CDCDCD;border-radius: 0;box-sizing: border-box;background: #f2f2f2;height: 175px;}
@@ -247,17 +247,17 @@ margin-bottom: 15px;}
 .gb_payment_option img {object-fit: contain;margin-right: 12px;}
 .gb_inquiry_popup .neon_tool_layout {text-align: center;}
 .gb_order_delivery label {display: block;}
-.gb_order_delivery  .gb_fname, .gb_order_delivery  .gb_lname, .gb_order_delivery .gb_company, .gb_order_delivery .gb_phone {width: 100%;max-width: 47%;float: left;}
+.gb_order_delivery  .gb_fname, .gb_order_delivery  .gb_lname, .gb_order_delivery .gb_company, .gb_order_delivery .gb_phone {width: 100%;max-width: 46.5%;float: left;}
 .gb_lname label, .gb_phone label {margin-left: 22px;}
 
 /** **/
-.sbt_text_font a.active_size, ul.gb_backing_shape a.active_btype, ul.gb_backing_color a.active_bcolor, .sbt_fixtures ul.choose_fixture a.active_fixture, .gb_delivery ul.choose_delivery a.active_delivery {background: #FADCEB;border-radius: 6px;}
+.sbt_text_font a.active_size, ul.gb_backing_shape a.active_btype, ul.gb_backing_color a.active_bcolor, .sbt_fixtures ul.choose_fixture a.active_fixture, .gb_delivery ul.choose_delivery a.active_delivery {background: #FADCEB;border-radius: 0px;box-shadow: unset;}
 .gb_rectangle {display:flex;justify-content: space-between;align-items: center;padding: 5px 15px;}
 .gb_rectangle h2 {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #2C2E3F;}
 .sbt_text_font a.active_size {padding-top: 0;padding-bottom: 0;border: unset;}
 .gb_lenth small {font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 10px;line-height: 12px;color: #000000;text-decoration: unset;}
 .sbt_text_font a {text-decoration: none;}
-.sbt_hint {font-size: 10px;background: rgba(196, 196, 196, 0.4);padding: 13px;border-radius: 16px;border: 1px solid rgba(250, 98, 138, 0.2);margin: 15px 20px 0;
+.sbt_hint {font-size: 10px;background: rgba(196, 196, 196, 0.4);padding: 10px;border-radius: 16px;border: 1px solid rgba(250, 98, 138, 0.2);margin: 15px 0px 0;
 display: flex;align-items: start;}
 .sbt_hint  p{margin:0 !important;font-style: normal;font-weight: 600;font-size: 9px;color: #828AA6;width: 100%;max-width: 80%;}
 .icon_hint img {margin-right: 20px;}
@@ -266,24 +266,45 @@ display: flex;align-items: start;}
 .gb_backing_type ul.gb_backing_shape li, .sbt_backing_options2 ul.gb_backing_color li, .sbt_fixtures ul.choose_fixture li, .gb_delivery ul.choose_delivery li {line-break: auto;margin: 0;padding: 7px 15px;}
 .gb_backing_type ul.gb_backing_shape a, .sbt_backing_options2 ul.gb_backing_color a, .gb_delivery ul.choose_delivery a {text-align: left;}
 .gb_backing_type ul.gb_backing_shape li span, .sbt_backing_options2 ul.gb_backing_color li span, .sbt_fixtures ul.choose_fixture li span, .gb_delivery ul.choose_delivery li span {font-weight: 600;font-size: 10px;line-height: 11px;color: #2C2E3F;text-align: left;margin: 0;}
-.sbt_backing_options2 {margin-top: 30px;}
 .sbt_backing_options2 ul.gb_backing_color a {text-align: left;padding: 0;}
 .sbt_fixtures ul.choose_fixture li {display: flex;justify-content: space-between;align-items: center;}
 .sbt_fixtures ul.choose_fixture li img {margin-right: 30px;}
 span#gb_text_error {font-size: 13px;color: red;}
 /****/
-ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);border-radius: 5px;}
-.sbt_font_options ul > li.active_font {border: unset;}
-.sbt_text_font > label , .sbt_font_options>label{font-size: 12px;display: block;color: #2C2E3F;padding-bottom: 5px; font-weight:600;line-height: 15px;font-family: Montserrat;text-transform: uppercase;}
+
+.sbt_text_font > label , .sbt_font_options>label{font-size: 12px;display: block;color: #2C2E3F; font-weight:600;line-height: 15px;font-family: Montserrat;text-transform: uppercase;padding: 0 15px;}
 .sbt_text_font textarea {margin-bottom: 20px;height: 6rem;}
 .sbt_menu_items > li > a > span {padding-top: 5px;font-weight: 600;}
 .gb_order_delivery label, .gb_inquiry_form label, .gb_order_payment label {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 12px;line-height: 15px;color: #4D4D4D;}
-.gb_order_sign {max-width: 320px;margin-left: 20px;}
+.gb_order_sign {max-width: 31.5%;}
 .gb_inquiry_form label {width: 100%;max-width: 264px;margin: 0 auto;display: block;}
 /* .gb_order_delivery label#gb_fname, .gb_order_delivery label#gb_company {display: block;width: 100%;max-width: 202px !important;float: left;clear: both;} */
 .gb_final_price {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 16px;line-height: 20px;color: #4D4D4D;padding-top: 30px;}
 /** **/
 .gb_order_delivery label#phone {width: 100%;max-width: 170px;clear: both;}
+div#dt3 .sbt_text_font, div#dt4 .sbt_text_font, div#dt5 .sbt_text_font, div#dt6 .sbt_text_font{padding: 15px 0 15px;}
+.sbt_text_font  label, .gb_backing_type label {padding-bottom: 16px;}
+.sbt_font_options > label {padding-bottom: 15px;}
+.footer-form .contact-btn:hover {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.23);}
+.gb_order_delivery .gb_lname, .gb_order_delivery .gb_phone {margin-left: 22px;}
+.tab_ct ul {padding-left: 0;}
+.gb_backing_type ul.gb_backing_shape li span.gb_text_info, .gb_delivery ul.choose_delivery li span.gb_text_info {display: block;font-size: 9px;font-weight: 400;font-family: Montserrat;color: #000;}
+ div#dt4 .sbt_text_font:first-child {margin-bottom: 10px;}
+.gb_delivery ul.choose_delivery li {display: flex;justify-content: space-between;align-items: center;}
+.gb_delivery ul.choose_delivery li .gb_delivery_price span {font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 9px;/* line-height: 11px; */color: #2C2E3F;}
+.gb_delivery ul.choose_delivery li .gb_delivery_price span.gb_sm_info {font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 4px;color: #000000;
+margin-top: -8px;display:block;}
+.gb_delivery ul.choose_delivery li span.gb_text_info {width: 100%;max-width: 162px;}
+ul.gb_backing_shape a {padding: 5px 0;}
+.sbt_backing_options2 label {padding-bottom: 10px;}
+
+/* color shadow */
+
+
+/*********************/
+/* .sbt_font_options ul li a:hover {
+    text-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px;
+} */
 
 @media only screen and (min-width: 100px) and (max-width: 767px) {
     .gb_stripe_form {min-width: 350px;width: 90%;padding: 30px 50px;}
@@ -302,7 +323,7 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
    .sbt_font_options ul > li {max-width: 100%;margin: 3px 0 20px;}
    .slider_font_sbt img {min-height: 300px;}
    .txt_over span {font-size: 2.5rem;}
-   .txt_over {padding-bottom: 0px; top: 16px;padding: 0 45px;}
+   /*.txt_over {padding-bottom: 0px; top: 16px;padding: 0 45px;}*/
    .prev_sl {left: 10px;top:40%;}
    .next_sl {right:10px;top:40%;}
    .sbt_hint {margin: 15px 0px 0;}
@@ -312,6 +333,15 @@ ul.color_pick li.active_color {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16), 0 6px
    .gb_order_delivery, .gb_order_payment {margin-top: 50px;}
    .result_effect {margin-bottom: 15px !important;}
    .gb_order_delivery .gb_fname, .gb_order_delivery .gb_lname, .gb_order_delivery .gb_company, .gb_order_delivery .gb_phone {max-width:100%;}
-    .gb_lname label, .gb_phone label {margin-left: 0;}
+    .gb_lname label, .gb_phone label, .gb_order_delivery .gb_lname, .gb_order_delivery .gb_phone  {margin-left: 0;}
 
+}
+
+
+@media only screen and (min-width: 100px) and (max-width: 320px) {
+    .btn_sbt_cart {display: block;}
+    .sbt_crt_btn {margin-bottom: 15px;}
+    .sbt_crt_btn, .sbt_gr {width: 100%;}
+    .gb_stripe_form {min-width: 310px;}
+    .gb_inquiry_container {max-width: 310px;}
 }

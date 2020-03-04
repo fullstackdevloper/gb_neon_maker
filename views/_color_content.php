@@ -2,7 +2,7 @@
     <div class="sbt_font_options">
         <label><?php _e("Choose a neon colour", "gb_neon_maker"); ?></label>
         <ul class="color_pick">
-            <li class="lipstick active_color"><a onclick="GbNeonmaker.changeColor(this,'#FC43BD');" href="javascript:void(0);"></a><span>Lipstick</span></li>
+            <li class="lipstick active_color"><a onclick="GbNeonmaker.changeColor(this,'#FC43BD');" href="javascript:void(0);" style="box-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, rgb(252, 67, 189) 0px 0px 30px, rgb(252, 67, 189) 0px 0px 40px, rgb(252, 67, 189) 0px 0px 55px, rgb(252, 67, 189) 0px 0px 75px; color: rgb(255, 255, 255);"></a><span>Lipstick</span></li>
             <li class="solare_flare"><a onclick="GbNeonmaker.changeColor(this,'#FFA800');" href="javascript:void(0);"></a><span>Solar flare</span></li>
             <li class="mint"><a onclick="GbNeonmaker.changeColor(this,'#82F925');" href="javascript:void(0);"></a><span>Mint</span></li>
             <li class="rosey"><a onclick="GbNeonmaker.changeColor(this,'#F59CBC');" href="javascript:void(0);"></a><span>Rosey</span></li>
@@ -28,6 +28,6 @@
         <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
-        <?php print apply_filters('gb_backing_hint', __("View actual color chart here. some colours have a white jacket when turned off and other have a colured jacket.</br>If you'd like to multiple neon colours. click it's not quite right' and let us know more.", "gb_neon_maker")); ?>
+        <?php print apply_filters('gb_color_hint', __("View actual colour chart here. Some colours have a white jacket when turned off and others have a coloured jacket.</br></br>If you’d like multiple neon colours. Click ‘It’s not quite right’ and let us know more.", "gb_neon_maker")); ?>
     </p>
 </div>

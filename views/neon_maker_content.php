@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="sbt_sub_total">
-                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >$ <span id="gb_total">450</span></span>
+                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >A$ <span id="gb_total">450</span></span>
                 </div>
                 <div class="btn_sbt_cart">
                     <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("BUY NOW", "gb_neon_maker"); ?></a>
@@ -37,7 +37,7 @@
             <div class="wd_7 result_effect">
                 <div class="slider_font_sbt">
                     <div class="gb_onoffswitch">
-                        <input type="checkbox" onchange="GbNeonmaker.onOffswitch(this);" name="gb_onoffswitch" class="gb_onoffswitch-checkbox" id="gb_myonoffswitch">
+                        <input type="checkbox" onchange="GbNeonmaker.onOffswitch(this);" name="gb_onoffswitch" class="gb_onoffswitch-checkbox" id="gb_myonoffswitch" checked="checked">
                         <label class="gb_onoffswitch-label" for="gb_myonoffswitch">
                             <span class="gb_onoffswitch-inner"></span>
                             <span class="gb_onoffswitch-switch"></span>

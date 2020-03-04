@@ -32,8 +32,11 @@ var GbNeonmaker;
             $this.sideBarEvents(slideIndex);
             $this.showSlides(slideIndex);
             $this.calculation();
-            $this.changeSize('null', neonConfigurations.size);
-            //$this.onOffswitch();
+            $this.onOffswitch();
+            $this.hoverColor();
+            $this.changeSize('null', 'small');
+            $this.changeSize('null', 'large');
+            $this.changeSize('null', 'medium');
         },
         sideBarEvents: function () {
             $('.sbt_menu_items>li').click(function () {
@@ -46,12 +49,13 @@ var GbNeonmaker;
         },
         changeNeonText: function(elem) {
             newLines = $(elem).val().split("\n").length;
+            $this.calculation();
             $(elem).keydown(function(event) {
-                if(event.keyCode == 13 && newLines >= 2) {
+                if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
+                    $('#gb_text_error').html("Max Character Limit Reached. If you want more than current characters, Please contact us.");
                     return false;
                 }
-                if(neonConfigurations.dynamicLength > lengthLimit &&  event.keyCode != 8){
-                    $('#gb_text_error').text("*you have reached the limit");
+                if(event.keyCode == 13 && newLines >= 2) {
                     return false;
                 }
             });
@@ -66,7 +70,6 @@ var GbNeonmaker;
             }else {
                 $("#gb_neon_text").css("font-size", '4rem');
             }
-            $this.calculation();
             $this.changeSize('null', 'small');
             $this.changeSize('null', 'large');
             $this.changeSize('null', 'medium');
@@ -74,31 +77,44 @@ var GbNeonmaker;
         changeFont: function(elem, fontType) {
             $("#gb_neon_text").css("font-family", `'${fontType}.woff'`);
             $('.sbt_font_options ul li').removeClass('active_font');
-            $(elem).parents('li').addClass('active_font');
+            //$(elem).addClass('active_font');
+            var onoffswitch = $('#gb_myonoffswitch').prop("checked");
+            $('.sbt_font_options ul li a').removeAttr('style');
+            if(onoffswitch == true) {
+                fontColor = neonConfigurations.color;
+                var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+fontColor+' 0px 0px 20px, '+fontColor+' 0px 0px 30px, '+fontColor+' 0px 0px 40px, '+fontColor+' 0px 0px 55px, '+fontColor+' 0px 0px 75px';
+                $(elem).css({"text-shadow": shadow_color});
+            }else {
+                $(elem).css({"text-shadow": none, "color": neonConfigurations.color});
+            }
             neonConfigurations.price = price;
             neonConfigurations.font = fontType;
-            $this.calculation();
-            $this.changeSize('null', 'small');
-            $this.changeSize('null', 'large');
-            $this.changeSize('null', 'medium');
             if(neonConfigurations.dynamicLength > lengthLimit){
-                $('#gb_text_error').text("*you have reached the limit");
+                $('#gb_text_error').html('Max Character Limit Reached. If you want more than current characters, Please <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);">contact us</a>');
                 str =  $("#gb_neon_text").val();
                 str.slice(0, str.length - 1);
                 return false;
             }
+            $this.changeSize('null', 'small');
+            $this.changeSize('null', 'large');
+            $this.changeSize('null', 'medium');
         },
         changeColor: function(elem, fontColor) {
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
+            $('.sbt_font_options ul li a').removeAttr('style');
             if(onoffswitch == true) {
                 var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+fontColor+' 0px 0px 20px, '+fontColor+' 0px 0px 30px, '+fontColor+' 0px 0px 40px, '+fontColor+' 0px 0px 55px, '+fontColor+' 0px 0px 75px';
                 $('#gb_neon_text').css({"text-shadow": shadow_color, "color":"#fff"});
+                $(elem).css({"box-shadow": shadow_color, "color":"#fff"});
             }else {
-                $("#gb_neon_text").css("color", fontColor);
+                if(fontColor == "#DC78FF" || fontColor == "#EF2CB8" || fontColor == "#ED9A9A" || fontColor == "#2B41E7" || fontColor == "#FF2828" || fontColor == "#FF7E55" || fontColor == "#FFF739" || fontColor == "#FFF1DC" || fontColor == "#EAEAEA"){
+                    $("#gb_neon_text").css("color", '#fff');
+                }else {
+                    $("#gb_neon_text").css("color", fontColor);
+                }
+                $(elem).css("color", fontColor);
             }
-
-            $('.sbt_font_options ul li').removeClass('active_color');
-            $(elem).parents('li').addClass('active_color');
+            //$(elem).parents('li').addClass('active_color');
             neonConfigurations.color = fontColor;
         },
         changeSize: function(elem, size) {
@@ -156,11 +172,16 @@ var GbNeonmaker;
         {
             var sel = $(elem).prop("checked");
             var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+neonConfigurations.color+' 0px 0px 20px, '+neonConfigurations.color+' 0px 0px 30px, '+neonConfigurations.color+' 0px 0px 40px, '+neonConfigurations.color+' 0px 0px 55px, '+neonConfigurations.color+' 0px 0px 75px';
-            if(sel == true){
-                $('#gb_neon_text').css({"text-shadow": shadow_color, "color":"#fff"});
-            }else {
+            if (sel == false) {
+                var fontColor = neonConfigurations.color;
                 $('#gb_neon_text').removeAttr('style');
-                $("#gb_neon_text").css("color", neonConfigurations.color);
+                if(fontColor == "#DC78FF" || fontColor == "#EF2CB8" || fontColor == "#ED9A9A" || fontColor == "#2B41E7" || fontColor == "#FF2828" || fontColor == "#FF7E55" || fontColor == "#FFF739" || fontColor == "#FFF1DC" || fontColor == "#EAEAEA"){
+                    $("#gb_neon_text").css({"color": '#fff', "font-family": "'"+neonConfigurations.font+".woff'"});
+                }else {
+                    $("#gb_neon_text").css({"color": neonConfigurations.color, "font-family": "'"+neonConfigurations.font+".woff'"});
+                }
+            }else {
+               $('#gb_neon_text').css({"text-shadow": shadow_color, "color":"#fff"});
             }
             neonConfigurations.onOffswitch = sel;
         },
@@ -181,6 +202,7 @@ var GbNeonmaker;
                     height = $this.getPrice(char, font, size, 'height');
                     maxHeight = ( height > maxHeight ) ? height : maxHeight;
                     price = price + $this.getPrice(char, font, size, 'text');
+
                 }
                 avgHeight = avgHeight + maxHeight;
                 maxLength = ( length > maxLength ) ? length : maxLength;
@@ -211,11 +233,13 @@ var GbNeonmaker;
             var backingTypeCost = (backingType == 'Stand' ) ? backingStandCost:0;
             /* console values */
 
-            /*console.log("Rope Price : "+ price);
+            console.log("Rope Price : "+ price);
             console.log("height : " + getHeight);
             console.log("length : " + getLenght);
             console.log("volume : " + volume);
-            console.log("shipping : " + shipping);*/
+            console.log("shipping : " + shipping);
+            neonConfigurations.dynamicLength = getLenght;
+            neonConfigurations.dynamicHeigth = getHeight;
             /* Add delivery cost: standardDeliveryCost = 50, priorityDeliveryCost = 100, internationalDeliveryCost = 150; */
             if(price == 0) {
                 deliveryCost = 0;
@@ -235,8 +259,10 @@ var GbNeonmaker;
             var finalPrice = gb_price + backingTypeCost + deliveryCost;
             $('#gb_total').html(finalPrice);
             neonConfigurations.price = finalPrice;
-            neonConfigurations.dynamicLength = getLenght;
+            /*neonConfigurations.dynamicLength = getLenght;
             neonConfigurations.dynamicHeigth = getHeight;
+            console.log("dynamicLength : "+ getLenght);
+            console.log("height : " + getHeight);*/
         },
         getShipping: function (vol){
             var shippingPrice = {
@@ -483,6 +509,12 @@ var GbNeonmaker;
         closeBtn: function (elem) {
             $('.gb_display_data').css('display', 'none');
             $('.gb_inquiry_popup').css('display', 'none');
+        },
+        hoverColor: function (elem) {
+            $(".sbt_font_options ul li a").hover(function(){
+                var textShadow = "rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, rgb(252, 67, 189) 0px 0px 20px, "+neonConfigurations.color+" 0px 0px 30px, "+neonConfigurations.color+" 0px 0px 40px, "+neonConfigurations.color+" 0px 0px 55px, "+neonConfigurations.color+" 0px 0px 75px;";
+              $(this).css("text-shadow", textShadow);
+            });
         }
     };
     GbNeonmaker.initilaize();

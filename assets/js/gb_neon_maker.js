@@ -46,7 +46,6 @@ var GbNeonmaker;
         },
         changeNeonText: function(elem) {
             newLines = $(elem).val().split("\n").length;
-            $this.calculation();
             if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
                 $('#gb_text_error').html('Max Character Limit Reached. If you want more than current characters, Please <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);">contact us</a>');
                 return false;
@@ -78,6 +77,7 @@ var GbNeonmaker;
                     $("#gb_neon_text").css("font-size", '4rem');
                 }
             }
+            $this.calculation();
             $this.getLengthHeight();
         },
         changeFont: function(elem, fontType) {

@@ -538,6 +538,10 @@ var GbNeonmaker;
                 $('.gb_height_'+size[k]).text(getHeight+'- '+Math.floor(getHeight +8) +'cm');
             }
         },
+        disbalePaste: function ()
+        {
+            return false;
+        }
     };
     GbNeonmaker.initilaize();
 })(jQuery);

@@ -3,6 +3,7 @@
         <div class="sbt_row gb_row">
             <!------------menu_side_bar----------------->
             <div class="wd_5 menu_aside">
+                <p class="gb_heading_mb"><label>Choose your design options</label></p>
                 <div class="sbt_row">
                     <?php print $this->getView("_sidebar_menu"); ?>
                     <div class="result_tabs">

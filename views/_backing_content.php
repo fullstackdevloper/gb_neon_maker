@@ -12,9 +12,9 @@
     <div class="sbt_backing_options2">
         <label><?php _e("Choose a Backing color", "gb_neon_maker"); ?></label>
         <ul class="gb_backing_color">
-            <a onclick="GbNeonmaker.changeBackingColor(this,'clear acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>clear acrylic (most popular!)</span></li></a>
-            <a onclick="GbNeonmaker.changeBackingColor(this,'white acrylic');" href="javascript:void(0);" ><li class="gb_acrylic"><span>white acrylic</span></li></a>
-            <a onclick="GbNeonmaker.changeBackingColor(this,'black acrylic');" href="javascript:void(0);"><li class="gb_acrylic gb_size_last"><span>black acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'Clear acrylic');" href="javascript:void(0);"><li class="gb_acrylic"><span>Clear acrylic (most popular!)</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'White acrylic');" href="javascript:void(0);" ><li class="gb_acrylic"><span>White acrylic</span></li></a>
+            <a onclick="GbNeonmaker.changeBackingColor(this,'Black acrylic');" href="javascript:void(0);"><li class="gb_acrylic gb_size_last"><span>Black acrylic</span></li></a>
         </ul>
     </div>
 </div>
@@ -23,6 +23,6 @@
         <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
-        <?php print apply_filters('gb_backing_hint', __("If you’d like coloured acrylic backing or UV printed backing, click ‘It’s not quite right’ and let us know more.", "gb_neon_maker")); ?>
+        <?php print apply_filters('gb_backing_hint', __("If you’d like coloured acrylic backing or an image UV printed onto the acrylic backing, click ‘it’s not quite right’ and let us know more.", "gb_neon_maker")); ?>
     </p>
 </div>

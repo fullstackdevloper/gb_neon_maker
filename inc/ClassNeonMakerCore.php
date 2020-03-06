@@ -73,13 +73,6 @@ class NeonMakerCore {
     }
 
     /**
-     * get the hint for text
-     * @return Html
-     */
-    public function logoTextHint() {
-        return __("If you have another font in mind, would like multiple fonts, or would like to incorporate an image or logo, click (it's not quite right) and let us know more.", 'gb_neon_maker');
-    }
-    /**
      * inquiry form filed
      * @return Html
      */
@@ -121,9 +114,9 @@ class NeonMakerCore {
     public function stripeFormFields()  {
         $fileds  = [
             ["name" =>  "card-number", "placeholder" => "Card Number", "label" => "Card Number*", "type" => "text", "id" => 'cardNumber', 'required' => true],
-            ["name" =>  "cvc", "placeholder" => "CCV", "label" => "CCV number*", "type" => "text", "id" => 'cardCVC', 'required' => true ],
-            ["name" =>  "month", "placeholder" => "MM", "label" => "Expiry month*", "type" => "text", "id" => 'cardExpMonth', 'required' => true ],
-            ["name" =>  "year", "placeholder" => "YYYY", "label" => "Expiry year*", "type" => "text", "id" => 'cardExpYear', 'required' => true ],
+            ["name" =>  "cvc", "placeholder" => "CVC", "label" => "CVC number*", "type" => "text", "id" => 'cardCVC', 'required' => true ],
+            ["name" =>  "month", "placeholder" => "MM", "label" => "Expiry date(MM/YY)*", "type" => "text", "id" => 'cardExpMonth', 'required' => true ],
+            ["name" =>  "year", "placeholder" => "YY", "label" => "&nbsp;", "type" => "text", "id" => 'cardExpYear', 'required' => true ],
         ];
         return $fileds;
     }
@@ -158,6 +151,15 @@ class NeonMakerCore {
         }
         return $inputFiled;
     }
+
+    /**
+     * get the hint for text
+     * @return Html
+     */
+    public function logoTextHint() {
+        return __("If you have another font in mind, would like multiple fonts, or would like to incorporate an image or logo, click 'it's not quite right' and let us know more.", 'gb_neon_maker');
+    }
+
     /**
      * get the inquiry form text
      * @return Html

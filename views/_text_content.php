@@ -8,7 +8,7 @@
         <ul>
             <li class="active_font">
                 <a onclick="GbNeonmaker.changeFont(this,'ModernTalking-Regular');" href="javascript:void(0);">
-                    <span class="gb_ModernTalking-Regular">Modern Talking</span>
+                    <span class="gb_ModernTalking-Regular">Fruity</span>
                 </a>
             </li>
             <li>

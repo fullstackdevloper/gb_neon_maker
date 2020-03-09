@@ -34,6 +34,6 @@
         <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
-        <?php print apply_filters('gb_size_hint', __("If you'd like a specific size, click 'it's not quite right' and let us know more.<br>If your sign is over 150cm, we may need to display text over multiple lines. We will be in contact prior to production to confirm how you would like to proceed.", "gb_neon_maker")); ?>
+        <?php print apply_filters('gb_size_hint', __("If you'd like a specific size, click 'it's not quite right' and let us know more.</br></br>If your sign is over 150cm, we may need to display text over multiple lines. We will be in contact prior to production to confirm how you would like to proceed.", "gb_neon_maker")); ?>
     </p>
 </div>

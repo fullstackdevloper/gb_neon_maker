@@ -57,14 +57,8 @@ var GbNeonmaker;
             $("#gb_neon_text").html(textareaValue.replace(/\r?\n/g, '<br />'));
             neonConfigurations.price = price;
             neonConfigurations.text = $(elem).val();
+            $this.fontsizeAdjust(neonConfigurations.font, neonConfigurations.text);
 
-            if(textareaValue.length >= 14 && textareaValue.length <= 20){
-                $("#gb_neon_text").css("font-size", '32px');
-            }else if(textareaValue.length > 20){
-                $("#gb_neon_text").css("font-size", '25px');
-            }else {
-                $("#gb_neon_text").css("font-size", '42px');
-            }
             $this.calculation();
             $this.getLengthHeight();
         },
@@ -73,6 +67,8 @@ var GbNeonmaker;
             $('.sbt_font_options ul li').removeClass('active_font');
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
             $('.sbt_font_options ul li a').removeAttr('style');
+            var txtvalue = $("#gb_default_value").val();
+            $this.fontsizeAdjust(fontType, txtvalue);
             if(onoffswitch == true) {
                 fontColor = neonConfigurations.color;
                 var shadow_color = 'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px, '+fontColor+' 0px 0px 20px, '+fontColor+' 0px 0px 30px, '+fontColor+' 0px 0px 40px, '+fontColor+' 0px 0px 55px, '+fontColor+' 0px 0px 75px';
@@ -90,6 +86,33 @@ var GbNeonmaker;
             }
             $this.calculation();
             $this.getLengthHeight();
+        },
+        fontsizeAdjust: function(fontType, txtvalue){
+            $("#gb_neon_text").removeClass('big_10_f40 mb_big_10_f30 mb_big_len16_f15 big_len16_f28 default_f45 default_mb_f40 bay_f50 bay_mb_f30 sm_10_f45 mb_sm_10_f30 sm_len16_f40 mb_sm_len16_f30');
+            var gbClassAdd ='';
+            if((fontType == 'thistails-sans' || fontType == 'Courier' || fontType == 'Shorelines-Script-Bold')){
+                if(txtvalue.length > 10 && txtvalue.length <=16){
+                    var gbClassAdd = "big_10_f40";
+                }else if(txtvalue.length > 16){
+                    var gbClassAdd = "big_len16_f28";
+                }else {
+                    var gbClassAdd = "default_f45";
+                }
+            }else {
+                if(fontType == 'Bayshore'){
+                    var gbClassAdd = "default_bay_f45";
+                }else {
+                    if(txtvalue.length > 10 && txtvalue.length <=16){
+                        var gbClassAdd = "sm_10_f45";
+                        var gbClassAddMob = "mb_sm_10_f30";
+                    }else if(txtvalue.length > 16){
+                        var gbClassAdd = "sm_len16_f40";
+                    }else {
+                        var gbClassAdd = "default_f45";
+                    }
+                }
+            }
+            $("#gb_neon_text").addClass(gbClassAdd);
         },
         changeColor: function(elem, fontColor) {
             var onoffswitch = $('#gb_myonoffswitch').prop("checked");
@@ -447,11 +470,15 @@ var GbNeonmaker;
             }
             Stripe.setPublishableKey(stripe_key);
             // create stripe token to make payment
+            var expdate= jQuery('#cardExpDate').val();
+            strArray = expdate.split("/");
+            exp_month = strArray[0];
+            exp_year = strArray[1];
             Stripe.createToken({
                 number: jQuery('#cardNumber').val(),
                 cvc: jQuery('#cardCVC').val(),
-                exp_month: jQuery('#cardExpMonth').val(),
-                exp_year: jQuery('#cardExpYear').val(),
+                exp_month: exp_month,
+                exp_year: exp_year,
                 name: jQuery('#fname').val(),
                 address_line1: jQuery('#address1').val(),
                 address_line2: jQuery('#address2').val(),
@@ -546,6 +573,30 @@ var GbNeonmaker;
                 $('.gb_len_'+size[k]).text(getLenght+'- '+Math.floor(getLenght +10) +'cm');
                 $('.gb_height_'+size[k]).text(getHeight+'- '+Math.floor(getHeight +8) +'cm');
             }
+        },
+        expDate: function(e){
+            var inputChar = String.fromCharCode(event.keyCode);
+            $("#cardExpDate").attr("maxlength","7");
+              var code = event.keyCode;
+              var allowedKeys = [8];
+              if (allowedKeys.indexOf(code) !== -1) {
+                return;
+              }
+              event.target.value = event.target.value.replace(
+                /^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
+              ).replace(
+                /^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
+              ).replace(
+                /^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
+              ).replace(
+                /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
+              ).replace(
+                /^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
+              ).replace(
+                /[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
+              ).replace(
+                /\/\//g, '/' // Prevent entering more than 1 `/`
+              );
         },
         disbalePaste: function ()
         {

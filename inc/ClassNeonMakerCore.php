@@ -115,8 +115,8 @@ class NeonMakerCore {
         $fileds  = [
             ["name" =>  "card-number", "placeholder" => "Card Number", "label" => "Card Number*", "type" => "text", "id" => 'cardNumber', 'required' => true],
             ["name" =>  "cvc", "placeholder" => "CVC", "label" => "CVC number*", "type" => "text", "id" => 'cardCVC', 'required' => true ],
-            ["name" =>  "month", "placeholder" => "MM", "label" => "Expiry date(MM/YY)*", "type" => "text", "id" => 'cardExpMonth', 'required' => true ],
-            ["name" =>  "year", "placeholder" => "YY", "label" => "&nbsp;", "type" => "text", "id" => 'cardExpYear', 'required' => true ],
+            ["name" =>  "date", "placeholder" => "MM/YYYY", "label" => "Expiry date(MM/YYYY)*", "type" => "textdate", "id" => 'cardExpDate', 'required' => true ],
+            /*["name" =>  "year", "placeholder" => "YY", "label" => "&nbsp;", "type" => "text", "id" => 'cardExpYear', 'required' => true ],*/
         ];
         return $fileds;
     }
@@ -142,6 +142,10 @@ class NeonMakerCore {
                 break;
             case 'checkbox':
                 $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></div>';
+                break;
+            case 'textdate':
+                $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<input type = "text" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" onkeyup = "return GbNeonmaker.expDate(event);" id="'.$field['id'].'" '.$reuired.'></div>';
+                break;
             case 'radio':
                 $inputFiled = '<div class="gb_'.$field['name'].'">'.$addlabel.'<input type = "'.$type.'" name="'.$field['name'].'" placeholder = "'.$field['placeholder'].'" id="'.$field['id'].'" '.$reuired.'></div>';
                 break;

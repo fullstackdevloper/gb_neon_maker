@@ -46,10 +46,10 @@ var GbNeonmaker;
         },
         changeNeonText: function(elem) {
             newLines = $(elem).val().split("\n").length;
-            if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
+            /*if(neonConfigurations.dynamicLength > lengthLimit && event.keyCode != 8){
                 $('#gb_text_error').html('Max Character Limit Reached. If you want more than current characters, Please <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);">contact us</a>');
                 return false;
-            }
+            }*/
             if(event.keyCode == 13 && newLines >= 2) {
                 return false;
             }
@@ -78,17 +78,15 @@ var GbNeonmaker;
             }
             neonConfigurations.price = price;
             neonConfigurations.font = fontType;
-            if(neonConfigurations.dynamicLength > lengthLimit){
+/*            if(neonConfigurations.dynamicLength > lengthLimit){
                 $('#gb_text_error').html('Max Character Limit Reached. If you want more than current characters, Please <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);">contact us</a>');
-                //str =  $("#gb_neon_text").val();
-                //str.slice(0, str.length - 1);
                 return false;
-            }
+            }*/
             $this.calculation();
             $this.getLengthHeight();
         },
         fontsizeAdjust: function(fontType, txtvalue){
-            $("#gb_neon_text").removeClass('big_10_f40 mb_big_10_f30 mb_big_len16_f15 big_len16_f28 default_f45 default_mb_f40 bay_f50 bay_mb_f30 sm_10_f45 mb_sm_10_f30 sm_len16_f40 mb_sm_len16_f30');
+           $("#gb_neon_text").removeClass('big_len16_f28 big_10_f40 sm_len16_f40 sm_10_f45 default_f45 default_bay_f45');
             var gbClassAdd ='';
             if((fontType == 'thistails-sans' || fontType == 'Courier' || fontType == 'Shorelines-Script-Bold')){
                 if(txtvalue.length > 10 && txtvalue.length <=16){
@@ -104,7 +102,6 @@ var GbNeonmaker;
                 }else {
                     if(txtvalue.length > 10 && txtvalue.length <=16){
                         var gbClassAdd = "sm_10_f45";
-                        var gbClassAddMob = "mb_sm_10_f30";
                     }else if(txtvalue.length > 16){
                         var gbClassAdd = "sm_len16_f40";
                     }else {
@@ -495,19 +492,23 @@ var GbNeonmaker;
                 jQuery(".paymentErrors").html(response.error.message);
             } else {
                 var stripeToken = response['id'];
+                var email = jQuery('#emailid').val();
+                var phone = jQuery('#phonenumber').val();
                 var ajaxurl = NeonMaker_ajax.ajax_url;
-                var formdata = { action: 'gb_submit_payment', data: stripeToken, formvalues: neonConfigurations };
+                var formdata = { action: 'gb_submit_payment', data: stripeToken, email: email, formvalues: neonConfigurations };
                     $.post(ajaxurl, formdata, function (data) {
                     jQuery(".paymentErrors").html("Payment "+ data.status);
                     if(data.status == 'success'){
-                        $this.saveOrders(neonConfigurations, data.transactionData);
+                        var url = NeonMaker_ajax.Site_url+'/?p=6805';
+                        $this.saveOrders(neonConfigurations, data.transactionData, email, phone);
+                        top.location.replace(url);
                     }
                 });
             }
         },
-        saveOrders:function(formdata, tdata, baseimg) {
+        saveOrders:function(formdata, tdata, email, phone) {
             var ajaxurl = NeonMaker_ajax.ajax_url;
-            var formdata = { action: 'gb_insert_order', formdata: formdata, transection: tdata, baseimg: baseimg };
+            var formdata = { action: 'gb_insert_order', formdata: formdata, transection: tdata, cemail: email, customer_phone: phone};
             $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
                     alert("Your Order information are stored! ");

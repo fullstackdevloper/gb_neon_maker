@@ -324,7 +324,7 @@ div#dt3 > .sbt_text_font > a > .gb_rectangle {border-bottom: 2px solid #f5f5f5;}
 div#dt3 > .sbt_text_font > a > .gb_size_last, .gb_backing_type ul.gb_backing_shape li.gb_size_last, .sbt_backing_options2 ul.gb_backing_color .gb_size_last {border-bottom: 0;}
 div#dt4 .sbt_text_font {padding: 15px 0 0px;}
 .gb_delivery .gb_delivery_price {margin-top: 13px;width: 55px;text-align: left;line-height: 2;}
-.sbt_fixtures ul.choose_fixture li.hanging_wire_kit img {margin-right: 21px;}
+.sbt_fixtures ul.choose_fixture li.hanging_wire_kit img {margin-right: 23px;}
 .gb_backing_type ul.gb_backing_shape li.gb_size_last {display: flex;justify-content: space-between;}
 
 
@@ -353,13 +353,12 @@ ul.sbt_menu_items > li > a > img {width: 35px;height: 35px;}
 div#dt1 .sbt_text_font label {padding-left: 0;}
 
 /* custom css for tool font size */
-.big_len16_f28 { font-size: 28px }
+.big_len16_f28 { font-size: 25px }
 .big_10_f40{ font-size: 33px }
-.sm_len16_f40{ font-size: 40px }
+.sm_len16_f40{ font-size: 38px }
 .sm_10_f45{ font-size: 45px }
 .default_f45{ font-size: 45px }
 .default_bay_f45 {font-size:45px}
-
 
 @media only screen and (min-width: 768px) and (max-width: 1160px) {
 	.holder_app {padding: 0;}
@@ -389,7 +388,6 @@ div#dt1 .sbt_text_font label {padding-left: 0;}
    .wd_5, .result_tabs, .wd_7  {max-width: 100% !important;padding: 0;margin-bottom: 15px;}
    .sbt_font_options ul > li {margin: 3px 0 0px;}
    .slider_font_sbt img {min-height: 300px;}
-   /*.txt_over span {font-size: 13px !important;}*/
    /*.txt_over {padding-bottom: 0px; top: 16px;padding: 0 45px;}*/
    .prev_sl {left: 10px;top:40%;}
    .next_sl {right:10px;top:40%;}
@@ -426,9 +424,10 @@ div#dt1 .sbt_text_font label {padding-left: 0;}
     .default_f45 {font-size:40px}
     .default_bay_f45 {font-size:35px}
     .big_len16_f28 {font-size:15px}
-    .big_10_f40 {font-size:23px}
+    .big_10_f40 {font-size:22px}
     .sm_len16_f40 {font-size:23px}
     .sm_10_f45 {font-size:30px}
+    .txt_over span#gb_neon_text {font-size: 34px;}
 }
 @media only screen and (min-width: 100px) and (max-width: 320px) {
     .btn_sbt_cart {display: block;}

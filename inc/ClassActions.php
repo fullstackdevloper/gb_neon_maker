@@ -50,7 +50,8 @@ class NeonMakerActions {
         \Stripe\Stripe::setApiKey($stripe_secret);
         //add customer to stripe
         $customer = \Stripe\Customer::create(array(
-            'source' => $_POST['data']
+            'source' => $_POST['data'],
+            'email' => $_POST['email'],
         ));
         //print_r($_POST['formvalues']);
         // item details for which payment made
@@ -86,16 +87,64 @@ class NeonMakerActions {
         $prefix = $wpdb->prefix;
         $formdata = json_encode($_POST['formdata']);
         $transection_logs = json_encode($_POST['transection']);
-        $baseimg = $_POST['baseimg'];
         $data = array(
             'content' => $formdata,
             'transection_logs' => $transection_logs,
-            'baseimg' => $baseimg,
             'created' => date('Y-m-d h:i:s') ,
             'modified' => date('Y-m-d h:i:s') ,
         );
         $wpdb->insert("{$prefix}gb_orders", $data, array('%s'));
         $lastid = $wpdb->insert_id;
+        $shortcodes=array('{{id}}', '{{amount}}', '{{balance_transaction}}', '{{address_city}}', '{{address_country}}', '{{address_line1}}', '{{address_line2}}', '{{address_zip}}', '{{address_state}}', '{{customer_email}}', '{{customer_phone}}', '{{description}}', '{{livemode}}', '{{payment_method}}', '{{status}}', '{{orderid}}', '{{date}}');
+        $values=array(
+            isset($_POST['transection']['id']) ? $_POST['transection']['id'] : '',
+            isset($_POST['transection']['amount']) ? ($_POST['transection']['amount'])/100 : '',
+            isset($_POST['transection']['balance_transaction']) ? $_POST['transection']['balance_transaction'] : '',
+            isset($_POST['transection']['source']['address_city']) ? $_POST['transection']['source']['address_city'] : '',
+            isset($_POST['transection']['source']['address_country']) ? $_POST['transection']['source']['address_country'] : '',
+            isset($_POST['transection']['source']['address_line1']) ? $_POST['transection']['source']['address_line1'] : '',
+            isset($_POST['transection']['source']['address_line2']) ? $_POST['transection']['source']['address_line2'] : '',
+            isset($_POST['transection']['source']['address_zip']) ? $_POST['transection']['source']['address_zip'] : '',
+            isset($_POST['transection']['source']['address_state']) ? $_POST['transection']['source']['address_state'] : '',
+            isset($_POST['cemail']) ? $_POST['cemail'] : '',
+            $_POST['customer_phone'],
+            isset($_POST['transection']['description']) ? $_POST['transection']['description'] : '',
+            isset($_POST['transection']['livemode']) ? $_POST['transection']['livemode'] : '',
+            isset($_POST['transection']['payment_method']) ? $_POST['transection']['payment_method'] : '',
+            isset($_POST['transection']['status']) ? $_POST['transection']['status'] : '',
+            isset($lastid) ? $lastid : '',
+            isset($_POST['transection']['created']) ? date('F j, Y') : '',
+        );
+        $sql = "SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'customer'";
+        $result = $wpdb->get_row($sql);
+
+        $doc_data = stripslashes($result->email_body);
+        $doc_data = str_replace($shortcodes,$values,$doc_data);
+
+        $mailhtml = stripslashes($doc_data);
+        $subject = $result->subject;
+        $Cc_email = $result->to_email;
+        $to = $_POST['cemail'];
+ 		$admin_email = get_option('admin_email');
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Create email headers
+        $headers .= 'From: '.$admin_email ."\r\n".
+            'Reply-To: '.$admin_email ."\r\n" .
+            'Cc: '.$Cc_email ."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+        $ismailsent=wp_mail($to,$subject,$mailhtml,$headers);
+        if(ismailsent){
+            $sql1 ="SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'admin'";
+            $result1 = $wpdb->get_row($sql1);
+            $doc_data1=stripslashes($result1->email_body);
+            $doc_data1=str_replace($shortcodes,$values,$doc_data1);
+            echo $mailhtml2=stripslashes($doc_data1);
+            $subject=$result1->subject;
+            $to = get_option('admin_email');
+            $ismailsent2=wp_mail($to,$subject,$mailhtml2,$headers);
+        }
         $success=array('status' => 'success', 'lastid' => $lastid);
         wp_send_json($success);
         return;

@@ -60,7 +60,6 @@
         </div>
     </div>
 </section>
-</div>
 <div class="gb_sc"></div>
 <!-- payment form for Stripe -->
 <div class="gb_display_data">

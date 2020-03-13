@@ -137,13 +137,13 @@ class NeonMakerActions {
             isset($_POST['transection']['status']) ? $_POST['transection']['status'] : '',
             isset($lastid) ? $lastid : '',
             isset($_POST['transection']['created']) ? date('F j, Y') : '',
-            isset($_POST['formdata']['text']) ? $fontTextName[$_POST['formdata']['text']] : '',
+            isset($_POST['formdata']['text']) ? $_POST['formdata']['text'] : '',
             isset($_POST['formdata']['font']) ? $fontTextName[$_POST['formdata']['font']] : '',
-            isset($_POST['formdata']['color']) ? $_POST['formdata']['color'] : '',
+            isset($_POST['formdata']['color']) ? $colorTextName[$_POST['formdata']['color']] : '',
             isset($_POST['formdata']['size']) ? $_POST['formdata']['size'] : '',
-            isset($_POST['formdata']['backingColor']) ? $_POST['formdata']['backingColor'] : '',
-            isset($_POST['formdata']['backingType']) ? $_POST['formdata']['backingType'] : '',
-            isset($_POST['formdata']['fixture']) ? $_POST['formdata']['fixture'] : '',
+            isset($_POST['formdata']['backingColor']) ? $_POST['formdata']['backingColor'] : 'N/A',
+            isset($_POST['formdata']['backingType']) ? $_POST['formdata']['backingType'] : 'N/A',
+            isset($_POST['formdata']['fixture']) ? $_POST['formdata']['fixture'] : 'N/A',
             isset($_POST['formdata']['delivery']) ? $_POST['formdata']['delivery'] : '',
             //isset($_POST['formdata']['slideImg']) ? $_POST['formdata']['slideImg'] : '',
         );
@@ -153,7 +153,7 @@ class NeonMakerActions {
         $doc_data = stripslashes($result->email_body);
         $doc_data = str_replace($shortcodes,$values,$doc_data);
 
-        echo $mailhtml = stripslashes($doc_data);
+        $mailhtml = stripslashes($doc_data);
         $subject = $result->subject;
         $Cc_email = $result->to_email;
         $to = $_POST['cemail'];

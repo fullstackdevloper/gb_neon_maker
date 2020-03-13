@@ -1,10 +1,10 @@
-  <div class="sbt_cho_font">
+  <div class="sbt_text_font">
     <div class="sbt_fixtures">
         <label><?php _e("Choose a Fixture", "gb_neon_maker"); ?></label>
         <ul class="choose_fixture">
-            <li class="spaced_screw_kit"><a onclick="GbNeonmaker.Fixture('spaced_screw_kit');" href="javascript:void(0);"></a><span>Spaced Screw Kit</span></li>
-            <li class="flush_screw_kit"><a onclick="GbNeonmaker.Fixture('flush_screw_kit');" href="javascript:void(0);"></a><span>Flush Screw Kit</span></li>
-            <li class="hanging_wire_kit"><a onclick="GbNeonmaker.Fixture('hanging_wire_kit');" href="javascript:void(0);"></a><span>Hanging Wire Kit</span></li>
+            <a onclick="GbNeonmaker.changeFixture(this, 'spaced_screw_kit');" href="javascript:void(0);"><li class="spaced_screw_kit"><span>Spaced Screw Kit</span> <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Spaced screw.png" alt="paymentmethod"></li></a>
+            <a onclick="GbNeonmaker.changeFixture(this, 'flush_screw_kit');" href="javascript:void(0);"><li class="flush_screw_kit"><span>Flush Screw Kit</span> <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Flush screw.png" alt="paymentmethod"></li></a>
+            <a onclick="GbNeonmaker.changeFixture(this, 'hanging_wire_kit');" href="javascript:void(0);"><li class="hanging_wire_kit"><span>Hanging Wire Kit</span> <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Hanging wire.png" alt="paymentmethod"></li></a>
         </ul>
     </div>
 </div>

@@ -80,11 +80,62 @@ class NeonMaker {
     }
 
     /*
-     * NeonMaker instalation hook
+     * NeonMaker installation hook
      */
 
     public function NeonMaker_plugin_install() {
+        global $wpdb;
+        $prefix=$wpdb->prefix;
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        $gb_orders=$this->NeonMaker_orders($prefix);          //40
+        $gb_inquiries=$this->NeonMaker_inquiries($prefix);          //40
+    }
 
+    /**
+     * @method create gb_orders table
+     * @pqaram string
+     * @return string
+     */
+    public function NeonMaker_orders($prefix){
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        global $wpdb;
+        $sql="CREATE TABLE `{$prefix}gb_orders` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `content` text NULL,
+        `transection_logs` text NULL,
+        `baseimg` text NULL,
+        `created` datetime NOT NULL,
+        `modified` datetime NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB;";
+
+        $response=dbDelta( $sql );
+        return $response;
+    }
+
+    /**
+     * @method create gb_inquiries table
+     * @pqaram string
+     * @return string
+     */
+    public function NeonMaker_inquiries($prefix){
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        global $wpdb;
+        $sql="CREATE TABLE `{$prefix}gb_inquiries` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `fname` varchar(100) NOT NULL,
+        `lname` varchar(100) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        `phone` varchar(100) NOT NULL,
+        `comment` text NULL,
+        `content` text NULL,
+        `created` datetime NOT NULL,
+        `modified` datetime NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB;";
+
+        $response=dbDelta( $sql );
+        return $response;
     }
 
     /**
@@ -93,7 +144,6 @@ class NeonMaker {
     public function init() {
 
     }
-
     /**
      * Define NeonMaker Constants.
      */
@@ -127,14 +177,21 @@ class NeonMaker {
         global $post;
         global $NeonMakerSetting;
 
-        //wp_register_script('slider', GB_NEON_MAKER_URL . '/assets/js/gb_neon_slider.js', [], GB_NEON_MAKER_VERSION);
-        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery'), GB_NEON_MAKER_VERSION);
+        wp_register_script('stripe', 'https://js.stripe.com/v2/', [], GB_NEON_MAKER_VERSION);
+        wp_enqueue_script('NeonMaker_script', GB_NEON_MAKER_URL . "/assets/js/gb_neon_maker.js", array('jquery','stripe'), GB_NEON_MAKER_VERSION);
         wp_enqueue_style('NeonMaker_style', GB_NEON_MAKER_URL . '/assets/css/gb_neon_maker.css', array(), GB_NEON_MAKER_VERSION);
 
 
 
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'configuration'=> file_get_contents(GB_NEON_MAKER_ABSPATH."setting.json"),
+                'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
+                'payment_mode' => $this->engine->getValue('payment_mode', $NeonMakerSetting, false),
+                'test_stripe_key' => $this->engine->getValue('test_stripe_key', $NeonMakerSetting, false),
+                'test_stripe_secret' => $this->engine->getValue('test_stripe_secret', $NeonMakerSetting, false),
+                'live_stripe_key' => $this->engine->getValue('live_stripe_key', $NeonMakerSetting, false),
+                'live_stripe_secret' => $this->engine->getValue('live_stripe_secret', $NeonMakerSetting, false)
             )
         );
     }
@@ -155,5 +212,5 @@ class NeonMaker {
             define($name, $value);
         }
     }
-
 }
+?>

@@ -95,8 +95,31 @@ class NeonMakerActions {
         );
         $wpdb->insert("{$prefix}gb_orders", $data, array('%s'));
         $lastid = $wpdb->insert_id;
-        $shortcodes=array('{{id}}', '{{amount}}', '{{balance_transaction}}', '{{address_city}}', '{{address_country}}', '{{address_line1}}', '{{address_line2}}', '{{address_zip}}', '{{address_state}}', '{{customer_email}}', '{{customer_phone}}', '{{description}}', '{{livemode}}', '{{payment_method}}', '{{status}}', '{{orderid}}', '{{date}}');
-        $values=array(
+
+        $fontTextName = ['ModernTalking-Regular' => 'Fruity', 'Bayshore' => 'Bayshore', 'thistails-regular' => 'Silhouette', 'Shorelines-Script-Bold' => 'Shorelines', 'thistails-sans' => 'Thistail', 'ShaimusOutline-Regular' => 'Shaimus', 'Courier' => 'Courier', 'RoadCrew-Regular' => 'Road Crew'];
+        $colorTextName = [
+            '#FC43BD' => 'Lipstick',
+            '#FFA800' => 'Solar Flare',
+            '#82F925' => 'Mint',
+            '#F59CBC' => 'Rosey',
+            '#ECF02A' => 'Tiger',
+            '#FF2828' => 'Candy',
+            '#3244EB' => 'Denim',
+            '#DC78FF' => 'Lavender',
+            '#FF7E55' => 'Golden Fizz',
+            '#74CBE8' => 'Maliblue',
+            '#EF2CB8' => 'Ballerina',
+            '#FFF739' => 'Sulphur',
+            '#86EA58' => 'Sushi',
+            '#ED9A9A' => 'Sherbet',
+            '#FFF1DC' => 'Antique',
+            '#F11D1D' => 'Ruby',
+            '#2B41E7' => 'Cobalt',
+            '#EAEAEA' => 'Snow(white)',
+        ];
+
+        $shortcodes = array('{{id}}', '{{amount}}', '{{balance_transaction}}', '{{address_city}}', '{{address_country}}', '{{address_line1}}', '{{address_line2}}', '{{address_zip}}', '{{address_state}}', '{{customer_email}}', '{{customer_phone}}', '{{description}}', '{{livemode}}', '{{payment_method}}', '{{status}}', '{{orderid}}', '{{date}}', '{{text}}', '{{font}}', '{{color}}', '{{size}}', '{{backingType}}', '{{backingColor}}', '{{fixture}}', '{{delivery}}', '{{slideImg}}' );
+        $values = array(
             isset($_POST['transection']['id']) ? $_POST['transection']['id'] : '',
             isset($_POST['transection']['amount']) ? ($_POST['transection']['amount'])/100 : '',
             isset($_POST['transection']['balance_transaction']) ? $_POST['transection']['balance_transaction'] : '',
@@ -114,6 +137,15 @@ class NeonMakerActions {
             isset($_POST['transection']['status']) ? $_POST['transection']['status'] : '',
             isset($lastid) ? $lastid : '',
             isset($_POST['transection']['created']) ? date('F j, Y') : '',
+            isset($_POST['formdata']['text']) ? $fontTextName[$_POST['formdata']['text']] : '',
+            isset($_POST['formdata']['font']) ? $fontTextName[$_POST['formdata']['font']] : '',
+            isset($_POST['formdata']['color']) ? $_POST['formdata']['color'] : '',
+            isset($_POST['formdata']['size']) ? $_POST['formdata']['size'] : '',
+            isset($_POST['formdata']['backingColor']) ? $_POST['formdata']['backingColor'] : '',
+            isset($_POST['formdata']['backingType']) ? $_POST['formdata']['backingType'] : '',
+            isset($_POST['formdata']['fixture']) ? $_POST['formdata']['fixture'] : '',
+            isset($_POST['formdata']['delivery']) ? $_POST['formdata']['delivery'] : '',
+            //isset($_POST['formdata']['slideImg']) ? $_POST['formdata']['slideImg'] : '',
         );
         $sql = "SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'customer'";
         $result = $wpdb->get_row($sql);
@@ -121,7 +153,7 @@ class NeonMakerActions {
         $doc_data = stripslashes($result->email_body);
         $doc_data = str_replace($shortcodes,$values,$doc_data);
 
-        $mailhtml = stripslashes($doc_data);
+        echo $mailhtml = stripslashes($doc_data);
         $subject = $result->subject;
         $Cc_email = $result->to_email;
         $to = $_POST['cemail'];
@@ -136,14 +168,14 @@ class NeonMakerActions {
             'X-Mailer: PHP/' . phpversion();
         $ismailsent=wp_mail($to,$subject,$mailhtml,$headers);
         if(ismailsent){
-            $sql1 ="SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'admin'";
+            $sql1 = "SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'admin'";
             $result1 = $wpdb->get_row($sql1);
-            $doc_data1=stripslashes($result1->email_body);
-            $doc_data1=str_replace($shortcodes,$values,$doc_data1);
-            echo $mailhtml2=stripslashes($doc_data1);
-            $subject=$result1->subject;
+            $doc_data1 = stripslashes($result1->email_body);
+            $doc_data1 = str_replace($shortcodes,$values,$doc_data1);
+            echo $mailhtml2 = stripslashes($doc_data1);
+            $subject = $result1->subject;
             $to = get_option('admin_email');
-            $ismailsent2=wp_mail($to,$subject,$mailhtml2,$headers);
+            $ismailsent2 = wp_mail($to,$subject,$mailhtml2,$headers);
         }
         $success=array('status' => 'success', 'lastid' => $lastid);
         wp_send_json($success);

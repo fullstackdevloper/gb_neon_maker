@@ -20,6 +20,8 @@
 				<b style="display:inline">Insert Shortcode : </b><br>
 				{{id}} {{amount}} {{balance_transaction}} {{address_city}} {{address_country}} {{address_line1}} {{address_line2}} {{address_zip}} {{address_state}} {{customer_email}} {{customer_phone}} {{description}} {{livemode}} {{payment_method}} {{status}} {{orderid}} {{date}}
 				<br>
+				<b style="display:inline">Custom neon tool Shortcode :</b><br>
+				{{text}} {{font}} {{color}} {{size}} {{backingType}} {{backingColor}} {{fixture}} {{delivery}} <!--{{slideImg}}-->
 				<?php  if(!empty($availablefields)): ?>
 					<?php foreach($availablefields as $key=>$field): ?>
 						<?php echo '{{'.$field->field_name.'}} '; ?>

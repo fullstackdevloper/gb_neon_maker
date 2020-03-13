@@ -522,8 +522,9 @@ var GbNeonmaker;
             var formdata = { action: 'gb_submit_inquiry', formdata: inquiryFormdata, toolData: neonConfigurations };
             $.post(ajaxurl, formdata, function (data) {
                 if (data.status == 'success') {
-                    alert("Thanks for submitting your information! We'll get back to you within 24-48 hours.");
-                    $('.gb_inquiry_popup').css('display', 'none');
+                    $('.gb_sucess_msg').text("Thanks for submitting your information! We'll get back to you within 24-48 hours.");
+                    //alert("Thanks for submitting your information! We'll get back to you within 24-48 hours.");
+                    //$('.gb_inquiry_popup').css('display', 'none');
                 }
             });
         },

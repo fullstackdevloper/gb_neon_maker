@@ -342,6 +342,8 @@ div#dt3 .sbt_text_font .active_size {text-align: left;}
 .gb_stripe_form a.gb_close {margin-top: -25px;margin-right: -30px;}
 .gb_month label#gb_month {width: 250px;}
 /****/
+/* success msg on inquiry form */
+p.gb_sucess_msg{ color: #008000 !important;}
 
 .sbt_font_options ul li {line-height: 1.5;display: flex;align-items: center;}
 div#dt3 .sbt_text_font .active_size:last-child, .gb_backing_type ul.gb_backing_shape a.active_btype:last-child, .sbt_backing_options2 ul.gb_backing_color a.active_bcolor:last-child, .sbt_fixtures ul.choose_fixture a.active_fixture:last-child, .gb_delivery ul.choose_delivery a.active_delivery:last-child {border-radius: 0 0 20px 20px;}

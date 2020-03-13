@@ -123,6 +123,7 @@
         foreach( $this->inquiryFormFields() as $key => $field) {
             echo $this->neonCustomFields($field);
         } ?>
+        <p class="gb_sucess_msg"></p>
         <input type="submit" value="Submit">
       </form>
     </div>

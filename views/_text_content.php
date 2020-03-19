@@ -1,13 +1,14 @@
 <div class="sbt_text_font">
     <label><?php _e("Enter Text Below", "gb_neon_maker"); ?></label>
     <!--<input type="text" id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);" Value="<?php //$this->getValue('default_text', $NeonMakerSetting); ?>">-->
-    <textarea id="gb_default_value" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php $this->getValue('default_text', $NeonMakerSetting); ?></textarea>
+    <span id="gb_text_error"></span>
+    <textarea id="gb_default_value" onpaste='return GbNeonmaker.disbalePaste();' onkeydown="return GbNeonmaker.changeNeonText(this);" onkeyup="return GbNeonmaker.changeNeonText(this);"><?php $this->getValue('default_text', $NeonMakerSetting); ?></textarea>
     <div class="sbt_font_options">
         <label>Choose a font</label>
         <ul>
             <li class="active_font">
                 <a onclick="GbNeonmaker.changeFont(this,'ModernTalking-Regular');" href="javascript:void(0);">
-                    <span class="gb_ModernTalking-Regular">Modern Talking</span>
+                    <span class="gb_ModernTalking-Regular">Fruity</span>
                 </a>
             </li>
             <li>

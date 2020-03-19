@@ -4,26 +4,26 @@
         <div class="gb_rectangle gb_rectangle_active">
             <h2 class="gb_small"><strong>Small</strong></h2>
             <div class="gb_lenth">
-                <small> length:  120-130cm </small><br>
-                <small> heigth: 8-22cm </small><br>
+                <small> length:  <span class="gb_len_small"></span></small><br>
+                <small> height: <span class="gb_height_small"></span></small><br>
             </div>
         </div>
     </a>
      <a onclick="GbNeonmaker.changeSize(this,'medium');" href="javascript:void(0);">
         <div class="gb_rectangle">
             <h2 class="gb_medium"><strong>Medium</strong></h2>
-            <div class="gb_lenth">
-                <small> length:  130-140cm </small><br>
-                <small> heigth: 22-30cm </small><br>
+            <div class="gb_lenth" >
+                <small> length:  <span class="gb_len_medium"></span></small><br>
+                <small> height: <span class="gb_height_medium"></span></small><br>
             </div>
         </div>
     </a>
     <a onclick="GbNeonmaker.changeSize(this,'large');" href="javascript:void(0);">
-        <div class="gb_rectangle">
+        <div class="gb_rectangle gb_size_last">
             <h2 class="gb_large"><strong>Large</strong></h2>
-            <div class="gb_lenth">
-                <small> length:   </small><br>
-                <small> heigth:  </small><br>
+            <div class="gb_lenth" >
+                <small> length:  <span class="gb_len_large"></span> </small><br>
+                <small> height:  <span class="gb_height_large"></span></small><br>
             </div>
         </div>
     </a>
@@ -34,6 +34,6 @@
         <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/error.png" alt="paymentmethod">
     </div>
     <p>
-        <?php print apply_filters('gb_backing_hint', __("If you'd like a specific size. Click it's not quite right and let us know more.", "gb_neon_maker")); ?>
+        <?php print apply_filters('gb_size_hint', __("If you'd like a specific size, click 'it's not quite right' and let us know more.</br></br>If your sign is over 150cm, we may need to display text over multiple lines. We will be in contact prior to production to confirm how you would like to proceed.", "gb_neon_maker")); ?>
     </p>
 </div>

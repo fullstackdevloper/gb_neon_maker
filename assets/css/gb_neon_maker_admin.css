@@ -51,6 +51,6 @@
 .admin_txt_over  span{ font-weight: bold;}
 .gb_tool_detail ul {position: relative;}
 .gb_tool_detail ul li, .gb_payment_detail ul li, .gb_inq_detail ul li {padding: 10px;border: 1px solid #ccc;margin-right: 20px;}
-.gb_tool_detail ul li, .gb_inq_detail ul li {
-    position: relative;
-}
+.gb_tool_detail ul li, .gb_inq_detail ul li {position: relative;}
+.gb_etemp_width100 input {width: 100%;margin: 10px 0;padding: 5px;display: block;max-width: 50%;}
+.gb_main_etemplate {margin-right: 17px;}

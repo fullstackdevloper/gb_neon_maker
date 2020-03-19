@@ -8,7 +8,7 @@
     <li  data-tab="dt2">
         <a href="javascript:void(0);">
             <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Settings_Icon.png">
-            <span><?php print apply_filters('gb_sidebar_colours_title', __('colours', 'gb_neon_maker')); ?></span>
+            <span><?php print apply_filters('gb_sidebar_colours_title', __('colour', 'gb_neon_maker')); ?></span>
         </a>
     </li>
     <li  data-tab="dt3">

@@ -25,6 +25,8 @@ class NeonMakerOptions {
         add_submenu_page('NeonMaker_options', 'Neon Maker Orders', 'Orders', 'manage_options', 'NeonMaker_options', [$this, 'NeonMaker_orders_page']);
         add_submenu_page('NeonMaker_options', 'Neon Maker Inquiries', 'Inquiries', 'manage_options', 'gb-inquiries', [$this, 'NeonMaker_inquiries_page']);
         add_submenu_page('NeonMaker_options', 'Neon Maker Setting', 'Setting', 'manage_options', 'gb-setting',  [$this, 'NeonMaker_options_page']);
+        add_submenu_page('NeonMaker_options', 'Neon Maker Email Template', 'Customer Email Template', 'manage_options', 'gb-etemplate',  [$this, 'NeonMaker_etemplate_page']);
+        add_submenu_page('NeonMaker_options', 'Neon Maker Admin Email Template', 'Admin Email Template', 'manage_options', 'gb-admin_etemplate',  [$this, 'NeonMaker_admin_etemplate_page']);
     }
     /**
      * Options page callback
@@ -78,6 +80,104 @@ class NeonMakerOptions {
         echo $dataprovider->views();
         echo $dataprovider->display();
         echo '</div>';
+    }
+
+    /**
+     * Email Template page callback
+     */
+    public function NeonMaker_etemplate_page() {
+        global $wpdb;
+        $prefix=$wpdb->prefix;
+        if(isset($_POST['foot_email_submit']))
+        {
+            $subject_name=$_POST['subject_name'];
+            $form_id='customer';
+            $to_email=$_POST['to_email'];
+            $from_name=$_POST['from_name'];
+            $neon_email_template=stripslashes($_POST['neon_email_template']);
+            $data = array(
+                'form_id' => $form_id,
+                'to_email' => $to_email,
+                'subject' => $subject_name,
+                'from_name' => $from_name,
+                'email_body' => $neon_email_template,
+                'created' => date('Y-m-d h:i:s') ,
+                'modified' => date('Y-m-d h:i:s') ,
+            );
+
+            $update_data = array(
+                'to_email' => $to_email,
+                'subject' => $subject_name,
+                'from_name' => $from_name,
+                'email_body' => $neon_email_template,
+                'modified' => date('Y-m-d h:i:s') ,
+            );
+
+            $rowcount = $wpdb->get_var("SELECT COUNT(*) FROM ".$wpdb->prefix."gb_email_templates WHERE `form_id` = '$form_id'");
+            if($rowcount>0){
+                $insertdata =   $wpdb->update( $wpdb->prefix .'gb_email_templates', $update_data, array('form_id'=>$form_id));
+            }else{
+                $insertdata = $wpdb->insert($wpdb->prefix .'gb_email_templates', $data);
+                echo $wpdb->last_query;
+            }
+            if($insertdata != ''){
+                echo 'Data saved successfully';
+            }else{
+                echo 'Error in saving the data';
+            }
+        }
+        $sql ="SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'customer'";
+        $result = $wpdb->get_row($sql);
+        $content = stripslashes($result->email_body);
+        echo NeonMaker()->engine->getView('email_template', array('content'=>$content, 'all_fileds_byid'=>$result));
+    }
+        /**
+     * Email Template admin callback
+     */
+    public function NeonMaker_admin_etemplate_page() {
+        global $wpdb;
+        $prefix=$wpdb->prefix;
+        if(isset($_POST['foot_email_submit']))
+        {
+            $subject_name=$_POST['subject_name'];
+            $form_id='admin';
+            $to_email=$_POST['to_email'];
+            $from_name=$_POST['from_name'];
+            $neon_email_template=stripslashes($_POST['neon_email_template']);
+            $data = array(
+                'form_id' => $form_id,
+                'to_email' => $to_email,
+                'subject' => $subject_name,
+                'from_name' => $from_name,
+                'email_body' => $neon_email_template,
+                'created' => date('Y-m-d') ,
+                'modified' => date('Y-m-d') ,
+            );
+
+            $update_data = array(
+                'to_email' => $to_email,
+                'subject' => $subject_name,
+                'from_name' => $from_name,
+                'email_body' => $neon_email_template,
+                'modified' => date('Y-m-d') ,
+            );
+
+            $rowcount = $wpdb->get_var("SELECT COUNT(*) FROM ".$wpdb->prefix."gb_email_templates WHERE `form_id` = '$form_id'");
+            if($rowcount>0){
+                $insertdata =   $wpdb->update( $wpdb->prefix .'gb_email_templates', $update_data, array('form_id'=>$form_id));
+            }else{
+                $insertdata = $wpdb->insert($wpdb->prefix .'gb_email_templates', $data);
+            }
+            if($insertdata != ''){
+                echo 'Data saved successfully';
+            }else{
+                echo 'Error in saving the data';
+            }
+        }
+        $sql ="SELECT * FROM `{$prefix}gb_email_templates` WHERE `form_id` = 'admin'";
+        $result = $wpdb->get_row($sql);
+        $content = stripslashes($result->email_body);
+        echo NeonMaker()->engine->getView('email_template', array('content'=>$content, 'all_fileds_byid'=>$result));
     }
 
     /**

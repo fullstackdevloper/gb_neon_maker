@@ -3,6 +3,7 @@
         <div class="sbt_row gb_row">
             <!------------menu_side_bar----------------->
             <div class="wd_5 menu_aside">
+                <p class="gb_heading_mb"><label>Choose your design options</label></p>
                 <div class="sbt_row">
                     <?php print $this->getView("_sidebar_menu"); ?>
                     <div class="result_tabs">
@@ -27,17 +28,17 @@
                     </div>
                 </div>
                 <div class="sbt_sub_total">
-                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" >$ <span id="gb_total">450</span></span>
+                    <label><?php _e("SUBTOTAL", "gb_neon_maker"); ?> </label><span id="sbt_subtotal" ><?php echo GB_NEON_MAKER_CURRENCY; ?> <span id="gb_total">450</span></span>
                 </div>
                 <div class="btn_sbt_cart">
-                    <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("Buy Now", "gb_neon_maker"); ?></a>
+                    <a onclick="GbNeonmaker.buyNow(this);" href="javascript:void(0);" class="sbt_crt_btn"><?php _e("BUY NOW", "gb_neon_maker"); ?></a>
                     <a onclick="GbNeonmaker.inquiryForm(this);" href="javascript:void(0);" class="sbt_gr"><?php _e("IT'S NOT QUITE RIGHT", "gb_neon_maker"); ?></a>
                 </div>
             </div>
             <div class="wd_7 result_effect">
                 <div class="slider_font_sbt">
                     <div class="gb_onoffswitch">
-                        <input type="checkbox" onchange="GbNeonmaker.onOffswitch(this);" name="gb_onoffswitch" class="gb_onoffswitch-checkbox" id="gb_myonoffswitch">
+                        <input type="checkbox" onchange="GbNeonmaker.onOffswitch(this);" name="gb_onoffswitch" class="gb_onoffswitch-checkbox" id="gb_myonoffswitch" checked="checked">
                         <label class="gb_onoffswitch-label" for="gb_myonoffswitch">
                             <span class="gb_onoffswitch-inner"></span>
                             <span class="gb_onoffswitch-switch"></span>
@@ -47,7 +48,6 @@
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Young_Adults_Looking_At_Neon_Sign.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Cafe-Background-For-Neon-Sign.jpg" alt="">
-                        <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Desk-Background-For-Neon-Sign-Quote-Tool.jpg" alt="">
                         <img class="gb_slides" src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/Kids-Bedroom-Custom-LED-Neon-Quote-Tool.jpg" alt="">
                         <div class="txt_over">
                             <span id="gb_neon_text"><?php $this->getValue('default_text', $NeonMakerSetting); ?></span>
@@ -60,7 +60,6 @@
         </div>
     </div>
 </section>
-</div>
 <div class="gb_sc"></div>
 <!-- payment form for Stripe -->
 <div class="gb_display_data">
@@ -73,14 +72,14 @@
             <div class="tool_details" >
                 <div class="neon_tool_layout"> <span class="gb_neon_layout"></span></div>
                 <div class="gb_selected_options"> </div>
-                <div class="gb_final_price"> </div>
+                <div class="gb_pr">Price : <?php echo GB_NEON_MAKER_CURRENCY; ?> <span class="gb_final_price"></span></div>
 
             </div>
         </div>
         <div class="gb_order_delivery gb_column3">
            <h5><img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/van.png" alt="paymentmethod"> DELIVERY </h5>
             <p><span>Deliver to</span></p>
-            <p>Shipping is free for all Australian customers. If you have selected ‘priority’ or ‘international’ shipping, delivery price has already been added to your total.</p>
+            <p><?php print apply_filters('gb_order_form_text', $this->orderFormText()); ?></p>
              <?php
             foreach( $this->stripeOrderDeliveryForm() as $key => $field) {
                 echo $this->neonCustomFields($field);
@@ -103,6 +102,7 @@
                 echo $this->neonCustomFields($field);
             } ?>
             <input class="black button" name="dostripe" type="submit" value="Pay Now">
+            <img src="<?php echo GB_NEON_MAKER_URL; ?>/assets/img/gb-loading-png-8.gif" alt="loding.." class="gb_loading">
         </div>
         </form>
     </div>
@@ -124,6 +124,7 @@
         foreach( $this->inquiryFormFields() as $key => $field) {
             echo $this->neonCustomFields($field);
         } ?>
+        <p class="gb_sucess_msg"></p>
         <input type="submit" value="Submit">
       </form>
     </div>

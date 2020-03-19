@@ -87,8 +87,9 @@ class NeonMaker {
         global $wpdb;
         $prefix=$wpdb->prefix;
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        $gb_orders=$this->NeonMaker_orders($prefix);          //40
-        $gb_inquiries=$this->NeonMaker_inquiries($prefix);          //40
+        $gb_orders = $this->NeonMaker_orders($prefix);          //40
+        $gb_inquiries = $this->NeonMaker_inquiries($prefix);          //40
+        $gb_email = $this->NeonMaker_emailtemp($prefix);          //40
     }
 
     /**
@@ -139,6 +140,27 @@ class NeonMaker {
     }
 
     /**
+     * @method create NeonMaker_emailtemp table
+     * @return string
+     */
+    public function NeonMaker_emailtemp($prefix){
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        global $wpdb;
+        $sql="CREATE TABLE `{$prefix}gb_email_templates` (
+        `temp_id` int(11) NOT NULL AUTO_INCREMENT,
+        `form_id` varchar(200) NULL,
+        `subject` varchar(500) NULL,
+        `from_name` varchar(100) NULL,
+        `email_body` text NULL,
+        `created` datetime NOT NULL,
+        `modified` datetime NOT NULL,
+        PRIMARY KEY (`temp_id`)
+        ) ENGINE=InnoDB;";
+        $response=dbDelta( $sql );
+        return $response;
+    }
+
+    /**
      * Init plugin when WordPress Initialises.
      */
     public function init() {
@@ -153,6 +175,7 @@ class NeonMaker {
         $this->define('GB_NEON_MAKER_URL', plugins_url(basename(GB_NEON_MAKER_ABSPATH)));
         $this->define('GB_NEON_MAKER_VERSION', $this->version);
         $this->define('GB_NEON_MAKER_ROLE', 'km_user');
+        $this->define('GB_NEON_MAKER_CURRENCY', 'A$');
     }
 
     /**
@@ -185,6 +208,7 @@ class NeonMaker {
 
         wp_localize_script('NeonMaker_script', 'NeonMaker_ajax', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'Site_url' => home_url(),
                 'configuration'=> file_get_contents(GB_NEON_MAKER_ABSPATH."setting.json"),
                 'default_value' => $this->engine->getValue('default_text', $NeonMakerSetting, false),
                 'payment_mode' => $this->engine->getValue('payment_mode', $NeonMakerSetting, false),
